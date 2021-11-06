@@ -12,6 +12,10 @@ npm run preview
 ## TODO
 
 - tailwind
+- prerendering
+    - https://app.netlify.com/sites/lucid-hodgkin-cc7294/settings/deploys
+- forms
+    - https://docs.netlify.com/site-deploys/post-processing/form-detection/
 
 ## One-time Setup
 
