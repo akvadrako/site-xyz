@@ -5,7 +5,8 @@ collections:
   - name: routes
     label: routes
     label_singular: route
-    folder: src/routes
+  - name: pages
+    folder: src/routes/pages
     create: true
     nested:
       depth: 10
@@ -17,9 +18,9 @@ collections:
         widget: markdown
     meta:
       path: { widget: string, label: 'Path', index_file: 'index' }
-  - name: "blog"
-    label: "Blog"
-    folder: "src/posts"
+  - name: posts
+    label: Posts
+    folder: src/routes/posts
     create: true
     slug: "{{year}}/{{month}}-{{day}}-{{slug}}"
     fields:

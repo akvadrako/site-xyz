@@ -12,5 +12,6 @@ This is the [`/routes/index.md`](https://github.com/buhrmi/sveltekit-netlify-cms
 ## TOC
 
 - [contact](/contact)
-- [admin](/admin)
 - [posts](/posts)
+- <a rel="external" href="/admin">/admin</a>
+

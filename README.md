@@ -12,6 +12,7 @@ npm run preview
 ## TODO
 
 - tailwind
+    - https://strapi.io/blog/how-to-create-a-blog-with-svelte-kit-strapi
 - prerendering
     - https://app.netlify.com/sites/lucid-hodgkin-cc7294/settings/deploys
 - forms
@@ -26,6 +27,9 @@ Netlify
 2. Services > Git Gateway -> Enable Git Gateway. 
 
 ## Technical Intro
+
+Docs
+- https://mdsvex.com/docs
 
 Tree
 
