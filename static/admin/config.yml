@@ -13,6 +13,7 @@ collections:
       - name: body
         widget: markdown
   - name: pages
+    label: More Pages
     folder: src/routes/pages
     create: true
     nested:
