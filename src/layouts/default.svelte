@@ -1,7 +1,16 @@
 <script>  
-  import {routes} from '../metadata'
-  
-  export let title
+    import {loadRoutes} from '../metadata'
+
+    function _load({ page }) {
+        return {
+            props: {
+                routes: loadRoutes()
+            }
+        }
+    }
+
+    export let routes = loadRoutes()
+    export let title
 </script>
 
 <svelte:head>

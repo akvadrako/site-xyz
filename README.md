@@ -49,3 +49,5 @@ A SvelteKit skeleton app with Netlify CMS living in `/admin`. Netlify CMS is
 configured to directly edit `/routes/*.md` files, which are preprocessed by
 [mdsvex](https://mdsvex.com).
 
+Related
+- https://github.com/rodneylab/sveltekit-blog-mdx

@@ -1,6 +1,8 @@
 <script>  
-  import {routes} from '/src/metadata'
-  import Chart from '/src/comp/Chart.svelte';
+  import {loadRoutes} from '/src/metadata'
+  import Chart from '/src/comp/Chart.svelte'
+  
+  const routes = loadRoutes()
 </script>
 
 <svelte:head>
