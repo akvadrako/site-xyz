@@ -5,6 +5,13 @@ collections:
   - name: routes
     label: routes
     label_singular: route
+    folder: src/routes
+    create: true
+    fields:
+      - name: title
+      - name: nav_label
+      - name: body
+        widget: markdown
   - name: pages
     folder: src/routes/pages
     create: true
