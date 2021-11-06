@@ -1,9 +1,9 @@
 ---
 label: Contact
-title: Contact Us
+title: Contact Me
+nav_label: navlablelcontact
 ---
-
-This is where the contact form will go
+**This is where the contact form will go**
 
 <script>  
   import Chart from '/src/comp/Chart.svelte';
