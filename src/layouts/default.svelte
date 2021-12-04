@@ -1,30 +1,52 @@
 <script>  
-    import {loadRoutes} from '../metadata'
-
-    function _load({ page }) {
-        return {
-            props: {
-                routes: loadRoutes()
-            }
-        }
-    }
-
-    export let routes = loadRoutes()
     export let title
 </script>
 
 <svelte:head>
-  <title>{title}</title>
+    <title>| Wall 2 Wall | {title} |</title>
 </svelte:head>
 
+<style>
+    nav {
+        height: 39px;
+        margin: 8px;
+        line-height: 40px; 
+        display: flex;
+    }
+    img {
+        height: 100%;
+        width: 200px;
+        height: 100%;
+    }
+    a {
+        text-decoration: none;
+        height: 100%;
+    }
+    #logo {
+    }
+    .link {
+        margin: 0 10px;
+        text-align: center;
+        width: 100px;
+        background: #112233;
+        color: #EEFF77;
+    }
+</style>
+
 <nav>
-  <ul>
-    {#each routes as route}
-      <li>
-        <a href={route.path}>{route.label}</a>
-      </li>
-    {/each}
-  </ul>
+    <a id=logo href="/">
+        <img src="/uploads/logo.svg" alt="home">
+    </a>
+    <a class=link href="/posts">news</a>
+    <a class=link href="/about">about</a>
+    <a class=link href="/contact">contact</a>
+    <a class=link href="/help">help</a>
 </nav>
 
+<hr>
+
 <slot />
+
+<hr>
+
+

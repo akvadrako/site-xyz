@@ -1,17 +1,19 @@
 ---
 label: Home
-title: SvelteKit Netlify CMS
+title: Wall To Wall
 ---
 
-# Welcome to the SvelteKit Netlify CMS example
+<script>
+    import Gallery from '/src/comp/Gallery.svelte'
+</script>
 
-This is the [`/routes/index.md`](https://github.com/buhrmi/sveltekit-netlify-cms/blob/main/src/routes/index.md) file, which is preprocessed by [mdsvex](https://mdsvex.com) and is <a href="https://sveltekit-netlify-cms.netlify.app/admin/#/" target="_blank">editable through Netlify CMS</a>
+<p>
+You've found yourself wanting a wall to wall service. So please
+reach out by approaching the [contact](/about) page.
+</p>
 
-[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/buhrmi/sveltekit-netlify-cms&amp;stack=cms) or [view repo](https://github.com/buhrmi/sveltekit-netlify-cms)
+<Gallery />
 
-## TOC
-
-- [contact](/contact)
-- [posts](/posts)
-- <a rel="external" href="/admin">/admin</a>
-
+<p>
+Prices: €100 - €200 / m²
+</p>

@@ -1,0 +1,27 @@
+---
+label: Help
+title: Editor Help
+---
+
+[![Netlify Status](https://api.netlify.com/api/v1/badges/0d39d3a7-da15-492c-ae76-b66fa2707e19/deploy-status)](https://app.netlify.com/sites/lucid-hodgkin-cc7294/deploys)
+
+- home: <https://lucid-hodgkin-cc7294.netlify.app/>
+
+## Content Editing 
+
+- open <a rel="external" href="/admin">/admin</a>
+
+## Code Editing
+
+- [repo](https://github.com/akvadrako/site-xyz)
+- you need a Github Account with access to the repo
+- see README for further details
+
+To start editing
+
+- open [code editor](https://github.dev/akvadrako/site-xyz)
+- ctrl-shift-G → open source control
+- click '+' to stage changes
+- click 'check' to commit changes
+- it should deploy automatically
+
