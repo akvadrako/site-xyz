@@ -14,6 +14,14 @@ const config = {
                 onError: 'continue',
                 entries: ['*'],
             },
+            vite: {
+                resolve: {
+                    extensions: ['.svelte', '.js'],
+                    alias: {
+                        $comp: '/src/comp'
+                    }
+                },
+            },
 	},
 	extensions: [".svelte", ...mdsvexConfig.extensions],
 	preprocess: [mdsvex(mdsvexConfig)]

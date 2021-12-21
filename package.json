@@ -6,12 +6,16 @@
 		"build": "svelte-kit build",
 		"preview": "svelte-kit preview"
 	},
-	"devDependencies": {
+	"type": "module",
+	"dependencies": {
 		"@sveltejs/adapter-netlify": "^1.0.0-next.29",
 		"@sveltejs/adapter-static": "^1.0.0-next.21",
 		"@sveltejs/kit": "next",
 		"mdsvex": "^0.9.8",
+		"rehype-resolution": "^1.0.2",
+		"rehype-rewrite": "^3.0.4",
+		"remark-macro": "^1.0.7",
+		"remark-wiki-link": "^0.0.4",
 		"svelte": "^3.44.2"
-	},
-	"type": "module"
+	}
 }

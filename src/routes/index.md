@@ -1,19 +1,20 @@
 ---
 label: Home
 title: Wall To Wall
+layout: false
 ---
 
 <script>
-    import Gallery from '/src/comp/Gallery.svelte'
+    import IndexEnglish from '/src/routes/[lang]/index.md'
+
+    import { goto } from '$app/navigation';
+    import { page } from '$app/stores';
+    import { browser } from '$app/env';
+
+    if (browser && $page.path == '/') {
+        goto('/en', {replaceState: true})
+    }
+
 </script>
 
-<p>
-You've found yourself wanting a wall to wall service. So please
-reach out by approaching the [contact](/about) page.
-</p>
-
-<Gallery />
-
-<p>
-Prices: €100 - €200 / m²
-</p>
+<IndexEnglish />
