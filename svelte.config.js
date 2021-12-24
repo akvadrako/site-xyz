@@ -24,6 +24,9 @@ const config = {
                 },
             },
 	},
+        hot: {
+            preserveLocalState: true,
+        },
 	extensions: [".svelte", ...mdsvexConfig.extensions],
 	preprocess: [mdsvex(mdsvexConfig)]
 };

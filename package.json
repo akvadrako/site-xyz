@@ -13,6 +13,7 @@
         "@sveltejs/adapter-static": "^1.0.0-next.21",
         "@sveltejs/kit": "next",
         "fuse.js": "^6.5.3",
+        "g": "^2.0.1",
         "lodash": "^4.17.21",
         "lunr": "^2.3.9",
         "lunr-languages": "^1.9.0",
@@ -25,6 +26,7 @@
         "strip-markdown": "^5.0.0",
         "svelte": "^3.44.2",
         "svelte-fuzzy": "^2.1.0",
+        "svelte-language-server": "^0.14.16",
         "svelte-sitemap": "^2.1.3"
     }
 }

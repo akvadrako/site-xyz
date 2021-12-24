@@ -6,7 +6,7 @@ import rehypePlugins from './src/rehype.js'
 import remarkPlugins from './src/remark.js'
 
 export default {
-    "extensions": [".md"],
+    "extensions": [".mdx"],
     "smartypants": {
         "dashes": "oldschool"
     },

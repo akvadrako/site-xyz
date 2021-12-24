@@ -1,0 +1,127 @@
+---
+title: Search
+layout: null
+---
+<script>
+
+    import { onMount, afterUpdate } from 'svelte'
+    import {lang} from '$lib'
+    import {Link} from '$comp'
+    import _ from 'lodash'
+    import lunr from 'lunr'
+
+    export const title = 'search'
+
+    const data_href = '/' + $lang + '/search_index.json'
+    
+    let query = 'home'
+
+    let idx = null
+    let routes = {}
+
+    let hits = []
+    
+    onMount(async () => {
+        
+        console.log('loading', data_href)
+        const res = await fetch(data_href)
+        const data = await res.json();
+       
+        for(let route of data.routes) {
+            routes[route.path] = route
+        }
+     
+        if(! lunr.nl) {
+            (await import('lunr-languages/lunr.stemmer.support')).default(lunr);
+            (await import('lunr-languages/lunr.nl')).default(lunr);
+            (await import('lunr-languages/lunr.multi')).default(lunr);
+        }
+
+        idx = lunr.Index.load(data.index)
+        console.log('loading done')
+        search()
+    })
+
+    let search = _.debounce(
+        () => {
+            console.log('search', typeof idx)
+            if(! idx)
+                return
+
+            hits = idx.query(function (query) {
+                // prefix search, no boost
+                query.term("reconnaiss", { wildcard: lunr.Query.wildcard.TRAILING, boost: 1 })
+                // 'exact' match, boosted
+                query.term("reconnaiss", { boost: 10 })
+            })
+        },
+        300,
+        {},
+    )
+
+    function highlight(value, indexes) {
+        try {
+            let out = ''
+            for(let pair of indexes) {
+                let begin = Math.max(pair[0] - 10, 0)
+                let sub = [pair[0], pair[0] + pair[1]]
+                let end = Math.min(pair[1] + 10, value.length)
+            
+                if(out)
+                    out += '<br/>'
+
+                out += ''
+                    + value.substring(begin, sub[0])
+                    + '<mark>'
+                    + value.substring(sub[0], sub[1])
+                    + '</mark>'
+                    + value.substring(sub[1], end)
+            }
+            return out;
+        } catch(e) {
+            return `error: ${e}`
+        }
+    }
+
+</script>
+<Link title='/search_index.json' ext={true} path='/search_index.json' />
+<p>
+    <!-- FIXME - live search not working -->
+    <input
+        type="text"
+        placeholder="Type here to search"
+        on:change={search}
+        bind:value={query}
+    />
+    <input type="submit" value="search" on:click={search.flush} />
+</p>
+<p>
+Syntax: '*' is wildcard. 'title:foo',
+search only in title, fuzzy: 'foo~1'
+exclude: '-foo'
+</p>
+
+<h2>{hits.length} hits</h2>
+
+<table>
+    <tr><th>ref</th><th>score</th><th>path</th><th>blurb</th></tr>
+    {#each hits as hit}
+    <tr>
+        <td>{hit.ref}</td>
+        <td>{hit.score}</td>
+        <td>
+        {JSON.stringify(hit)}
+        <ul>
+        {#each Object.entries(hit.matchData.metadata) as [field, meta] }
+            {#each Object.entries(meta) as [key, pos] }
+              <li>
+                <b>{key}</b>: {@html highlight(routes[hit.ref][key], pos.position)}
+              </li>
+            {/each}
+        {/each}
+        </ul>
+        </td>
+    </tr>
+    {/each}
+</table>
+
