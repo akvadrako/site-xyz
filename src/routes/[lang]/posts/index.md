@@ -1,7 +1,8 @@
 <script>  
-  import {loadRoutes} from '/src/metadata'
-  
-  const routes = loadRoutes()
+  import {getRoutes} from '/src/metadata'
+  import {lang} from '$lib'
+
+  const routes = getRoutes($lang)
 </script>
 
 <svelte:head>

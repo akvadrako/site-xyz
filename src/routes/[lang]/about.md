@@ -3,9 +3,10 @@ title: About
 ---
 
 <script>
-    import {loadRoutes} from '/src/metadata'
+    import {getRoutes} from '/src/metadata'
+    import {lang} from '$lib'
   
-    const routes = loadRoutes()
+    const routes = getRoutes($lang)
 </script>
 
 ## History of Wall too Wall
@@ -13,14 +14,14 @@ title: About
 For far too longs walls have gone unnoticed, hidden behind paper
 and paint. This is causing huge problems in the wall rights community.
 But frankly undecored walls do not deserve rights. With a wall to wall
-transformation you can shutup your bare wall.
+transformation you can shutup your bare wall. Some stuff.
 
 ## Sitemap
 
   <ul>
     {#each routes as route}
       <li>
-        <a href={route.path}>{route.path}</a> -- {route.label}
+        <a href={route.path}>{route.path}</a> -- {route.title}
       </li>
     {/each}
   </ul>

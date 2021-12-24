@@ -1,10 +1,9 @@
 ---
-label: Home
-title: Wall To Wall
+title: Home
 ---
 
 <script>
-    import {Nl, Gallery} from '$comp'
+    import {Gallery} from '$comp'
 </script>
 
 [en]You've found yourself wanting a wall to wall service. So please

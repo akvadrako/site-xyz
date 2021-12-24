@@ -1,8 +1,11 @@
+/**
+ * Internal Library
+ */
 
 import {readable} from 'svelte/store'
 import {page, session} from '$app/stores'
 
-const lang = readable('en', set => {
+export const lang = readable('en', set => {
     page.subscribe(value => {
         if (value.path.startsWith('/nl')) {
             set('nl')
@@ -12,4 +15,14 @@ const lang = readable('en', set => {
     })
 })
 
-export {lang}
+export function assert(test, ...args) {
+    console.assert(test, ...args)
+}
+
+export function log(...args) {
+    console.log(...args)
+}
+
+log.error = (msg, ...args) => {
+    console.error('ERROR: ' + msg, ...args)
+}

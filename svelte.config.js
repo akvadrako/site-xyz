@@ -15,6 +15,7 @@ const config = {
                 entries: ['*'],
             },
             vite: {
+                clearScreen: false,
                 resolve: {
                     extensions: ['.svelte', '.js'],
                     alias: {

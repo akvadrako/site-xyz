@@ -1,6 +1,5 @@
 ---
-label: Home
-title: Wall To Wall
+title: Home
 layout: false
 ---
 
@@ -9,3 +8,4 @@ layout: false
 </script>
 
 <IndexEnglish />
+

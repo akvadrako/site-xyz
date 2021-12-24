@@ -3,8 +3,7 @@
     import { lang } from '$lib';
     import { Link } from '$comp';
 
-    export let title
-
+    export let title = ''
 </script>
 
 <svelte:head>
@@ -44,15 +43,17 @@
     <a id=logo href="/">
         <img src="/uploads/logo.svg" alt="home">
     </a>
-    <Link slug="about" />
-    <Link slug="contact" />
-    <Link slug="help" />
+    <Link title="About" path="/about" />
+    <Link title="Contact" path="/contact" />
+    <Link title="Help" path="/help" />
 
     {#if $lang == 'nl'}
         <a href="{$page.path.replace('/nl', '/en')}">EN</a> / <b>NL</b>
     {:else}
         <b>EN</b> / <a href="{$page.path.replace('/en', '/nl')}">NL</a>
     {/if}
+    
+    <Link title="Search" path="/search" />
 </nav>
 
 <hr>

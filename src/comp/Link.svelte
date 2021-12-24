@@ -3,10 +3,19 @@
     import {getRoute} from '/src/metadata'
     import {lang} from '$lib'
 
-    export let slug
+    export let path
+    export let title
 
-    const route = getRoute(slug, $lang)
-    
+    let route = {}
+
+    if(title) {
+        route = {
+            title: title,
+            path: '/' + $lang + path,
+        }
+    } else {
+        route = getRoute(path, $lang)
+    }
 </script>
 
 <style>
@@ -19,4 +28,4 @@
     }
 </style>
 
-<a class=link href="/en/{slug}">{route.title}</a>
+<a class=link href="{route.path}">{route.title}</a>

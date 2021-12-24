@@ -1,6 +1,5 @@
 ---
-label: Pages
-title: PagesSvelteKit Netlify CMS
+title: Pages
 ---
 
 ...

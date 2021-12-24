@@ -1,6 +1,5 @@
 ---
-label: Help
-title: Editor Help
+title: Help
 ---
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/0d39d3a7-da15-492c-ae76-b66fa2707e19/deploy-status)](https://app.netlify.com/sites/lucid-hodgkin-cc7294/deploys)

@@ -1,47 +1,64 @@
 
+import {assert, log} from '$lib'
+
 const pages_mds = import.meta.globEager('/src/routes/**/*.md')
 const pages = [] //import.meta.globEager('/src/routes/**/*.svelte')
 
 const modules = {...pages_mds, ...pages}
 
-let routes
-let routesBySlug = {}
+let routes = null
 
-export function loadRoutes() {
-    if (routes)
-        return routes
-   
-    for (const file in modules) {
-        if (Object.hasOwnProperty.call(modules, file)) {
-            const mod = modules[file]
-            const path = file.replace('/src/routes/','/').replace('index','').replace('.md','')
+// return list localized routes
+export function getRoutes(lang) {
+    loadRoutes()
 
-            routesBySlug[path.replace('/', '')] = {
-                path: path,
-                ...mod.metadata,
-            }
+    return Object.values(routes).map(r => localRoute(r, lang))
+}
 
-            routes.push({
-                path: `en/${path}`,
-                ...mod.metadata
-            })
-            routes.push({
-                path: `nl/${path}`,
-                ...mod.metadata
-            })
-            if(path == '/') {
-                routes.push({
-                    path: '/',
-                    ...mod.metadata
-                })
-            }
+// return localized route
+export function getRoute(path, lang) {
+    loadRoutes()
+
+    let r = routes[path]
+    if(!r) {
+        log.error(`no route for ${path}`)
+        return {
+            path: '/' + lang + path,
+            title: path,
         }
     }
-    
-    return routes;
+
+    return localRoute(routes[path], lang)
 }
 
-export function getRoute(slug, lang) {
-    return `${lang}/${slug}`
+////////////////////////////////////////////////////////////////
+// Internal
+
+function loadRoutes() {
+    if (routes)
+       return routes
+   
+    log('loading routes...')
+    routes = {}
+
+    for (const file in modules) {
+        const mod = modules[file]
+        const path = file.replace('/src/routes/','/').replace('index','').replace('.md','')
+        const route = {
+            path: path,
+            ...mod.metadata,
+        }
+        //log('add route', route)
+
+        routes[path.replace('/[lang]', '')] = route
+    }
 }
 
+// return localized route
+function localRoute(route, lang) {
+    return {
+        path: route.path.replace('[lang]', lang),
+        title: route['title_' + lang] || route.title,
+        text: route._text,
+    }
+}

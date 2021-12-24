@@ -1,5 +1,4 @@
 ---
-label: Event
 title: Event
 ---
 
