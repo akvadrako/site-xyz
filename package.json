@@ -9,6 +9,7 @@
     },
     "type": "module",
     "dependencies": {
+        "@beyonk/svelte-notifications": "^4.1.1",
         "@sveltejs/adapter-netlify": "^1.0.0-next.29",
         "@sveltejs/adapter-static": "^1.0.0-next.21",
         "@sveltejs/kit": "next",
@@ -19,6 +20,7 @@
         "lunr-languages": "^1.9.0",
         "mdast-util-to-string": "^3.1.0",
         "mdsvex": "^0.9.8",
+        "minisearch": "^3.2.0",
         "rehype-resolution": "^1.0.2",
         "rehype-rewrite": "^3.0.4",
         "remark-macro": "^1.0.7",
@@ -26,6 +28,8 @@
         "strip-markdown": "^5.0.0",
         "svelte": "^3.44.2",
         "svelte-fuzzy": "^2.1.0",
+        "svelte-json-tree": "^0.1.0",
+        "svelte-jsoneditor": "^0.3.10",
         "svelte-language-server": "^0.14.16",
         "svelte-sitemap": "^2.1.3"
     }

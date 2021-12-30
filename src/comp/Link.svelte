@@ -5,6 +5,7 @@
 
     export let path
     export let title
+    export let ext = false
 
     let route = {}
 
@@ -28,4 +29,6 @@
     }
 </style>
 
-<a class=link href="{route.path}">{route.title}</a>
+<a class=link
+    rel={ext && 'external'}
+    href="{route.path}">{route.title}</a>

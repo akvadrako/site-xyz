@@ -1,7 +1,7 @@
 
 import {assert, log} from '$lib'
 
-const pages_mds = import.meta.globEager('/src/routes/**/*.md')
+const pages_mds = import.meta.globEager('/src/routes/**/*.mdx')
 const pages = [] //import.meta.globEager('/src/routes/**/*.svelte')
 
 const modules = {...pages_mds, ...pages}
@@ -38,7 +38,7 @@ function loadRoutes() {
     if (routes)
        return routes
    
-    log('loading routes...')
+    log('loading routes...', { mds: pages_mds.length })
     routes = {}
 
     for (const file in modules) {

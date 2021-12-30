@@ -22,6 +22,27 @@ const config = {
                         $comp: '/src/comp'
                     }
                 },
+                optimizeDeps: {
+                    exclude: [
+                        '@beyonk/svelte-notifications',
+                        //'@beyonk/svelte-notifications/store.js',
+                    ],
+                    include: [
+                    /*
+                        'lodash',
+                        'lodash-es',
+                        'ace-builds/src-noconflict/ace',
+                        'ace-builds/src-noconflict/ext-searchbox',
+                        'ace-builds/src-noconflict/mode-json',
+                        'ajv',
+                        'classnames',
+                        'diff-sequences',
+                        'jmespath',
+                        'json-source-map',
+                        'natural-compare-lite',
+                    */
+                    ]
+                }
             },
 	},
         hot: {
