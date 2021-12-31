@@ -3,18 +3,24 @@ title: Play
 layout: false
 ---
 <script>
-    import { NotificationDisplay, notifier } from '@beyonk/svelte-notifications'
-    import Json from 'svelte-json-tree'
+    import JsonView from '@zerodevx/svelte-json-view/src/JsonView.svelte'
+
+    import Notify from '$comp/Notify'
+    import {toasts, createToast} from '$lib/toasts'
 
     function someFunction () {
-        console.log('noted')
-        notifier.danger('Notifications work!', 7000)
+        createToast({ msg: 'Notifications work!', type: 'danger', timeout: 7000 })
     }
 
+    import Search from '$comp/Search'
 </script>
+
 <h1>Play</h1>
-<h2>Notes</h2>
-<NotificationDisplay />
-<h2>Button</h2>
-<button on:click={someFunction}>Show message</button>
-<p>Hello</p>
+<h2>Search</h2>
+<Search />
+
+<h2>Toaster</h2>
+<Notify />
+<button on:click={someFunction}>work!</button>
+
+<pre>json: <JsonView json={$toasts} depth={1} /></pre>

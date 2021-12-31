@@ -2,9 +2,12 @@
  * Internal Library
  */
 
-import {readable} from 'svelte/store'
+import {readable, derived} from 'svelte/store'
 import {page, session} from '$app/stores'
 
+export {goto} from '$app/navigation'
+
+// store: current language
 export const lang = readable('en', set => {
     page.subscribe(value => {
         if (value.path.startsWith('/nl')) {
@@ -13,6 +16,17 @@ export const lang = readable('en', set => {
             set('en')
         }
     })
+})
+
+// store: localized route for path + params
+export const route = derived(lang, $lang => {
+    return (path, params) => {
+        if(params) {
+            path += '?' + (new URLSearchParams(params)).toString()
+        }
+
+        return '/' + $lang + path
+    }
 })
 
 export function assert(test, ...args) {

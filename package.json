@@ -8,16 +8,12 @@
         "postbuild": "npx svelte-sitemap --domain https://walltowall.nl"
     },
     "type": "module",
-    "dependencies": {
-        "@beyonk/svelte-notifications": "^4.1.1",
+    "devDependencies": {
         "@sveltejs/adapter-netlify": "^1.0.0-next.29",
         "@sveltejs/adapter-static": "^1.0.0-next.21",
         "@sveltejs/kit": "next",
-        "fuse.js": "^6.5.3",
-        "g": "^2.0.1",
+        "@zerodevx/svelte-json-view": "^0.1.3",
         "lodash": "^4.17.21",
-        "lunr": "^2.3.9",
-        "lunr-languages": "^1.9.0",
         "mdast-util-to-string": "^3.1.0",
         "mdsvex": "^0.9.8",
         "minisearch": "^3.2.0",

@@ -1,7 +1,8 @@
 <script>
     import { page } from '$app/stores';
     import { lang } from '$lib';
-    import { Link } from '$comp';
+    import { Link, Search } from '$comp';
+    import Notify from '$comp/Notify';
 
     export let title = ''
 </script>
@@ -14,12 +15,6 @@
             text-decoration: none;
             height: 100%;
         }
-        *[lang="en"] {
-            background: red;
-        }
-        *[lang="nl"] {
-            background: yellow;
-        }
     </style>
 </svelte:head>
 
@@ -30,12 +25,25 @@
         line-height: 40px; 
         display: flex;
     }
-    img {
+    nav img {
         height: 100%;
         width: 200px;
         height: 100%;
     }
     #logo {
+        background: transparent;
+    }
+    footer {
+        text-align: center;
+    }
+    footer img {
+        height: 40px;
+        width: 40px;
+        margin: 0 40px;
+        opacity: 50%;
+    }
+    footer img:hover {
+        opacity: 100%;
     }
 </style>
 
@@ -52,14 +60,28 @@
     {:else}
         <b>EN</b> / <a href="{$page.path.replace('/en', '/nl')}">NL</a>
     {/if}
-    
-    <Link title="Search" path="/search" />
+
+    <Search />
 </nav>
+<Notify />
 
 <hr>
 
+<main lang={$lang}>
 <slot />
+</main>
 
 <hr>
 
+<footer>
+    <a href="https://twitter.com/walltowall" rel="external">
+        <img src="/sprites.svg#twitter" alt='twitter' />
+    </a>
+    <a href="https://fbook.com" rel="external">
+        <img src="/sprites.svg#facebook" alt='facebook' />
+    </a>
+    <a href="https://www.instagram.com/walltowalleg/" rel="external">
+        <img src="/sprites.svg#instagram" alt='instagram' />
+    </a>
+</footer>
 

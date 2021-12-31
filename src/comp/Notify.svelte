@@ -1,23 +1,7 @@
-<!--
-
--->
 <script>
-  import { toaster } from './toaster.js'
+  import { toasts } from '$lib/toasts'
 
-  export let themes = {
-    danger: '#bb2124',
-    success: '#22bb33',
-    warning: '#f0ad4e',
-    info: '#5bc0de',
-    default: '#aaaaaa'
-  }
-
-  export let timeout = 3000
-  export let sessionKey = 'byk-toasts'
-
-  let toasts = []
-
-  function animateOut (node, { delay = 0, duration = 1000 }) {
+  function animateOut (_, { delay = 0, duration = 1000 }) {
     return {
       delay,
       duration,
@@ -25,51 +9,11 @@
     }
   }
 
-  function createToast ({ detail }) {
-    const { message, type, options = {} } = detail
-    const background = themes[type] || themes.default
-    const persist = options.persist
-    const computedTimeout = options.persist ? 0 : (options.timeout || timeout)
-    const id = Math.random().toString(36).replace(/[^a-z]+/g, '')
-
-    try {
-      sessionStorage.setItem(
-        sessionKey,
-        JSON.stringify([
-          ...JSON.parse(sessionStorage.getItem(sessionKey) || '[]'),
-          { ...detail, id }
-        ])
-      )
-    } catch (e) {}
-
-    toasts = [ {
-      id,
-      message,
-      background,
-      persist,
-      timeout: computedTimeout,
-      width: '100%'
-    }, ...toasts ]
-  }
-
   function maybePurge (toast) {
-    !toast.persist && purge(toast.id)
+    console.log('animation-end')
+    !toast.persist && toast.purge()
   }
 
-  function purge (id) {
-    const filter = t => t.id !== id
-    toasts = toasts.filter(filter)
-    try {
-      sessionStorage.setItem(
-        sessionKey,
-        JSON.stringify(
-          JSON.parse(sessionStorage.getItem(sessionKey) || '[]').filter(filter)
-        )
-      )
-    } catch (e) {
-
-    }
-  }
 </script>
 <style>
   .toasts {
@@ -239,16 +183,16 @@
   }
 </style>
 
-<ul class="toasts" use:toaster={sessionKey} on:notify={createToast}>
-  {#each toasts as toast (toast.id)}
+<ul class="toasts">
+  {#each $toasts as toast (toast.id)}
     <li class="toast" style="background: {toast.background};" out:animateOut>
       {#if toast.persist}
-      <button class="close" on:click={() => purge(toast.id)}>
-        ✕
-      </button>
+        <button class="close" on:click={toast.purge}>
+          ✕
+        </button>
       {/if}
       <div class="content">
-        {toast.message}
+        {toast.msg}
       </div>
       <div 
         class="progress" 

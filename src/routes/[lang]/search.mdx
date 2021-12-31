@@ -3,18 +3,32 @@ title: Search
 layout: null
 ---
 <script>
-
+    import {page} from '$app/stores'
     import { onMount, afterUpdate } from 'svelte'
-    import {lang} from '$lib'
+    import {log, lang} from '$lib'
     import {Link} from '$comp'
-    import _ from 'lodash'
+    import {debounce} from 'lodash'
     import MiniSearch from 'minisearch'
 
     export const title = 'search'
 
     const data_href = '/' + $lang + '/search_index.json'
-    
+
+    log('page', $page.query.get('q'))
+
     let query = 'home'
+
+    // update query when URL string changes
+    let prev_param = null
+    $: (() => {
+        let q = $page.query.get('q')
+        if(prev_param != q) {
+            prev_param = q
+            query = q
+            search()
+        }
+    })()
+
     let idx = null
     let hits = []
     let suggest = []
@@ -30,9 +44,10 @@ layout: null
         search()
     })
 
-    let search = _.debounce(
+    let search = debounce(
         () => {
             console.log('search', { idx: typeof idx })
+
             if(! idx)
                 return
                     
