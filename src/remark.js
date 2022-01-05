@@ -6,7 +6,7 @@ import strip from 'strip-markdown'
 import visit from 'unist-util-visit'
 //import _ from 'lodash-es'
 
-const extractText = () => async function(tree, vFile) {
+export const extractText = () => async function(tree, vFile) {
 
     const toString = (await import('mdast-util-to-string')).toString
 
@@ -34,7 +34,23 @@ const extractText = () => async function(tree, vFile) {
     vFile.data.fm._text = text
 }
 
-function visiter(tree, vFile) {
+/**
+ * {
+  type: 'image',
+  url: 'https://example.com/favicon.ico',
+  title: 'bravo',
+  alt: 'alpha'
+}
+*/
+export const betterImage = () => async tree => {
+    visit(tree, "image", node => {
+        const relativeUrl = node.url.replace(/^\//, "")
+
+        node.url = new URL(relativeUrl, options.absolutePath).href
+    })
+}
+
+export const saveHeadings = () => async (tree, vFile) => {
     visit(tree, 'heading', (node) => {
         vFile.data.headings.push({
             level: node.depth,
@@ -53,4 +69,3 @@ function extra() {
     }
 }
 
-export default { extractText }

@@ -3,7 +3,7 @@ import wikiLinkPlugin from 'remark-wiki-link'
 import resolution from 'rehype-resolution'
 
 import rehypePlugins from './src/rehype.js'
-import remarkPlugins from './src/remark.js'
+import { extractText, betterImage } from './src/remark.js'
 
 export default {
     "extensions": [".mdx"],
@@ -22,7 +22,8 @@ export default {
             },
             aliasDivider: '|',
         }],
-        remarkPlugins.extractText,
+        extractText,
+        //betterImage,
     ],
     "rehypePlugins": [
         resolution,
