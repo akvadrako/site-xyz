@@ -1,0 +1,29 @@
+---
+title: Home
+---
+
+<script context="module">
+    export async function load({ params }) {
+        if(params.lang == 'en') {
+            return {};
+        }
+
+        if(params.lang == 'nl') {
+            return {};
+        }
+
+        // 404
+        return null;
+        return {
+            status: res.status,
+            error: new Error(`Could not load ${url}`)
+        };
+    }
+</script>
+
+<script>
+    import {Gallery} from '$comp'
+</script>
+
+<Gallery />
+

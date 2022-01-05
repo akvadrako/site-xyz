@@ -1,5 +1,6 @@
 backend:
   name: git-gateway
+  repo: akvadrako/site-xyz
   branch: master
 collections:
   - name: routes
@@ -32,9 +33,6 @@ collections:
     fields:
       - name: title
         i18n: true
-      - label: layout
-        widget: hidden
-        default: work
       - name: date
         widget: date
       - name: image

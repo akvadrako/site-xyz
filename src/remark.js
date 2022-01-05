@@ -4,7 +4,7 @@
 
 import strip from 'strip-markdown'
 import visit from 'unist-util-visit'
-import _ from 'lodash'
+//import _ from 'lodash-es'
 
 const extractText = () => async function(tree, vFile) {
 

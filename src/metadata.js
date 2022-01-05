@@ -1,11 +1,6 @@
 
 import {assert, log} from '$lib'
 
-const pages_mds = import.meta.globEager('/src/routes/**/*.mdx')
-const pages = [] //import.meta.globEager('/src/routes/**/*.svelte')
-
-const modules = {...pages_mds, ...pages}
-
 let routes = null
 
 // return list localized routes
@@ -37,18 +32,23 @@ export function getRoute(path, lang) {
 function loadRoutes() {
     if (routes)
        return routes
+    
+    log('loading routes...')
    
-    log('loading routes...', { mds: pages_mds.length })
+    let pages = import.meta.globEager('/src/routes/**/*.mdx')
+    // ...import.meta.globEager('/src/routes/**/*.svelte')
+    
+    log('loading routes...', { count: pages.length })
+
     routes = {}
 
-    for (const file in modules) {
-        const mod = modules[file]
-        const path = file.replace('/src/routes/','/').replace('index','').replace('.md','')
+    for (const file in pages) {
+        const mod = pages[file]
+        const path = file.replace('/src/routes/','/').replace('index','').replace('.mdx','')
         const route = {
             path: path,
             ...mod.metadata,
         }
-        //log('add route', route)
 
         routes[path.replace('/[lang]', '')] = route
     }

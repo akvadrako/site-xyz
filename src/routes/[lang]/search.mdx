@@ -7,21 +7,21 @@ layout: null
     import { onMount, afterUpdate } from 'svelte'
     import {log, lang} from '$lib'
     import {Link} from '$comp'
-    import {debounce} from 'lodash'
+    import {debounce} from 'lodash-es'
     import MiniSearch from 'minisearch'
 
     export const title = 'search'
 
     const data_href = '/' + $lang + '/search_index.json'
 
-    log('page', $page.query.get('q'))
+    log('page', $page.url.searchParams.get('q'))
 
     let query = 'home'
 
     // update query when URL string changes
     let prev_param = null
     $: (() => {
-        let q = $page.query.get('q')
+        let q = $page.url.searchParams.get('q')
         if(prev_param != q) {
             prev_param = q
             query = q

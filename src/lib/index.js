@@ -10,7 +10,7 @@ export {goto} from '$app/navigation'
 // store: current language
 export const lang = readable('en', set => {
     page.subscribe(value => {
-        if (value.path.startsWith('/nl')) {
+        if (value.url.pathname.startsWith('/nl')) {
             set('nl')
         } else {
             set('en')

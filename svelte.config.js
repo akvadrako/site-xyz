@@ -3,31 +3,42 @@ import mdsvexConfig from "./mdsvex.config.js";
 //import adapter from '@sveltejs/adapter-netlify'
 import adapter from '@sveltejs/adapter-static'
 
+const myPlugin = {
+  name: 'log-request-middleware',
+  configureServer(server) {
+    server.middlewares.use((req, res, next) => {
+      console.log(req.method, req.url);
+      next();
+    })
+  }
+}
+
 const config = {
-	kit: {
-            adapter: adapter({}),
-            // currently the adapter does not take any options
-            target: '#svelte',
-            prerender: {
-                crawl: true,
-                enabled: true,
-                onError: 'continue',
-                entries: ['*'],
+    kit: {
+        adapter: adapter({}),
+        target: '#svelte',
+        prerender: {
+            //crawl: true,
+            enabled: true,
+            onError: 'continue',
+            entries: ['*'],
+        },
+        vite: {
+	    plugins: [ myPlugin ],
+            logLevel: 'info',
+            clearScreen: false,
+            resolve: {
+                extensions: ['.svelte', '.js'],
+                alias: {
+                    $comp: '/src/comp'
+                }
             },
-            vite: {
-                clearScreen: false,
-                resolve: {
-                    extensions: ['.svelte', '.js'],
-                    alias: {
-                        $comp: '/src/comp'
-                    }
-                },
-                optimizeDeps: {
-                    exclude: [
-                        '@beyonk/svelte-notifications',
-                        //'@beyonk/svelte-notifications/store.js',
-                    ],
-                    include: [
+            optimizeDeps: {
+                exclude: [
+                    //'@beyonk/svelte-notifications',
+                    //'@beyonk/svelte-notifications/store.js',
+                ],
+                include: [
                     /*
                         'lodash',
                         'lodash-es',
@@ -40,16 +51,24 @@ const config = {
                         'jmespath',
                         'json-source-map',
                         'natural-compare-lite',
-                    */
-                    ]
-                }
-            },
-	},
-        hot: {
-            preserveLocalState: true,
+                        */
+                ]
+            }
         },
-	extensions: [".svelte", ...mdsvexConfig.extensions],
-	preprocess: [mdsvex(mdsvexConfig)]
+        // experimental: {
+        //     //prebundleSvelteLibraries: true;
+        // }
+    },
+    extensions: [".svelte", ...mdsvexConfig.extensions],
+    preprocess: [mdsvex(mdsvexConfig)]
 };
+
+console.log('config', process.env.NODE_ENV)
+if(process.env.NODE_ENV == 'development') {
+    config.hot =  {
+        preserveLocalState: true,
+    }
+} else {
+}
 
 export default config;
