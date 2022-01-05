@@ -97,3 +97,4 @@ In repo
 
     netlify link
     netlify lm:setup
+    git lfs track "static/media/**"
