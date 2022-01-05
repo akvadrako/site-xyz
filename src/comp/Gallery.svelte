@@ -19,6 +19,6 @@
 
 <section>
     {#each pics as pic}
-       <img src='/uploads/{pic.path}' alt={pic.path} />
+       <img src='/media/{pic.path}' alt={pic.path} />
     {/each}
 </section>

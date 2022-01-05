@@ -49,7 +49,7 @@
 
 <nav>
     <a id=logo href="/">
-        <img src="/uploads/logo.svg" alt="home">
+        <img src="/media/logo.svg" alt="home">
     </a>
     <Link title="About" path="/about" />
     <Link title="Contact" path="/contact" />

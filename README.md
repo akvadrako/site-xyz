@@ -25,6 +25,10 @@ root
 
 ## Usage
 
+Prereqs:
+- git LFS
+- npm
+
 Develop locally:
 
 ```
@@ -78,6 +82,9 @@ Related
 
 ## One-time Setup
 
+Docs
+- [LFS setup](https://docs.netlify.com/large-media/setup/)
+
 Netlify
 1. Go to Settings > Identity, and select Enable Identity service.
 
@@ -85,3 +92,8 @@ Netlify
   - External Providers -> Github -> One Click Login
 
 2. Services > Git Gateway -> Enable Git Gateway. 
+
+In repo
+
+    netlify link
+    netlify lm:setup

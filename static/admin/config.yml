@@ -5,41 +5,51 @@ collections:
   - name: routes
     label: routes
     label_singular: route
-    folder: src/routes
+    folder: 'src/routes/[lang]'
+    extension: mdx
+    format: yaml-frontmatter
     create: true
     fields:
       - name: title
-      - name: nav_label
+      - name: layout
       - name: body
         widget: markdown
-  - name: pages
-    label: More Pages
-    folder: src/routes/pages
+  - name: works
+    i18n: true
+    label: works
+    label_singular: work
+    folder: 'src/routes/[lang]/works'
+    extension: mdx
+    format: yaml-frontmatter
     create: true
+    slug: "{{slug}}"
     nested:
-      depth: 10
+      depth: 2
       summary: '{{title}}'
-    fields:
-      - name: title
-      - name: nav_label
-      - name: body
-        widget: markdown
+    preview_path: '/en/works/{{slug}}'
     meta:
       path: { widget: string, label: 'Path', index_file: 'index' }
-  - name: posts
-    label: Posts
-    folder: src/routes/posts
-    create: true
-    slug: "{{year}}/{{month}}-{{day}}-{{slug}}"
     fields:
-      - {label: "Layout", name: "layout", widget: "hidden", default: "blog"}
-      - {label: "Title", name: "title", widget: "string"}
-      - {label: "Publish Date", name: "date", widget: "datetime"}
-      - {label: "Featured Image", name: "thumbnail", widget: "image"}
-      - {label: "Rating (scale of 1-5)", name: "rating", widget: "number"}
-      - {label: "Body", name: "body", widget: "markdown"}
-media_folder: "static/uploads"
-public_folder: "/uploads"
+      - name: title
+        i18n: true
+      - label: layout
+        widget: hidden
+        default: work
+      - name: date
+        widget: date
+      - name: image
+        widget: image
+        allow_multiple: false
+      - name: body
+        widget: markdown
+media_folder: "static/media"
+public_folder: "/media"
+
+local_backend: true
+i18n:
+  structure: single_file
+  locales: [en, nl]
+  default_locale: en
 
 # publish_mode: editorial_workflow
 
