@@ -10,6 +10,10 @@ export {goto} from '$app/navigation'
 // store: current language
 export const lang = readable('en', set => {
     page.subscribe(value => {
+        if(! page) {
+            console.error('$lang: missing $page')
+        }
+
         if (value.url.pathname.startsWith('/nl')) {
             set('nl')
         } else {

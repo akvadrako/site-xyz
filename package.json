@@ -5,7 +5,7 @@
         "dev": "svelte-kit dev",
         "build": "svelte-kit build",
         "preview": "svelte-kit preview",
-        "postbuild": "npx svelte-sitemap --domain https://walltowall.nl"
+        "postbuild": "svelte-sitemap --domain https://walltowall.nl"
     },
     "type": "module",
     "devDependencies": {
