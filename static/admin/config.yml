@@ -53,6 +53,8 @@ i18n:
 
 # publish_mode: editorial_workflow
 
-# site_url: https://your-site.com
+site_url: https://lucid-hodgkin-cc7294.netlify.app
+logo_url: https://lucid-hodgkin-cc7294.netlify.app/media/logo.svg
+
 # display_url: https://your-site.com
-# logo_url: https://your-site.com/images/logo.svg
+
