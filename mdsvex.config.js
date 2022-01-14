@@ -1,9 +1,6 @@
 
-import wikiLinkPlugin from 'remark-wiki-link'
-import resolution from 'rehype-resolution'
-
-import rehypePlugins from './src/rehype.js'
-import { extractText, betterImage } from './src/remark.js'
+import { tagLang } from './src/rehype.js'
+import { wikiLink, extractText, betterImage } from './src/remark.js'
 
 export default {
     "extensions": [".mdx"],
@@ -13,21 +10,21 @@ export default {
     "layout": {
         _: "./src/layouts/default.svelte",
         blog: "./src/layouts/blog.svelte",
+        work: "./src/layouts/work.svelte",
     },
     "remarkPlugins": [
-        [wikiLinkPlugin, {
+        [wikiLink, {
             wikiLinkClassName: 'internal wikilink',
             hrefTemplate(permalink) {
                 return `/en/${permalink}`
             },
             aliasDivider: '|',
         }],
-        extractText,
+        [extractText, {}],
         //betterImage,
     ],
     "rehypePlugins": [
-        resolution,
-        rehypePlugins.tagLang,
+        tagLang,
     ]
 };
 

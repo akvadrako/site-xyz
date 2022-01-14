@@ -1,10 +1,11 @@
 
 <style>
     input {
-        width: 400px;
+        width: 100%;
         height: 40px;
         font-size: 16px;
         padding: 0px 20px 0px 40px;
+        margin-right: 10px;
         border-radius: 40px;
         outline: none;
         border: solid gray 2px;

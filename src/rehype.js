@@ -4,7 +4,7 @@
 
 import rehypeRewrite from 'rehype-rewrite';
 
-const tagLang = () => {
+export const tagLang = () => {
     return rehypeRewrite({
         // https://github.com/syntax-tree/hast#properties
         rewrite: (node, index, parent) => {
@@ -22,15 +22,14 @@ const tagLang = () => {
     })
 }
 
-export default { tagLang }
-
 /******************************************************************************
  * extras
  */
 
-const extractText = () => async function(tree, vFile) {
-    const toString = (await import('mdast-util-to-string')).toString
-    const visit = (await import('unist-util-visit')).visit
+import {toString} from 'mdast-util-to-string'
+import visit from 'unist-util-visit'
+
+const extractText = () => (tree, vFile) => {
 
     console.log('extractText', tree, vFile, toString)
 

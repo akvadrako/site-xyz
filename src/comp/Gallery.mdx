@@ -1,0 +1,82 @@
+---
+layout: default
+---
+<script>
+    import {JsonView, Image} from '$comp'
+    import {loadWorks} from '$lib/metadata'
+    import {lang} from '$lib'
+
+    console.log('loading gallery')
+
+    let data = {
+        works: loadWorks($lang)
+    }
+</script>
+
+<style>
+    section {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin: 10px 0;
+    }
+    a.work {
+        text-decoration: none;
+        display: inline-block;
+    }
+    x-grid {
+        display: grid;
+        height: 400px;
+        width: 400px;
+    }
+    div {
+        grid-area: 1 / 1 / 1 / 1;
+        margin: 0;
+        padding: 0;
+        height: 400px;
+        width: 400px;
+    }
+    h3 {
+        display: none;
+        grid-area: 1 / 1 / 1 / 1;
+        z-index: 10;
+        background: #EEEEEE99;
+        color: black;
+        justify-self: center;
+        align-self: center;
+        margin: 0;
+        padding: 10px;
+    }
+    a.work:hover h3 {
+        display: block;
+    }
+</style>
+
+[en]You've found yourself wanting a wall to wall service. So please
+rech out by <b>approaching the [[Contact|About]] pagey.</b>
+
+[nl]NL intro [[Contact]]
+
+<section>
+    {#each data.works as work}
+        <a
+            class="work py-8 px-8 max-w-sm mx-auto bg-white rounded-xl shadow-md space-y-2 sm:(py-4 flex items-center space-y-0 space-x-6)"
+            href={work.path}>
+            <x-grid>
+                <h3 class="text-lg text-black font-semibold">{work.title}</h3>
+                <div>
+                    <Image src={work.image} alt={work.title} sizes="400px" />
+                </div>
+            </x-grid>
+        </a>
+    {/each}
+</section>
+
+<p>
+Prices: €1000 - €4000 / m²
+</p>
+
+<x-debug>
+    debug:
+    raw=<JsonView depth={1} json={data} />
+</x-debug>

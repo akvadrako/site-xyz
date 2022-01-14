@@ -4,29 +4,8 @@
 // https://kit.svelte.dev/docs#hooks
 
 export async function __handle({ request, resolve }) {
-    let orig = request.path
+    //console.log(request.method, request.url.pathname)
 
-    if (request.path.startsWith('/en')) {
-        request.locals.lang = 'en'
-        request.path = request.path.replace('/en', '/')
-    }
-    
-    console.log('path', request.path, orig)
-
-    const response = await resolve(request);
-
-    if (response.body) {
-        console.log('body', response.body.substr(0, 20))
-        response.body = response.body.replace('<html', '<html lang="en,nl"')
-    }
-
-    return {
-            ...response,
-    };
+    return await resolve(request);
 };
 
-export function __getSession(request) {
-    return {
-        lang: request.locals.lang
-    }
-}

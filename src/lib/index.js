@@ -6,6 +6,9 @@ import {readable, derived} from 'svelte/store'
 import {page, session} from '$app/stores'
 
 export {goto} from '$app/navigation'
+export {createToast} from './toasts'
+
+export const base = "https://lucid-hodgkin-cc7294.netlify.app"
 
 // store: current language
 export const lang = readable('en', set => {
@@ -32,6 +35,12 @@ export const route = derived(lang, $lang => {
         return '/' + $lang + path
     }
 })
+
+import dayjs from 'dayjs'
+
+export function formatDate(when) {
+    return dayjs(route.date).format('YYYY-MM-DD')
+}
 
 export function assert(test, ...args) {
     console.assert(test, ...args)

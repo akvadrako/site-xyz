@@ -1,6 +1,6 @@
 
 <script>
-    import {getRoute} from '/src/metadata'
+    //import {getRoute} from '/src/backend/metadata'
     import {lang} from '$lib'
 
     export let path
@@ -9,13 +9,20 @@
 
     let route = {}
 
-    if(title) {
-        route = {
-            title: title,
-            path: '/' + $lang + path,
-        }
-    } else {
-        route = getRoute(path, $lang)
+    /*
+     * if(title) {
+     *     route = {
+     *         title: title,
+     *         path: '/' + $lang + path,
+     *     }
+     * } else {
+     *     route = getRoute(path, $lang)
+     * }
+     */
+
+    route = {
+        title: title,
+        path: '/' + $lang + path,
     }
 </script>
 
@@ -31,4 +38,5 @@
 
 <a class=link
     rel={ext && 'external'}
+    sveltekit:prefetch
     href="{route.path}">{route.title}</a>

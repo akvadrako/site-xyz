@@ -6,6 +6,7 @@ layout: false
     import JsonView from '@zerodevx/svelte-json-view/src/JsonView.svelte'
 
     import Notify from '$comp/Notify'
+    import { Image } from '$comp'
     import {toasts, createToast} from '$lib/toasts'
 
     function someFunction () {
@@ -18,31 +19,25 @@ layout: false
 <h1>Play</h1>
 <h2>Images</h2>
 
-![alt](/media/screenshot-20211227-2201.png "title")
-<!-- 
-    docs:
-    - https://gist.github.com/cathyxz/f17d12c07d60bcef52591e64e5e684fb
-    - without 'sizes', FF and Safari always pick largest image
-    - srcset: 400w is intrinsic width in pixels
-    - sizes: media-condition width-of-element
--->
+<Image src="/media/woman-cropped.jpeg" sizes="100vw" width="200px" />
+
+<br />
 <img srcset="https://placekitten.com/200/200 200w,
              https://placekitten.com/300/300 300w,
-             https://placekitten.com/400/400 400w,
-             https://placekitten.com/600/600 600w
-             https://placekitten.com/800/800 800w"
+             https://placekitten.com/600/600 600w,
+             https://placekitten.com/800/800 800w,
+             https://placekitten.com/1000/1000 1000w,
+             https://placekitten.com/1200/1200 1200w,
+             "
      sizes="(max-width: 320px) 200px,
             (max-width: 480px) 300px,
-            (max-width: 640px) 400px,
             (max-width: 800px) 600px,
-            100vw"
+            700px"
     src="https://placekitten.com/200/200"
     alt="kitten"
+    style="width: 50%"
 />
 
-<img src="https://lucid-hodgkin-cc7294.netlify.app/media/woman-cropped.jpeg?nf_resize=fit&w=100&h=200" alt="apples" />
-<img src="/media/woman-cropped.jpeg?nf_resize=smartcrop&w=100&h=200" alt="" />
-<img src="/media/woman-cropped.jpeg?nf_resize=fit&w=20&h=20" alt="" />
 
 <h2>Search</h2>
 <Search />

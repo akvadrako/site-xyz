@@ -3,9 +3,9 @@ title: About
 layout: default
 ---
 <script>
-    import {getRoutes} from '/src/metadata'
+    import {getRoutes} from '$lib/metadata'
     import {lang} from '$lib'
-  
+
     const routes = getRoutes($lang)
 </script>
 
@@ -16,12 +16,13 @@ and paint. This is causing huge problems in the wall rights community.
 But frankly undecored walls do not deserve rights. With a wall to wall
 transformation you can shutup your bare wall. Some stuff. and more.
 
-## Sitemap of Routes
+## Sitemap
 
-  <ul>
+<ul>
     {#each Object.values(routes) as route}
-      <li>
-        <a href={route.path}>{route.path}</a> -- {route.title}
-      </li>
+        <li>
+            <a href={route.path}>{route.path}</a> -- {route.title}
+        </li>
     {/each}
-  </ul>
+</ul>
+

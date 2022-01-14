@@ -4,7 +4,12 @@
 
 ## TODO
 
-- https://github.com/sw-yx/swyxkit
+- tailwind
+- sitemap
+- catch errors globally?
+- monitoring
+- analytics
+- comments?
 
 ## TOC
 
@@ -46,26 +51,17 @@ Deploy:
 
 - git commit
 
-## TODO
-
-- tailwind
-    - https://strapi.io/blog/how-to-create-a-blog-with-svelte-kit-strapi
-- prerendering
-    - https://app.netlify.com/sites/lucid-hodgkin-cc7294/settings/deploys
-- forms
-    - https://docs.netlify.com/site-deploys/post-processing/form-detection/
-- sitemap
-- large media
-    - https://app.netlify.com/sites/lucid-hodgkin-cc7294/large-media
-- catch errors globally?
-- monitoring / analytics
-
 ## Technical Intro
+
+Style
+- tailwind - https://tailwindcss.com/docs/guides/sveltekit
+- windicss - https://windicss.org/guide/configuration.html
+- `npx windicss-analysis`
+- https://flowbite.com/docs/getting-started/introduction/
 
 Mdsvex
 - <https://mdsvex.com/docs>
-- links?
-    - https://github.com/landakram/remark-wiki-link
+- links - https://github.com/landakram/remark-wiki-link
 - embedded js:
 
     > ```js exec
@@ -73,7 +69,6 @@ Mdsvex
     > <script context="module">
 
 - https://github.com/jxnblk/vim-mdx-js
-
 - <https://github.com/rehypejs/rehype/blob/main/doc/plugins.md>
 - <https://github.com/remarkjs/remark/blob/main/doc/plugins.md>
 
@@ -83,6 +78,10 @@ i18n
 Related
 - https://github.com/rodneylab/sveltekit-blog-mdx
 - Based on sveltekit-netlify-cms.
+    
+Netlify
+- forms: https://docs.netlify.com/site-deploys/post-processing/form-detection/
+- large media: https://app.netlify.com/sites/lucid-hodgkin-cc7294/large-media
 
 ## One-time Setup
 

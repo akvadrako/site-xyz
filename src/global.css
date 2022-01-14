@@ -22,7 +22,13 @@ main[lang="nl"] *[lang="en"] {
 }
 
 /**********************************************
- * CSS Reset
+ * Common components
+ */
+
+x-debug { display: none; }
+
+/**********************************************
+ * Standard components / CSS Reset
  */
 
 html {
@@ -57,9 +63,22 @@ dd {
   margin: 0;
 }
 
-/* A elements that don't have a class get default styles */
-a:not([class]) {
+h1, h2, h3, h4 {
+  font-weight: bold;
+}
+
+a {
   text-decoration-skip-ink: auto;
+  color: blue;
+}
+
+a:visited {
+  color: purple;
+}
+
+a:hover {
+  color: red;
+  outline: 2px;
 }
 
 /* Inherit fonts for inputs and buttons */

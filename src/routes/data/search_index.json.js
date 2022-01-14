@@ -1,5 +1,5 @@
 
-import {getRoutes} from '/src/metadata'
+import {getRoutes} from '$lib/metadata'
 import {log} from '$lib'
 import MiniSearch from 'minisearch'
 

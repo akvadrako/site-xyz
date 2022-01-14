@@ -1,3 +1,7 @@
+#
+# Netlify CMS
+#
+
 backend:
   name: git-gateway
   repo: akvadrako/site-xyz
@@ -12,11 +16,11 @@ collections:
     create: true
     fields:
       - name: title
-      - name: layout
+      #- name: layout
       - name: body
         widget: markdown
   - name: works
-    i18n: true
+    #i18n: true
     label: works
     label_singular: work
     folder: 'src/routes/[lang]/works'
@@ -24,15 +28,17 @@ collections:
     format: yaml-frontmatter
     create: true
     slug: "{{slug}}"
-    nested:
-      depth: 2
-      summary: '{{title}}'
-    preview_path: '/en/works/{{slug}}'
-    meta:
-      path: { widget: string, label: 'Path', index_file: 'index' }
+    identifier_field: slug
     fields:
-      - name: title
-        i18n: true
+      - name: slug
+        label: slug (short, unique ID for URL path)
+      - name: title_en
+        label: English Title
+      - name: title_nl
+        label: Dutch Title
+      - name: layout
+        widget: hidden
+        default: work
       - name: date
         widget: date
       - name: image
@@ -40,14 +46,16 @@ collections:
         allow_multiple: false
       - name: body
         widget: markdown
+        label: Page Content / Description
 media_folder: "static/media"
 public_folder: "/media"
 
 local_backend: true
-i18n:
-  structure: single_file
-  locales: [en, nl]
-  default_locale: en
+
+# i18n:
+#   structure: single_file
+#   locales: [en, nl]
+#   default_locale: en
 
 # publish_mode: editorial_workflow
 
