@@ -20,7 +20,8 @@
 
     // https://developer.mozilla.org/en-US/docs/Web/API/ErrorEvent
     function onerror(event) {
-        createToast(`Error: ${event.message}`)
+        let msg = event.message || 'unknown';
+        createToast(`Error: ${msg}`)
     }
 </script>
 

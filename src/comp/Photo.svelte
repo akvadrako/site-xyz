@@ -20,16 +20,12 @@
         object-fit: cover;
     }
     .preload {
-        _z-index: 1;
-        _position: absolute;
-        display: none;
-    }
-    .real {
-        _z-index: 2;
+        z-index: -1;
+        position: absolute;
     }
     div {
-        object-fit: cover;
-        _position: relative;
+        height: 100%;
+        position: relative;
     }
 </style>
 
@@ -48,7 +44,7 @@
         {base}{src}?nf_resize=fit&w=1200 1200w,
         {src}
         "
-        src="-{src}"
+        src="{src}"
         sizes="{sizes}"
         alt="{alt}"
     />
