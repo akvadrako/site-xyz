@@ -10,9 +10,11 @@ title: Contact
     async function submit(e) {
         e.preventDefault()
 
-        let reply = await fetch('/', {
+        let reply = await fetch(base, { //window.location.toString(), {
             method: 'POST',
-            headers: { "Content-Type": "multipart/form-data" },
+            mode: 'no-cors',
+            //headers: { "Content-Type": "multipart/form-data" },
+            //headers: { "Content-Type": undefined },
             body: new FormData(form),
         })
         console.log('form', reply)
