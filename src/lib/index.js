@@ -10,6 +10,11 @@ export {createToast} from './toasts'
 
 export const base = "https://lucid-hodgkin-cc7294.netlify.app"
 
+// return thumbnail image
+export function small(src) {
+    return `${base}${src}?nf_resize=fit&w=200`
+}
+
 // store: current language
 export const lang = readable('en', set => {
     page.subscribe(value => {

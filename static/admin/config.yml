@@ -32,6 +32,9 @@ collections:
     fields:
       - name: slug
         label: slug (short, unique ID for URL path)
+      - name: kind
+        widget: select
+        options: ['illustration', 'mural', 'painting']
       - name: title_en
         label: English Title
       - name: title_nl

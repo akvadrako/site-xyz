@@ -2,7 +2,7 @@
 export {default as Link} from './Link'
 //export {default as Gallery} from './Gallery'
 export {default as Search} from './Search'
-export {default as Image} from './Image'
+export {default as Photo} from './Photo'
 export {default as JsonView} from './JsonView'
 
 // experimental stuff

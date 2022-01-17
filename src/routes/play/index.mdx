@@ -6,7 +6,7 @@ layout: false
     import JsonView from '@zerodevx/svelte-json-view/src/JsonView.svelte'
 
     import Notify from '$comp/Notify'
-    import { Image } from '$comp'
+    import { Photo } from '$comp'
     import {toasts, createToast} from '$lib/toasts'
 
     function someFunction () {
@@ -17,9 +17,9 @@ layout: false
 </script>
 
 <h1>Play</h1>
-<h2>Images</h2>
+<h2>Photos</h2>
 
-<Image src="/media/woman-cropped.jpeg" sizes="100vw" width="200px" />
+<Photo src="/media/woman-cropped.jpeg" sizes="100vw" width="200px" />
 
 <br />
 <img srcset="https://placekitten.com/200/200 200w,

@@ -2,7 +2,7 @@
     // mdsvex wrapper
     // can provide custom components and access front-matter
     
-    import { Image as img } from '$comp';
+    import { Photo as img } from '$comp';
     export { img }
 </script>
 <script>

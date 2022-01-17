@@ -55,9 +55,11 @@ Deploy:
 
 Style
 - tailwind - https://tailwindcss.com/docs/guides/sveltekit
-- windicss - https://windicss.org/guide/configuration.html
-- `npx windicss-analysis`
-- https://flowbite.com/docs/getting-started/introduction/
+- windicss
+    - https://windicss.org/guide/configuration.html
+    - `npx windicss-analysis`
+    -
+- flowbite - https://flowbite.com/docs/getting-started/introduction/
 
 Mdsvex
 - <https://mdsvex.com/docs>

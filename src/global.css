@@ -67,6 +67,11 @@ h1, h2, h3, h4 {
   font-weight: bold;
 }
 
+h2 {
+  margin-top: 8px;
+  font-size: 120%;
+}
+
 a {
   text-decoration-skip-ink: auto;
   color: blue;
@@ -81,11 +86,26 @@ a:hover {
   outline: 2px;
 }
 
-/* Inherit fonts for inputs and buttons */
-input,
-button,
-textarea,
-select {
-  font: inherit;
+/**********************************************
+ * Dark Mode
+ */
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background: black;
+    color: white;
+  }
+
+  a {
+    color: yellow;
+  }
+
+  a:visited {
+    color: pink;
+  }
+
+  a:hover {
+    color: red;
+  }
 }
 

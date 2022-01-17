@@ -1,6 +1,4 @@
 
-const typography = require('windicss/plugin/typography')
-
 export default {
     scan: {
         dirs: ['src'],
@@ -13,7 +11,9 @@ export default {
         'app': 'text-red',
         'app-border': 'border-gray-200 dark:border-dark-300',
     },
-    //darkMode: 'class',
+    // media or class
+    // https://windicss.org/features/dark-mode.html
+    darkMode: 'media',
     theme: {
         extend: {
             // typography: theme => ({
@@ -31,7 +31,7 @@ export default {
     },
     variants: {},
     plugins: [
-        //typography,
+        require('windicss/plugin/typography'),
         require('windicss/plugin/forms'),
     ],
     //plugins: [require('@tailwindcss/typography')]
