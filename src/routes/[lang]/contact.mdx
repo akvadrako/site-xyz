@@ -19,7 +19,7 @@ title: Contact
         })
         console.log('form', reply)
 
-        if(reply.status == 200) {
+        if(reply.status == 200 || reply.status == 0) {
             let msg = 'Form successfully submitted'
             createToast({ msg: msg, type: 'success', persist: true })
         } else {
