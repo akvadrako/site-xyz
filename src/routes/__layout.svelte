@@ -15,13 +15,13 @@
     export let title = ''
 
     function unhandledrejection(event) {
-        createToast(`Unhandled Promise: ${event.reason}`)
+        createToast({ msg: `Unhandled Promise: ${event.reason}` })
     }
 
     // https://developer.mozilla.org/en-US/docs/Web/API/ErrorEvent
     function onerror(event) {
         let msg = event.message || 'unknown';
-        createToast(`Error: ${msg}`)
+        createToast({ msg: `Error: ${msg}` })
     }
 </script>
 

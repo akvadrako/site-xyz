@@ -4,9 +4,9 @@ import {writable} from 'svelte/store'
 export const toasts = writable([])
   
 export let themes = {
-    danger: '#bb2124',
+    error: '#bb2124',
     success: '#22bb33',
-    warning: '#f0ad4e',
+    warn: '#f0ad4e',
     info: '#5bc0de',
     default: '#aaaaaa'
 }

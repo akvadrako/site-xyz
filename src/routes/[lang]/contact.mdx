@@ -3,27 +3,32 @@ title: Contact
 ---
 
 <script>
-let form
-let msg
+    import { base, lang, createToast } from '$lib';
 
-async function submit(e) {
-    e.preventDefault()
-    
-    let formData = new FormData(form)
-    let reply = await fetch('/', {
-        method: 'POST',
-        headers: { "Content-Type": "multipart/form-data" },
-        body: new URLSearchParams(formData).toString()
-    })
-    msg = 'Form successfully submitted'
-}
+    let form;
+
+    async function submit(e) {
+        e.preventDefault()
+
+        let formData = new FormData(form)
+        let reply = await fetch('/', {
+            method: 'POST',
+            headers: { "Content-Type": "multipart/form-data" },
+            body: new URLSearchParams(formData).toString()
+        })
+        console.log('form', reply)
+
+        if(reply.status == 200) {
+            let msg = 'Form successfully submitted'
+            createToast({ msg: msg, type: 'success', persist: true })
+        } else {
+            let msg = `Error submitting form: ${reply.status}`
+            createToast({ msg: msg, type: 'error', persist: true })
+        }
+    }
 </script>
 
 <style>
-    #msg {
-        border: thick solid black;
-        background: green;
-    }
 
     @media (prefers-color-scheme: dark) {
         input[type="file"]::file-selector-button {
