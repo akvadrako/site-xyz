@@ -41,18 +41,18 @@ layout: default
     a.work {
         text-decoration: none;
         display: inline-block;
+        @apply py-8 px-8 w-sm h-sm mx-auto bg-white rounded-xl shadow-md space-y-2;
+        @apply sm:(py-4 flex items-center space-y-0 space-x-6)
     }
     x-grid {
         display: grid;
-        height: 400px;
-        width: 400px;
+        height: 100%;
+        width: 100%;
     }
     x-grid div {
         grid-area: 1 / 1 / 1 / 1;
         margin: 0;
         padding: 0;
-        height: 400px;
-        width: 400px;
     }
     h3 {
         display: none;
@@ -98,7 +98,7 @@ rech out by <b>approaching the [[Contact|About]] pagey.</b>
 <section>
     {#each filtered as work}
         <a
-            class="work py-8 px-8 max-w-sm mx-auto bg-white rounded-xl shadow-md space-y-2 sm:(py-4 flex items-center space-y-0 space-x-6)"
+            class="work"
             href={work.path}>
             <x-grid>
                 <h3 class="text-lg text-black font-semibold">{work.title}</h3>

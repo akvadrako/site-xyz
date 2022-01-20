@@ -13,7 +13,12 @@
     export let sizes = "100vw"
     export let alt = "image"
 
+    let real
     let loaded = false;
+
+    $: if(real && real.complete) {
+        loaded = true;
+    }
 
     function onLoad(event) {
         console.log('image loaded', event)
@@ -27,7 +32,7 @@
         object-fit: cover;
     }
     .preload {
-        z-index: -1;
+        z-index: 1;
         position: absolute;
     }
     div {
@@ -35,6 +40,8 @@
         position: relative;
     }
     .real {
+        z-index: 2;
+        position: relative;
         visibility: hidden;
     }
     .real.loaded {
@@ -49,6 +56,7 @@
         alt="{alt} thumbnail"
     />
     <img
+        bind:this={real}
         on:load={onLoad}
         class:loaded
         class="real"
