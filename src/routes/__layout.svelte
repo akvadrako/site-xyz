@@ -37,51 +37,37 @@
 
 <style>
     footer {
+        @apply mx-3 p-3;
+        @apply dark:border-white-500 border-black-500 border-t-2 border-solid;
         text-align: center;
-        margin-top: 10px;
+        clear: both;
     }
     footer a {
         color: inherit;
     }
     footer a {
+        @apply mx-4;
         height: 40px;
         width: 40px;
-        margin: 0 40px;
         opacity: 50%;
         display: inline-block;
     }
-    footer hr {
-        margin-bottom: 10px;
-    }
-    hr {
-        _border: 1px solid black;
-        margin: 1px 0;
-        clear: both;
-    }
-    hr {
-        @apply dark:border-white-500 border-black-500 border-width-2 border-solid;
-    }
-
     footer a:hover {
         opacity: 100%;
     }
     main {
-        margin: 10px 20px;
+        @apply mx-3 my-3;
     }
 </style>
 
 <Nav />
 <Notify />
 
-<hr />
-
 <main lang={$lang}>
 <slot />
 </main>
 
 <footer>
-    <hr />
-
     <a href="https://twitter.com/walltowall" rel="external">
         <svg id="twitter"
             viewBox="0 0 24 24"

@@ -1,34 +1,7 @@
 /**********************************************
  * Global CSS styles
- */
-
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
-
-
-/**********************************************
- * Language selection
- */
-
-main[lang="en"] *[lang="nl"] {
-    display: none;
-}
-
-main[lang="nl"] *[lang="en"] {
-    display: none;
-}
-
-/**********************************************
- * Common components
- */
-
-x-debug { display: none; }
-
-/**********************************************
- * Standard components / CSS Reset
+ *
+ * See: https://tailwindcss.com/docs/preflight
  */
 
 html {
@@ -50,41 +23,52 @@ body {
     line-height: 1.5;
 }
 
-/* Remove default margins */
-h1,
-h2,
-h3,
-h4,
-p,
-figure,
-blockquote,
-dl,
-dd {
-  margin: 0;
+/**********************************************
+ * Language selection
+ */
+
+main[lang="en"] *[lang="nl"] {
+    display: none;
 }
 
-h1, h2, h3, h4 {
-  font-weight: bold;
+main[lang="nl"] *[lang="en"] {
+    display: none;
 }
 
-h2 {
-  margin-top: 8px;
-  font-size: 120%;
+/**********************************************
+ * Standard components
+ */
+
+@layer base {
+  h1, h2, h3, h4 {
+    font-weight: bold;
+  }
+
+  h2 {
+    margin-top: 8px;
+    font-size: 120%;
+  }
+
+  a {
+    text-decoration-skip-ink: auto;
+    color: blue;
+  }
+
+  a:visited {
+    color: purple;
+  }
+
+  a:hover {
+    color: red;
+    outline: 2px;
+  }
 }
 
-a {
-  text-decoration-skip-ink: auto;
-  color: blue;
-}
+/**********************************************
+ * Custom components
+ */
 
-a:visited {
-  color: purple;
-}
-
-a:hover {
-  color: red;
-  outline: 2px;
-}
+x-debug { display: none; }
 
 /**********************************************
  * Dark Mode

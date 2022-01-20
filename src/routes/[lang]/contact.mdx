@@ -31,13 +31,6 @@ title: Contact
 
 <style>
 
-    @media (prefers-color-scheme: dark) {
-        input[type="file"]::file-selector-button {
-            background: #4b5563;
-            color: #fff;
-        }
-    }
-
     input[type="file"]::file-selector-button {
         -webkit-margin-start: -1rem;
         -webkit-margin-end: 1rem;
@@ -51,11 +44,23 @@ title: Contact
         margin-inline-start: -1rem;
         padding: .625rem 1rem .625rem 2rem;
     }
+    
+    @variants dark {
+        input[type="file"]::file-selector-button {
+            background: #4b5563;
+            color: #fff;
+        }
+    }
+
+    section {
+        @apply p-4 bg-white rounded-lg border border-gray-200 shadow-md sm:p-6 lg:p-8 dark:bg-gray-800 dark:border-gray-700 bg-gray-200
+    }
+
 </style>
 
 ## Contact Details
 
-<section class="p-4 bg-white rounded-lg border border-gray-200 shadow-md sm:p-6 lg:p-8 dark:bg-gray-800 dark:border-gray-700">
+<section>
 <div class="flex flex-col">
     <div class="sm:-mx-6 lg:-mx-8">
         <div class="inline-block py-2 min-w-full sm:px-6 lg:px-8">
@@ -89,7 +94,7 @@ title: Contact
 
 ## Contact Form
 
-<section class="p-4 bg-white rounded-lg border border-gray-200 shadow-md sm:p-6 lg:p-8 dark:bg-gray-800 dark:border-gray-700 bg-gray-200">
+<section>
 <form bind:this={form} name="contact" method="POST" data-netlify="true">
     <input type="hidden" name="form-name" value="contact">
     <div class="mb-6">

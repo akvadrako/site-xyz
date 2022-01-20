@@ -12,6 +12,13 @@
     export let src
     export let sizes = "100vw"
     export let alt = "image"
+
+    let loaded = false;
+
+    function onLoad(event) {
+        console.log('image loaded', event)
+        loaded = true;
+    }
 </script>
 <style>
     img {
@@ -27,15 +34,23 @@
         height: 100%;
         position: relative;
     }
+    .real {
+        visibility: hidden;
+    }
+    .real.loaded {
+        visibility: visible;
+    }
 </style>
 
 <div>
     <img 
         class="preload"
-        src="{base}{src}?nf_resize=fit&w=200"
+        src="{small(src)}"
         alt="{alt} thumbnail"
     />
     <img
+        on:load={onLoad}
+        class:loaded
         class="real"
         srcset="
         {base}{src}?nf_resize=fit&w=200   200w,

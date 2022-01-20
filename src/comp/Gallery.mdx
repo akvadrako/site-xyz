@@ -7,8 +7,6 @@ layout: default
     import {lang} from '$lib'
     import {keyBy} from 'lodash-es'
 
-    console.log('loading gallery')
-
     let kinds = [
         {
             key: 'illustration',
@@ -31,8 +29,6 @@ layout: default
 
     $: bykey = keyBy(kinds, 'key')
     $: filtered = works.filter(w => bykey[w.kind || 'mural'].checked)
-    
-    $: console.log('kinds', kinds, filtered)
 </script>
 
 <style>

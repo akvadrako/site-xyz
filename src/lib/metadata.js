@@ -66,8 +66,6 @@ function loadRoutes() {
     for (const file in pages) {
         const mod = pages[file]
 
-        log('mod', mod)
-
         if(! mod.metadata)
             continue
 

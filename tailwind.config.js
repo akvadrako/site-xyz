@@ -1,4 +1,6 @@
 
+const colors = require('windicss/plugin/colors');
+
 export default {
     scan: {
         dirs: ['src'],

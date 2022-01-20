@@ -1,9 +1,9 @@
 <script>
     import { page } from '$app/stores';
     import { lang } from '$lib';
-    import { Link, Search } from '$comp';
+    import { Search } from '$comp';
     
-    let menu
+    let sidebar
     let open = false
 
     const navItems = [
@@ -21,33 +21,24 @@
         n.current = $page.url.pathname == `/${lang}/${n.path}`
     }
 
-    $: console.log('open', open, navItems)
+    function handleDropdownOutsideClick(event) {
+        if (! sidebar)
+            return;
 
-    function onClick(event) {
+        if (event.target == sidebar || sidebar.contains(event.target))
+            return;
+        
+        console.log('outside', event)
+        event.preventDefault()
+        event.stopPropagation()
+        open = false
+        document.body.removeEventListener('click', handleDropdownOutsideClick, true);
+    }
+
+    function onClick() {
+        console.log('button', { open, event })
         open = !open;
-
-        /* createPopper(element, menu, { */
-        /*     placement: placement ? placement : 'bottom-start', */
-        /*     modifiers: [ */
-        /*         { */
-        /*             name: 'offset', */
-        /*             options: { */
-        /*                 offset: [0, 10] */
-        /*             }, */
-        /*         }, */
-        /*     ] */
-        /* }); */
-
-        function handleDropdownOutsideClick(event) {
-            if (event.target == menu || menu.contains(event.target))
-                return;
-            
-            event.preventDefault()
-            open = false
-            document.body.removeEventListener('click', handleDropdownOutsideClick, true);
-        }
-
-        if(! open) {
+        if(open) {
             document.body.addEventListener('click', handleDropdownOutsideClick, true)
         }
     }
@@ -55,71 +46,87 @@
 
 <style>
     nav {
-        height: 39px;
-        margin: 8px;
-        line-height: 40px; 
+        @apply px-3 py-2;
+        @apply text-base bg-warm-gray-400 text-black;
+        margin: 0;
         display: flex;
         gap: 10px;
-        justify-content: space-between;
+        justify-content: left;
+        align-items: center;
+        display: sticky;
+        white-space: nowrap;
+        border-bottom: thin solid black;
+    }
+    nav h1 {
+        font-size: inherit;
+    }
+    nav > * {
+        text-align: center;
+    }
+    nav a, #sidebar a {
+        color: inherit;
     }
     nav img {
-        height: 100%;
-        width: 200px;
+        height: 40px;
     }
     #logo {
         height: 100%;
-        width: 200px;
     }
     
-    button {
-        position: absolute;
-        left: 0px;
-        top: 0px;
-        margin: 5px;
-        z-index: 10;
-        background-color: Transparent;
-        background-repeat: no-repeat;
-        border: none;
-        cursor: pointer;
-        overflow: hidden;
-        outline: none;
-    }
-    svg line {
-        stroke: currentColor;
-        stroke-width: 3;
-    }
-    /* rotate the top line */
-    .open #top {
-        transform: translate(10px, 0px) rotate(45deg)
-    }
-    /* hide the middle */
-    .open #mid {
-        opacity: 0
-    }
-    /* rotate the bottom line */
-    .open #bot {
-        transform: translate(-15px, 8px) rotate(-45deg)
-    }
-    @media (min-width: 640px) {
+    /* desktop */
+    @screen sm {
         #sidebar {
             display: none;
         }
         .link {
             display: block;
         }
+        button {
+            display: none;
+        }
     }
-    @media (max-width: 640px) {
+
+    /* mobile */
+    @screen <sm {
+        button {
+            cursor: pointer;
+            transition: color 0.4s ease-in-out;
+            flex: 2 0 0%;
+            text-align: center;
+        }
+        svg {
+            display: inline-block;
+            _position: absolute;
+            _left: 50%;
+            _transform: translate(-50%, -50%);
+        }
+        svg line {
+            stroke: currentColor;
+            stroke-width: 3;
+        }
+        .open #top {
+            transform: translate(10px, 0px) rotate(45deg)
+        }
+        .open #mid {
+            opacity: 0
+        }
+        .open #bot {
+            transform: translate(-15px, 8px) rotate(-45deg)
+        }
+
         #sidebar {
             display: block;
             transition: left 0.4s ease-in-out;
             position: absolute;
             height: 100vh;
-            top: 0px;
-            left: -300px;
+            left: -20ch;
+            z-index: 10;
             overflow-y: auto;
-            width: 300px;
-            background: #11111199;
+            width: 20ch;
+            border-right: thin solid black;
+            @apply bg-warm-gray-400; 
         }
+
         .link {
             display: none;
         }
@@ -128,34 +135,28 @@
             display: flex;
             flex-direction: column;
         }
-        
-        #menu {
-            text-align: left;
-            padding: 25px;
-            padding-top: 50px;
+        ul a:hover {
+            @apply bg-red-400;
         }
+        
         #sidebar.open {
             left: 0px;
         }
     }
-    h1 {
-        font-size: inherit;
-    }
 </style>
 
-<nav class="border-gray-200 px-2 sm:px-4 rounded items-center mx-auto">
-    <a id="logo" href="/{$lang}">
+<nav>
+    <a id="logo" class="flex-initial" href="/{$lang}">
         <img class="mr-3 h-5" src="/media/logo.svg" alt="home">
     </a>
 
     <a
         href="/{$lang}"
-        class="link block py-2 pr-4 pl-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white">
+        class="flex-initial py-2 pr-4 pl-3 text-white rounded dark:text-white">
         <h1>Wall To Wall</h1>
     </a>
-
     
-    <button class:open on:click={onClick} class="sm:hidden" style="transition: color 0.4s ease-in-out;">
+    <button class:open on:click={onClick}>
         <svg width=32 height=32>
             <line id="top" x1=0 y1=9    x2=32 y2=9    style="transition: transform 0.4s ease-in-out, opacity 0.4s ease-in-out;"/>
             <line id="mid" x1=0 y1=18.5 x2=32 y2=18.5 style="transition: transform 0.4s ease-in-out, opacity 0.4s ease-in-out;"/>
@@ -166,32 +167,17 @@
     {#each navItems as item}
         <a
             href="/{$lang}{item.path}"
-            class="link block py-2 pr-4 pl-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white" 
+            class="flex-auto max-w-sm link block py-2 pr-4 pl-3 text-white rounded dark:text-white" 
             aria-current={ item.current ? "page" : '' }>
             {item.label[$lang]}
         </a>
     {/each}
 
-    <div bind:this={menu} id="sidebar" class:open>
-        <ul id="menu" class="flex mt-4">
-            {#each navItems as item}
-            <li>
-                <a href="/{$lang}{item.path}"
-                    class="block py-2 pr-4 pl-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white"
-                    aria-current="{ item.current ? 'page' : '' }"
-                >
-                    {item.label[$lang]}
-                </a>
-            </li>
-            {/each}
-        </ul>
-    </div>
-
-    <span class="md:w-64 w-16">
+    <span class="flex-grow-[2] flex-shrink-[2] max-w-sm hidden sm:(block w-16)">
         <Search />
     </span>
     
-    <span class="w-16">
+    <span class="flex-initial pl-4">
         {#if $page.url.pathname == '/'}
             <b>EN</b> / <a href="/nl">NL</a>
         {:else if $lang == 'nl'}
@@ -201,4 +187,17 @@
         {/if}
     </span>
 </nav>
+
+<ul bind:this={sidebar} id="sidebar" class:open class="flex">
+    {#each navItems as item}
+    <li>
+        <a href="/{$lang}{item.path}"
+            class="block py-2 pr-4 pl-3 text-white dark:text-white"
+            aria-current="{ item.current ? 'page' : '' }"
+        >
+            {item.label[$lang]}
+        </a>
+    </li>
+    {/each}
+</ul>
 
