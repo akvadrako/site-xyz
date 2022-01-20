@@ -1,6 +1,4 @@
 
-const colors = require('windicss/plugin/colors');
-
 export default {
     scan: {
         dirs: ['src'],
@@ -31,10 +29,9 @@ export default {
             },
         }
     },
-    variants: {},
+    //variants: {},
     plugins: [
         require('windicss/plugin/typography'),
         require('windicss/plugin/forms'),
     ],
-    //plugins: [require('@tailwindcss/typography')]
 }
