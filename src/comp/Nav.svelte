@@ -2,9 +2,14 @@
     import { page } from '$app/stores';
     import { lang } from '$lib';
     import { Search } from '$comp';
-    
+    import { beforeNavigate } from '$app/navigation';
+
     let sidebar
     let open = false
+
+    beforeNavigate(() => {
+        open = false;
+    })
 
     const navItems = [
         { 
@@ -53,7 +58,9 @@
         gap: 10px;
         justify-content: left;
         align-items: center;
-        display: sticky;
+        position: sticky;
+        top: 0;
+        z-index: 100;
         white-space: nowrap;
         border-bottom: thin solid black;
     }

@@ -3,13 +3,13 @@
 //
 // https://kit.svelte.dev/docs#hooks
 
-export async function handle({ request, resolve }) {
+export async function handle({ event, resolve }) {
     //console.log(request.method, request.url.pathname)
 
-    const response = await resolve(request)
+    const response = await resolve(event)
 
     // read language slug
-    const [, lang] = request.url.pathname.split('/')
+    const [, lang] = event.url.pathname.split('/')
 
     if(lang && response.body) {
         response.body = response.body.toString()
