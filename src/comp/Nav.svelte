@@ -167,13 +167,17 @@
     {#each navItems as item}
         <a
             href="/{$lang}{item.path}"
-            class="flex-auto max-w-sm link block py-2 pr-4 pl-3 text-white rounded dark:text-white" 
+            class="flex-auto max-w-xs link block py-2 pr-4 pl-3 text-white rounded dark:text-white" 
             aria-current={ item.current ? "page" : '' }>
             {item.label[$lang]}
         </a>
     {/each}
+    
+    <span class="flex-1">
+        &nbsp;
+    </span>
 
-    <span class="flex-grow-[2] flex-shrink-[2] max-w-sm hidden sm:(block w-16)">
+    <span class="flex-grow-[10] flex-shrink-[10] max-w-sm hidden sm:(block w-16)">
         <Search />
     </span>
     
