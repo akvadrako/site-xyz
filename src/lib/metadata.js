@@ -66,7 +66,7 @@ function loadRoutes() {
     for (const file in pages) {
         const mod = pages[file]
 
-        if(! mod.metadata)
+        if(! mod.metadata || mod.metadata.hide)
             continue
 
         const path = file.replace('/src/routes/','/').replace('index','').replace('.mdx','').replace('.svelte', '')

@@ -4,6 +4,7 @@ layout: null
 ---
 <script>
     import {page} from '$app/stores'
+    import {prerendering} from '$app/env'
     import { onMount, afterUpdate } from 'svelte'
     import {log, lang} from '$lib'
     import {Link} from '$comp'
@@ -18,14 +19,15 @@ layout: null
 
     // update query when URL string changes
     let prev_param = null
-    $: (() => {
+    
+    $: if(! prerendering) {
         let q = $page.url.searchParams.get('q')
         if(prev_param != q) {
             prev_param = q
             query = q
             search()
         }
-    })()
+    }
 
     let idx = null
     let hits = []
@@ -102,7 +104,14 @@ layout: null
     }
 
 </script>
-<Link title='/search_index.json' ext={true} path='/search_index.json' />
+<style>
+    input {
+        @apply dark:bg-grey-500 text-black;
+    }
+    button {
+        @apply text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800;
+    }
+</style>
 <p>
     <!-- FIXME - live search not working -->
     <input
@@ -111,7 +120,7 @@ layout: null
         on:change={search}
         bind:value={query}
     />
-    <input type="submit" value="search" on:click={search.flush} />
+    <button on:click={search.flush}>Search</button>
 </p>
 
 <h2>Suggestions</h2>
@@ -137,3 +146,6 @@ layout: null
     {/each}
 </table>
 
+<p>
+    <a rel="external" href={data_href}>{data_href}</a>
+</p>

@@ -6,14 +6,17 @@
 export async function handle({ event, resolve }) {
     //console.log(request.method, request.url.pathname)
 
-    const response = await resolve(event)
+    let response = await resolve(event)
 
     // read language slug
-    const [, lang] = event.url.pathname.split('/')
+    let [, lang] = event.url.pathname.split('/')
 
     if(lang && response.body) {
-        response.body = response.body.toString()
-            .replace('<html>', `<html lang="${lang}">`)
+        let body = await response.text()
+        
+        body = body.replace('<html>', `<html lang="${lang}">`)
+ 
+        response = new Response(body, response)
     }
 
     return response
