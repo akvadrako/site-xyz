@@ -48,8 +48,6 @@
 
     $: next = (active + 1) % works.length;
     $: prev = (active - 1 + works.length) % works.length
-
-    $: console.log(works)
 </script>
 <style>
     div {

@@ -59,8 +59,6 @@ function loadRoutes() {
    
     let pages = { ...mds, ...srcs }
 
-    log('loading routes...', { count: Object.values(pages).length })
-
     routes = {}
 
     for (const file in pages) {
