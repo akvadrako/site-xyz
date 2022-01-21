@@ -5,7 +5,7 @@
     import { Photo } from '$comp';
     import { lang, formatDate, small } from '$lib';
     import { loadWorks } from '$lib/metadata';
-    import { prefetch } from '$app/navigation';
+    import { prefetch, goto } from '$app/navigation';
 
     export let title_en;
     export let title_nl;
@@ -48,6 +48,52 @@
 
     $: next = (active + 1) % works.length;
     $: prev = (active - 1 + works.length) % works.length
+
+    var xDown = null;
+    var yDown = null;
+    var xDiff = null;
+    var yDiff = null;
+    var timeDown = null;
+    var startEl = null;
+
+    function handleTouchEnd(e) {
+
+        if (startEl !== e.target)
+            return;
+        
+        if(Date.now() - timeDown > 500)
+            return;
+        
+        if (Math.abs(xDiff) < Math.abs(yDiff))
+            return;
+        
+        if (Math.abs(xDiff) < 40)
+            return;
+
+        // var changedTouches = e.changedTouches || e.touches || [];
+        // touchendX = e.changedTouches[0].clientX
+
+        if (xDiff < 0) {
+            goto(works[prev].path, { noscroll: true })
+        } else {
+            goto(works[next].path, { noscroll: true })
+        }
+    }
+
+    function handleTouchStart(e) {
+        startEl = e.target;
+        timeDown = Date.now();
+        xDown = e.touches[0].clientX;
+        yDown = e.touches[0].clientY;
+        xDiff = 0;
+        yDiff = 0;
+    }
+
+    function handleTouchMove(e) {
+        xDiff = xDown - e.touches[0].clientX;
+        yDiff = yDown - e.touches[0].clientY;
+    }
+
 </script>
 <style>
     .frame {
@@ -73,7 +119,12 @@
 
 <h2>{title} ({$lang})</h2>
 
-<div class="frame">
+<div
+    class="frame"
+    on:touchstart={handleTouchStart}
+    on:touchmove={handleTouchMove}
+    on:touchend={handleTouchEnd}
+>
     <Photo src={image} />
 </div>
 
