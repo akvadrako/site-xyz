@@ -50,21 +50,30 @@
     $: prev = (active - 1 + works.length) % works.length
 </script>
 <style>
-    div {
+    .frame {
         /* border: thick solid black; */
         height: 60vh;
     }
+    .inner {
+        overflow-x: auto;
+    }
+
     div :global(img) {
         object-fit: contain;
     }
-    nav {
+    ul {
         padding: 20px 0;
+        align-content: flex-start;
+    }
+    li {
+        height: 2em;
+        margin-top: 1em;
     }
 </style>
 
 <h2>{title} ({$lang})</h2>
 
-<div>
+<div class="frame">
     <Photo src={image} />
 </div>
 
@@ -73,14 +82,14 @@
 <p>Date: {formatDate(date)}</p>
 <p>Kind: {kind}</p>
 
-<nav aria-label="work navigation">
-  <ul class="inline-flex -space-x-px">
-    <li>
+<ul aria-label="work navigation" class="flex">
+    <li class="prev flex-initial">
         <a href={works[prev].path}
             on:mouseover={() => hover(works[prev])}
             on:focus={() => hover(works[prev])}
             class="py-2 px-3 ml-0 leading-tight text-gray-500 bg-white rounded-l-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Previous</a>
     </li>
+    <div class="inner flex overflow-x-auto">
     {#each works as work}
         <li>
             {#if work.active }
@@ -99,12 +108,12 @@
             {/if}
         </li>
     {/each}
-    <li>
+    </div>
+    <li class="next flex-initial">
         <a href={works[next].path}
             on:mouseover={() => hover(works[next])}
             on:focus={() => hover(works[next])}
             class="py-2 px-3 leading-tight text-gray-500 bg-white rounded-r-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Next</a>
     </li>
-  </ul>
-</nav>
+</ul>
 

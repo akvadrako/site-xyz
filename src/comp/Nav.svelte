@@ -56,10 +56,12 @@
         margin: 0;
         display: flex;
         gap: 10px;
+        height: 55px;
         justify-content: left;
         align-items: center;
         position: sticky;
         top: 0;
+        left: 0;
         z-index: 100;
         white-space: nowrap;
         border-bottom: thin solid black;
@@ -124,8 +126,9 @@
         #sidebar {
             display: block;
             transition: left 0.4s ease-in-out;
-            position: absolute;
-            height: 100vh;
+            position: fixed;
+            top: 55px;
+            bottom: 0;
             left: -20ch;
             z-index: 10;
             overflow-y: auto;
