@@ -52,7 +52,8 @@
 <style>
     nav {
         @apply px-3 py-2;
-        @apply text-base bg-warm-gray-400 text-black;
+        @apply text-base text-black;
+        background-color: white;
         margin: 0;
         display: flex;
         gap: 10px;
@@ -64,7 +65,6 @@
         left: 0;
         z-index: 100;
         white-space: nowrap;
-        border-bottom: thin solid black;
     }
     nav h1 {
         font-size: inherit;
