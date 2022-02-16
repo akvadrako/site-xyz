@@ -1,5 +1,20 @@
 <script context="module">
+    import {pages} from '$lib'
+    import {get} from 'svelte/store'
+
+    const data_href = '/data/pages.json'
+
+    export async function load({ fetch}) {
+        if(get(pages) === null) {
+            console.log('load pages')
+            const resp = await fetch(data_href)
+            pages.set(await resp.json())
+        }
+
+        return {}
+    }
 </script>
+
 <script>
     import { browser } from "$app/env";
     import { lang, metadata, createToast } from '$lib';

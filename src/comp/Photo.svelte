@@ -21,7 +21,6 @@
     }
 
     function onLoad(event) {
-        console.log('image loaded', event)
         loaded = true;
     }
 </script>

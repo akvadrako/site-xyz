@@ -17,6 +17,9 @@
     export let layout
     export let _text
 
+    layout;
+    _text;
+
     md_store.set({
         title_en: title_en,
         title_nl: title_nl,
@@ -114,9 +117,6 @@
         height: 60vh;
         margin: 1em;
     }
-    .inner {
-        overflow-x: auto;
-    }
 
     div :global(img) {
         object-fit: contain;
@@ -198,7 +198,7 @@
 {#if more_images.length > 0}
 <div class="subs">
     {#each all_images as src}
-        <a on:click={() => setSub(src)}>
+        <a href='#src' on:click={() => setSub(src)}>
             <Photo src={src} />
         </a>
     {/each}

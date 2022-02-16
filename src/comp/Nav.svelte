@@ -1,14 +1,16 @@
+
 <script>
     import { page } from '$app/stores';
-    import { lang } from '$lib';
+    import { lang, pages } from '$lib';
     import { Search } from '$comp';
     import { beforeNavigate } from '$app/navigation';
 
     let sidebar
     let open = false
-
+    
     beforeNavigate(() => {
         open = false;
+        document.body.removeEventListener('click', handleDropdownOutsideClick, true);
     })
 
     const navItems = [
@@ -26,6 +28,19 @@
         n.current = $page.url.pathname == `/${lang}/${n.path}`
     }
 
+    $: calcNavItems = (() => {
+        const nav = [ ...navItems ]
+
+        for(let work of $pages) {
+            nav.push({
+                path: work.bare_path,
+                label: { en: work.title_en, nl: work.title_nl },
+            })
+        }
+
+        return nav;
+    })()
+
     function handleDropdownOutsideClick(event) {
         if (! sidebar)
             return;
@@ -40,7 +55,8 @@
         document.body.removeEventListener('click', handleDropdownOutsideClick, true);
     }
 
-    function onClick() {
+    function onClick(event) {
+        event.preventDefault()
         console.log('button', { open, event })
         open = !open;
         if(open) {
@@ -81,76 +97,74 @@
     #logo {
         height: 100%;
     }
+
+    /**********************
+     * mobile
+     */
+    button {
+        cursor: pointer;
+        transition: color 0.4s ease-in-out;
+        flex: 2 0 0%;
+        text-align: center;
+    }
+    svg {
+        display: inline-block;
+        _position: absolute;
+        _left: 50%;
+        _transform: translate(-50%, -50%);
+    }
+    svg line {
+        stroke: currentColor;
+        stroke-width: 3;
+    }
+    .open #top {
+        transform: translate(10px, 0px) rotate(45deg)
+    }
+    .open #mid {
+        opacity: 0
+    }
+    .open #bot {
+        transform: translate(-15px, 8px) rotate(-45deg)
+    }
+
+    #sidebar {
+        display: block;
+        transition: left 0.4s ease-in-out;
+        position: fixed;
+        top: 55px;
+        bottom: 0;
+        left: -20ch;
+        z-index: 10;
+        overflow-y: auto;
+        width: 20ch;
+        border-right: thin solid black;
+        @apply bg-warm-gray-400; 
+    }
+
+    .link {
+        display: none;
+    }
+    
+    ul {
+        display: flex;
+        flex-direction: column;
+    }
+    ul a:hover {
+        @apply bg-red-400;
+    }
+    
+    #sidebar.open {
+        left: 0px;
+    }
+
     
     /* desktop */
     @screen sm {
-        #sidebar {
-            display: none;
-        }
         .link {
             display: block;
         }
         button {
             display: none;
-        }
-    }
-
-    /* mobile */
-    @screen <sm {
-        button {
-            cursor: pointer;
-            transition: color 0.4s ease-in-out;
-            flex: 2 0 0%;
-            text-align: center;
-        }
-        svg {
-            display: inline-block;
-            _position: absolute;
-            _left: 50%;
-            _transform: translate(-50%, -50%);
-        }
-        svg line {
-            stroke: currentColor;
-            stroke-width: 3;
-        }
-        .open #top {
-            transform: translate(10px, 0px) rotate(45deg)
-        }
-        .open #mid {
-            opacity: 0
-        }
-        .open #bot {
-            transform: translate(-15px, 8px) rotate(-45deg)
-        }
-
-        #sidebar {
-            display: block;
-            transition: left 0.4s ease-in-out;
-            position: fixed;
-            top: 55px;
-            bottom: 0;
-            left: -20ch;
-            z-index: 10;
-            overflow-y: auto;
-            width: 20ch;
-            border-right: thin solid black;
-            @apply bg-warm-gray-400; 
-        }
-
-        .link {
-            display: none;
-        }
-        
-        ul {
-            display: flex;
-            flex-direction: column;
-        }
-        ul a:hover {
-            @apply bg-red-400;
-        }
-        
-        #sidebar.open {
-            left: 0px;
         }
     }
 </style>
@@ -186,6 +200,13 @@
             {item.label[$lang]}
         </a>
     {/each}
+    
+    <a
+        href="#works"
+        on:click|preventDefault={onClick}
+        class="flex-initial max-w-xs link block py-2 pr-4 pl-3 text-white rounded dark:text-white">
+        Works
+    </a>
 
     <span class="flex-grow-[10] flex-shrink-[10] max-w-sm hidden sm:(block w-16)">
         <Search />
@@ -203,7 +224,7 @@
 </nav>
 
 <ul bind:this={sidebar} id="sidebar" class:open class="flex">
-    {#each navItems as item}
+    {#each calcNavItems as item}
     <li>
         <a href="/{$lang}{item.path}"
             class="block py-2 pr-4 pl-3 text-white dark:text-white"

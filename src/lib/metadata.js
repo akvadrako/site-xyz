@@ -82,6 +82,7 @@ function localRoute(route, lang) {
     return {
         ...route,
         path: route.path.replace('[lang]', lang),
+        bare_path: route.path.replace('[lang]/', ''),
         title: route['title_' + lang] || route.title_en,
     }
 }
