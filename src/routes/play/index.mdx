@@ -7,7 +7,7 @@ hide: true
     import JsonView from '@zerodevx/svelte-json-view/src/JsonView.svelte'
 
     import Notify from '$comp/Notify'
-    import { Photo } from '$comp'
+    import {Photo} from '$comp'
     import {toasts, createToast} from '$lib/toasts'
 
     function someFunction () {
@@ -16,16 +16,12 @@ hide: true
 
     import Search from '$comp/Search'
     import {getRoutes} from '$lib/metadata'
-    import {lang, pages} from '$lib'
+    import {lang} from '$lib'
 
     const routes = getRoutes($lang)
 </script>
 
 <h1>Play</h1>
-
-$pages: <JsonView json={$pages} depth={1} />
-
-<pre>{$pages}</pre>
 
 <h2> Kitten</h2>
 

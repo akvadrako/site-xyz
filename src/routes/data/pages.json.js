@@ -8,8 +8,15 @@ export async function get({ params }) {
 
     log('loading pages.json', { routes: routes.length })
 
+    let headers = new Headers()
+    headers.append('Content-Type', 'application/json');
+
     return {
-        body: routes,
+        status: 200,
+        headers: headers,
+        body: {
+            routes: [ ...routes ],
+        }
     }
 }
 

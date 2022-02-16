@@ -6,7 +6,7 @@
 
     export async function load({ fetch}) {
         if(get(pages) === null) {
-            console.log('load pages')
+            console.log('load pages - play')
             const resp = await fetch(data_href)
             pages.set(await resp.json())
         }
