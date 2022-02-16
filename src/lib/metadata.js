@@ -82,6 +82,6 @@ function localRoute(route, lang) {
     return {
         ...route,
         path: route.path.replace('[lang]', lang),
-        title: route['title_' + lang] || route.title,
+        title: route['title_' + lang] || route.title_en,
     }
 }

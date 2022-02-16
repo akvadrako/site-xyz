@@ -1,20 +1,20 @@
-<script context="module">
-    // mdsvex wrapper
-    // can provide custom components and access front-matter
-    
-    import { Photo as img } from '$comp';
-    export { img }
-</script>
 <script>
+    import {metadata as md_store} from '$lib'
+
     export let _text = '';
-    export let title = '';
-    export let title_en = '';
-    export let title_nl = '';
+    export let title_en;
+    export let title_nl;
+    export let layout;
 
     _text;
-    title;
+    layout;
     title_en;
     title_nl;
+    
+    md_store.set({
+        title_en: title_en,
+        title_nl: title_nl,
+    })
 </script>
 
 <slot />

@@ -7,12 +7,15 @@
     export let title
     export let ext = false
 
-    let route = {}
+    let route = {
+        title: title,
+        path: '/' + $lang + path,
+    }
 
     /*
      * if(title) {
      *     route = {
-     *         title: title,
+     *         title_en: title,
      *         path: '/' + $lang + path,
      *     }
      * } else {
@@ -20,10 +23,6 @@
      * }
      */
 
-    route = {
-        title: title,
-        path: '/' + $lang + path,
-    }
 </script>
 
 <style>

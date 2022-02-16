@@ -37,7 +37,7 @@ export const extractText = () => (tree, vFile) => {
  * {
   type: 'image',
   url: 'https://example.com/favicon.ico',
-  title: 'bravo',
+  title_en: 'bravo',
   alt: 'alpha'
 }
 */
@@ -53,7 +53,7 @@ export const saveHeadings = () => (tree, vFile) => {
     visit(tree, 'heading', (node) => {
         vFile.data.headings.push({
             level: node.depth,
-            title: tree_to_string(node),
+            title_en: tree_to_string(node),
         });
     });
 }

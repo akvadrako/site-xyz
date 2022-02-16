@@ -1,7 +1,7 @@
 
 <script context="module">
     export const metadata = {
-        title: 'empty',
+        title_en: 'empty',
     };
 </script>
 

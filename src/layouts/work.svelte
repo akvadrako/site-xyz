@@ -1,6 +1,5 @@
 <script>
-    // mdsvex wrapper
-    // can provide custom components and access front-matter
+    import {metadata as md_store} from '$lib'
     
     import { Photo } from '$comp';
     import { lang, formatDate, small } from '$lib';
@@ -12,13 +11,20 @@
     export let image;
     export let more_images = [];
     export let date;
-    export let layout;
     export let slug;
     export let kind;
-    export let _text;
 
-    layout
-    _text
+    export let layout
+    export let _text
+
+    md_store.set({
+        title_en: title_en,
+        title_nl: title_nl,
+    })
+
+    function get_title(work) {
+        return ($lang == 'nl' && work.title_nl) || work.title_en;
+    }
 
     $: title = $lang == 'nl' ? title_nl : title_en;
 
@@ -126,7 +132,10 @@
         @apply cursor-default;
         flex-grow: 1;
         flex-basis: 20%;
-        @apply py-2 px-3 ml-0 border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white;
+        @apply py-2 px-3 ml-0 border-gray-300;
+    }
+    nav > *:hover {
+        @apply bg-gray-100 text-gray-700;
     }
 
     nav > *:first-child {
@@ -152,7 +161,10 @@
         height: 100px;
         cursor: pointer;
         padding: 10px;
-        @apply hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white;
+    }
+
+    .subs a:hover {
+        @apply bg-gray-100 text-gray-700;
     }
 </style>
 
@@ -161,7 +173,7 @@
         on:mouseover={() => hover(works[prev])}
         on:focus={() => hover(works[prev])}
     >
-        Prev: {works[prev].title}
+        Prev: {get_title(works[prev])}
     </a>
     <span>
         {title}
@@ -170,7 +182,7 @@
         on:mouseover={() => hover(works[next])}
         on:focus={() => hover(works[next])}
     >
-        Next: {works[next].title}
+        Next: {get_title(works[next])}
     </a>
 </nav>
 

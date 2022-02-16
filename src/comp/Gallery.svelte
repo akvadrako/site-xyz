@@ -1,8 +1,5 @@
----
-layout: default
----
 <script>
-    import {JsonView, Photo} from '$comp'
+    import {Photo, Link} from '$comp'
     import {loadWorks} from '$lib/metadata'
     import {lang} from '$lib'
     import {keyBy} from 'lodash-es'
@@ -90,27 +87,32 @@ layout: default
     }
 </style>
 
-[en]
+<div lang="en">
 Hello. my name is iulia and wall to wall is my mural servicing center, active
 in the north/south holland area. below you will find some examples of my work.
-    
-[nl]
+</div>
+
+<div lang="nl">
 Hallo. mijn naam is iulia en van muur tot muur is mijn muurschilderingservicecentrum, actief
 in de regio noord/zuid holland. hieronder vindt u enkele voorbeelden van mijn werk. 
+</div>
 
-If you would like to commision a mural, please [[contact|contact me]].
+<p>
+    If you would like to commision a mural,
+    please <Link path="/contact" title="contact me" />
+</p>
 
-    <div class="chooser">
+<div class="chooser">
 {#each kinds as kind}
-    <div>
-        <input
-            id={kind.key}
-            bind:checked={kind.checked}
-            type="checkbox"
-            class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-        />
-        <label for={kind.key} class="ml-2 mr-4">{kind.label[$lang]}</label>
-    </div>
+<div>
+    <input
+        id={kind.key}
+        bind:checked={kind.checked}
+        type="checkbox"
+        class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+    />
+    <label for={kind.key} class="ml-2 mr-4">{kind.label[$lang]}</label>
+</div>
 {/each}
 </div>
 

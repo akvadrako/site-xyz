@@ -1,10 +1,7 @@
 <script>
 </script>
 
-<p>Blog Sub-layout</p>
+<p>Blog Sub-layout 2</p>
 
 <slot />
-
-<hr>
-
 

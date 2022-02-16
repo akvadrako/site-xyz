@@ -1,8 +1,8 @@
+<script context="module">
+</script>
 <script>
-    import { page } from '$app/stores';
     import { browser } from "$app/env";
-    import { lang, createToast } from '$lib';
-    import { Link, Search } from '$comp';
+    import { lang, metadata, createToast } from '$lib';
     import Notify from '$comp/Notify';
     import Nav from '$comp/Nav';
     
@@ -12,11 +12,7 @@
     if (browser)
         import("virtual:windi-devtools")
 
-    export let title = ''
-    export let title_en = ''
-    export let title_nl = ''
-
-    $: ititle = {en: title_en, nl: title_nl}[$lang] || title;
+    $: ititle = {en: $metadata.title_en, nl: $metadata.title_nl}[$lang];
 
     function unhandledrejection(event) {
         createToast({ msg: `Unhandled Promise: ${event.reason}` })
@@ -35,7 +31,7 @@
 />
 
 <svelte:head>
-    <title>Wall 2 Wall | {ititle} |</title>
+    <title>Wall 2 Wall || {ititle}</title>
     <meta http-equiv="content-language" content="{$lang}" />
 </svelte:head>
 
@@ -68,8 +64,6 @@
 
 <Nav />
 <Notify />
-
-TITLE: {title} / {ititle} / {title_nl} / {$lang}
 
 <main lang={$lang}>
 <slot />

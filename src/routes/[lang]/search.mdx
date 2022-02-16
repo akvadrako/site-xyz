@@ -1,5 +1,5 @@
 ---
-title: Search
+title_en: Search
 layout: null
 ---
 <script>
@@ -55,7 +55,7 @@ layout: null
 
             hits = idx.search(query, {
                 prefix: true,
-                boost: { title: 2, path: 2 },
+                boost: { title_en: 2, path: 2 },
                 fuzzy: 0.2,
             })
         },

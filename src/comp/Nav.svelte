@@ -173,19 +173,19 @@
             <line id="bot" x1=0 y1=28    x2=32 y2=28  style="transition: transform 0.4s ease-in-out, opacity 0.4s ease-in-out;"/>
         </svg>
     </button>
+    
+    <span class="flex-grow-[5]">
+        &nbsp;
+    </span>
         
     {#each navItems as item}
         <a
             href="/{$lang}{item.path}"
-            class="flex-auto max-w-xs link block py-2 pr-4 pl-3 text-white rounded dark:text-white" 
+            class="flex-initial max-w-xs link block py-2 pr-4 pl-3 text-white rounded dark:text-white" 
             aria-current={ item.current ? "page" : '' }>
             {item.label[$lang]}
         </a>
     {/each}
-    
-    <span class="flex-1">
-        &nbsp;
-    </span>
 
     <span class="flex-grow-[10] flex-shrink-[10] max-w-sm hidden sm:(block w-16)">
         <Search />

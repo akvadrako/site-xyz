@@ -2,13 +2,18 @@
  * Internal Library
  */
 
-import {readable, derived} from 'svelte/store'
+import {writable, readable, derived} from 'svelte/store'
 import {page, session} from '$app/stores'
 
 export {goto} from '$app/navigation'
 export {createToast} from './toasts'
 
 export const base = "https://lucid-hodgkin-cc7294.netlify.app"
+
+export const metadata = writable({
+    title_en: 'title_en',
+    title_nl: 'title_nl',
+})
 
 // return thumbnail image
 export function small(src) {
