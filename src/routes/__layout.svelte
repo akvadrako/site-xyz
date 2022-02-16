@@ -13,6 +13,10 @@
         import("virtual:windi-devtools")
 
     export let title = ''
+    export let title_en = ''
+    export let title_nl = ''
+
+    $: ititle = {en: title_en, nl: title_nl}[$lang] || title;
 
     function unhandledrejection(event) {
         createToast({ msg: `Unhandled Promise: ${event.reason}` })
@@ -31,7 +35,7 @@
 />
 
 <svelte:head>
-    <title>Wall 2 Wall | {title} |</title>
+    <title>Wall 2 Wall | {ititle} |</title>
     <meta http-equiv="content-language" content="{$lang}" />
 </svelte:head>
 
@@ -56,12 +60,16 @@
         opacity: 100%;
     }
     main {
-        @apply mx-3 my-3;
+        @apply px-3 py-3;
+        max-width: 1000px;
+        margin: auto;
     }
 </style>
 
 <Nav />
 <Notify />
+
+TITLE: {title} / {ititle} / {title_nl} / {$lang}
 
 <main lang={$lang}>
 <slot />

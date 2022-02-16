@@ -1,28 +1,25 @@
 ---
-title: About
+title_en: About
+title_nl: Over
 layout: default
 ---
-<script>
-    import {getRoutes} from '$lib/metadata'
-    import {lang} from '$lib'
 
-    const routes = getRoutes($lang)
-</script>
+<div lang="en">
 
-## History of Wall too Wall
+## The Wall too Wall
 
 For far too longs walls have gone unnoticed, hidden behind paper
 and paint. This is causing huge problems in the wall rights community.
 But frankly undecored walls do not deserve rights. With a wall to wall
 transformation you can shutup your bare wall. Some stuff. and more.
 
-## Sitemap
+</div>
 
-<ul>
-    {#each Object.values(routes) as route}
-        <li>
-            <a href={route.path}>{route.path}</a> -- {route.title}
-        </li>
-    {/each}
-</ul>
+<div lang="nl">
+    
+## Dutch Version
+
+stuff
+
+</div>
 

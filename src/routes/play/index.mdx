@@ -45,3 +45,13 @@ hide: true
 <button on:click={someFunction}>work!</button>
 
 <pre>json: <JsonView json={$toasts} depth={1} /></pre>
+
+## Sitemap
+
+<ul>
+    {#each Object.values(routes) as route}
+        <li>
+            <a href={route.path}>{route.path}</a> -- {route.title}
+        </li>
+    {/each}
+</ul>

@@ -6,11 +6,15 @@
     export { img }
 </script>
 <script>
-    export let _text = ''
-    export let title = ''
+    export let _text = '';
+    export let title = '';
+    export let title_en = '';
+    export let title_nl = '';
 
     _text;
     title;
+    title_en;
+    title_nl;
 </script>
 
 <slot />

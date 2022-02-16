@@ -2,10 +2,19 @@
 # Netlify CMS
 #
 
+media_folder: "static/media"
+public_folder: "/media"
+local_backend: true
+
+site_url: /
+logo_url: https://lucid-hodgkin-cc7294.netlify.app/media/logo.svg
+display_url: /
+
 backend:
   name: git-gateway
   repo: akvadrako/site-xyz
   branch: master
+
 collections:
   - name: routes
     label: routes
@@ -16,7 +25,6 @@ collections:
     create: true
     fields:
       - name: title
-      #- name: layout
       - name: body
         widget: markdown
   - name: works
@@ -29,6 +37,7 @@ collections:
     create: true
     slug: "{{slug}}"
     identifier_field: slug
+    preview_path: "/en/works/{{slug}}"
     fields:
       - name: slug
         label: slug (short, unique ID for URL path)
@@ -45,25 +54,18 @@ collections:
       - name: date
         widget: date
       - name: image
+        label: Primary Image
         widget: image
         allow_multiple: false
+      - name: more_images
+        label: Secondary Images
+        widget: list
+        summary: '{{fields.image}}'
+        field:
+          name: image
+          widget: image
+          allow_multiple: false
       - name: body
         widget: markdown
         label: Page Content / Description
-media_folder: "static/media"
-public_folder: "/media"
-
-local_backend: true
-
-# i18n:
-#   structure: single_file
-#   locales: [en, nl]
-#   default_locale: en
-
-# publish_mode: editorial_workflow
-
-site_url: https://lucid-hodgkin-cc7294.netlify.app
-logo_url: https://lucid-hodgkin-cc7294.netlify.app/media/logo.svg
-
-# display_url: https://your-site.com
 

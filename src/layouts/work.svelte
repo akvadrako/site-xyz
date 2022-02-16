@@ -10,6 +10,7 @@
     export let title_en;
     export let title_nl;
     export let image;
+    export let more_images = [];
     export let date;
     export let layout;
     export let slug;
@@ -47,7 +48,9 @@
     })
 
     $: next = (active + 1) % works.length;
-    $: prev = (active - 1 + works.length) % works.length
+    $: prev = (active - 1 + works.length) % works.length;
+
+    $: subimage = image;
 
     var xDown = null;
     var yDown = null;
@@ -94,11 +97,16 @@
         yDiff = yDown - e.touches[0].clientY;
     }
 
+    function setSub(path) {
+        subimage = path;
+    }
+
+    $: all_images = [image, ...more_images];
 </script>
 <style>
     .frame {
-        /* border: thick solid black; */
         height: 60vh;
+        margin: 1em;
     }
     .inner {
         overflow-x: auto;
@@ -106,18 +114,65 @@
 
     div :global(img) {
         object-fit: contain;
+        object-position: left;
     }
-    ul {
-        padding: 20px 0;
-        align-content: flex-start;
-    }
-    li {
-        height: 2em;
+    nav {
         margin-top: 1em;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        @apply border border-gray-300 rounded-lg;
+    }
+    nav > * {
+        text-align: center;
+        @apply cursor-default;
+        flex-grow: 1;
+        flex-basis: 20%;
+        @apply py-2 px-3 ml-0 border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white;
+    }
+
+    nav > *:first-child {
+        text-align: left;
+    }
+    nav > *:last-child {
+        text-align: right;
+    }
+    nav {
+        display: flex;
+        width: 100%;
+        margin: 0 0 1em 0;
+    }
+    .subs {
+        display: flex;
+        gap: 10px;
+        margin: 1em 0;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        @apply border border-gray-300 rounded-lg;
+    }
+    .subs a {
+        width: 100px;
+        height: 100px;
+        cursor: pointer;
+        padding: 10px;
+        @apply hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white;
     }
 </style>
 
-<h2>{title} ({$lang})</h2>
+<nav>
+    <a href={works[prev].path}
+        on:mouseover={() => hover(works[prev])}
+        on:focus={() => hover(works[prev])}
+    >
+        Prev: {works[prev].title}
+    </a>
+    <span>
+        {title}
+    </span>
+    <a href={works[next].path}
+        on:mouseover={() => hover(works[next])}
+        on:focus={() => hover(works[next])}
+    >
+        Next: {works[next].title}
+    </a>
+</nav>
 
 <div
     class="frame"
@@ -125,46 +180,20 @@
     on:touchmove={handleTouchMove}
     on:touchend={handleTouchEnd}
 >
-    <Photo src={image} />
+    <Photo src={subimage} />
 </div>
+
+{#if more_images.length > 0}
+<div class="subs">
+    {#each all_images as src}
+        <a on:click={() => setSub(src)}>
+            <Photo src={src} />
+        </a>
+    {/each}
+</div>
+{/if}
 
 <slot />
 
 <p>Date: {formatDate(date)}</p>
 <p>Kind: {kind}</p>
-
-<ul aria-label="work navigation" class="flex">
-    <li class="prev flex-initial">
-        <a href={works[prev].path}
-            on:mouseover={() => hover(works[prev])}
-            on:focus={() => hover(works[prev])}
-            class="py-2 px-3 ml-0 leading-tight text-gray-500 bg-white rounded-l-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Previous</a>
-    </li>
-    <div class="inner flex overflow-x-auto">
-    {#each works as work}
-        <li>
-            {#if work.active }
-                <span
-                    aria-current="page"
-                    class="cursor-default py-2 px-3 text-blue-600 bg-blue-50 border border-gray-300 hover:bg-blue-100 hover:text-blue-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white">{work.title}</span>
-            {:else}
-                <a
-                    class="py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-                    on:mouseover={() => hover(work)}
-                    on:focus={() => hover(work)}
-                    href={work.path}
-                >
-                    {work.title}
-                </a>
-            {/if}
-        </li>
-    {/each}
-    </div>
-    <li class="next flex-initial">
-        <a href={works[next].path}
-            on:mouseover={() => hover(works[next])}
-            on:focus={() => hover(works[next])}
-            class="py-2 px-3 leading-tight text-gray-500 bg-white rounded-r-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Next</a>
-    </li>
-</ul>
-
