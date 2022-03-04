@@ -10,7 +10,7 @@ export {createToast} from './toasts'
 
 export const base = "https://lucid-hodgkin-cc7294.netlify.app"
 
-export const pages = writable(null);
+export const pages = writable([]);
 
 export const metadata = writable({
     title_en: 'title_en',

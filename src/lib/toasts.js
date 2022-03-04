@@ -40,6 +40,6 @@ export function createToast ({ msg, type, persist=false, timeout=3000 }) {
         toasts.update(ts => ts.filter(t => t.id != id))
     }
 
-    console.log('toast-add', toast)
+    console.log('toast-add', toast.id, toast.msg)
     toasts.update(ts => [ toast, ...ts ])
 }

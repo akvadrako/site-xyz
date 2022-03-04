@@ -67,9 +67,12 @@ function loadRoutes() {
         if(! mod.metadata || mod.metadata.hide)
             continue
 
+        console.log('path', file, mod.metadata)
+
         const path = file.replace('/src/routes/','/').replace('index','').replace('.mdx','').replace('.svelte', '')
         const route = {
             path: path,
+            text: mod.metadata._text,
             ...mod.metadata,
         }
 

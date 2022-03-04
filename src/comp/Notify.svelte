@@ -10,7 +10,6 @@
   }
 
   function maybePurge (toast) {
-    console.log('animation-end')
     !toast.persist && toast.purge()
   }
 
@@ -197,8 +196,6 @@
       <div 
         class="progress" 
         style="animation-duration: 5s;"
-        on:animationstart={ e => console.log(e.elapsedTime, `animation start`) }
-        on:animationiteration={ e => console.log(e.elapsedTime, `animation iter`) }
         on:animationend={() => maybePurge(toast) }>
       </div>
     </li>  

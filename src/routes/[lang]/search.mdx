@@ -1,67 +1,19 @@
 ---
 title_en: Search
 layout: null
+noindex: true
 ---
 <script>
     import {page} from '$app/stores'
+    import {search} from '$lib/search'
     import {prerendering} from '$app/env'
-    import { onMount, afterUpdate } from 'svelte'
-    import {log, lang} from '$lib'
-    import {Link} from '$comp'
-    import {debounce} from 'lodash-es'
-    import MiniSearch from 'minisearch'
+    import {SmallPhoto} from '$comp'
 
     export const title = 'search'
 
-    const data_href = '/data/search_index.json'
-
-    let query = 'home'
-
-    // update query when URL string changes
-    let prev_param = null
+    $: query = $page.url.searchParams.get('q')
     
-    $: if(! prerendering) {
-        let q = $page.url.searchParams.get('q')
-        if(prev_param != q) {
-            prev_param = q
-            query = q
-            search()
-        }
-    }
-
-    let idx = null
-    let hits = []
-    let suggest = []
-    
-    onMount(async () => {
-        
-        console.log('loading', data_href)
-        const res = await fetch(data_href)
-        const data = await res.json()
-        
-        idx = MiniSearch.loadJS(data.index, data.config)
-        console.log('loading done')
-        search()
-    })
-
-    let search = debounce(
-        () => {
-            console.log('search', { idx: typeof idx })
-
-            if(! idx)
-                return
-                    
-            suggest = idx.autoSuggest(query)
-
-            hits = idx.search(query, {
-                prefix: true,
-                boost: { title_en: 2, path: 2 },
-                fuzzy: 0.2,
-            })
-        },
-        300,
-        {},
-    )
+    $: ahits = prerendering ? [] : search(query)
 
     function findMarks(field, term) {
         let pat = new RegExp(term, 'gi')
@@ -90,7 +42,7 @@ layout: null
                 if(out)
                     out += '<br/>'
 
-                out += `${pair} `
+                out += '' // `${pair} `
                     + field.substring(begin, sub[0])
                     + '<mark>'
                     + field.substring(sub[0], sub[1])
@@ -102,50 +54,52 @@ layout: null
             return `error: ${e}`
         }
     }
-
 </script>
+
 <style>
-    input {
-        @apply dark:bg-grey-500 text-black;
+    .side :global(img) {
+        height: 100%;
+        width: 100%;
+        position: absolute;
+        object-fit: cover;
     }
-    button {
-        @apply text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800;
+    .side {
+        width: 10em;
+        position: relative;
     }
 </style>
-<p>
-    <!-- FIXME - live search not working -->
-    <input
-        type="text"
-        placeholder="Type here to search"
-        on:change={search}
-        bind:value={query}
-    />
-    <button on:click={search.flush}>Search</button>
-</p>
 
-<h2>Suggestions</h2>
+{#await ahits}
+    <div>...loading...</div>
+{:then hits}
+    <h2>Search results for {query} ({hits.length})</h2>
 
-{JSON.stringify(suggest)}
-
-<h2>{hits.length} hits</h2>
-
-<table>
-    <tr><th>ref</th><th>score</th><th>blurb</th></tr>
     {#each hits as hit}
-    <tr>
-        <td><a href={hit.path}>{hit.title}</a></td>
-        <td>{hit.score}</td>
-        <td>
-        {#each Object.entries(hit.match) as [term, fields] }
-            {#each fields as field }
-                <b>{field}</b>: {@html highlight(hit[field], term)}
-            {/each}
-        {/each}
-        </td>
-    </tr>
+        <a href={hit.path}>
+        <div class="flex justify-center w-full p-5">
+            <div class="flex flex-col min-h-40 w-full md:flex-row md:max-w-2xl rounded-lg bg-white shadow-lg">
+                <div class="side">
+                    {#if hit.image}
+                        <SmallPhoto src="{hit.image}" alt="{hit.title}" />
+                    {/if}
+                </div>
+                <div class="p-6 flex flex-col justify-start">
+                    <h5 class="text-gray-900 text-xl font-medium mb-2">{hit.title}</h5>
+                    {#each Object.entries(hit.match) as [term, fields] }
+                        {#each fields as field }
+                            <p class="text-gray-700 text-base mb-2">
+                                <b>{field}</b>: {@html highlight(hit[field], term)}
+                            </p>
+                        {/each}
+                    {/each}
+                    <p class="text-gray-600 text-xs">
+                        {hit.layout || "page"}, relevance score {hit.score}
+                    </p>
+                </div>
+            </div>
+        </div>
+        </a>
     {/each}
-</table>
-
-<p>
-    <a rel="external" href={data_href}>{data_href}</a>
-</p>
+{:catch error}
+    <div>...{error.message}</div>
+{/await}
