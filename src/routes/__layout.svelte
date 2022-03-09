@@ -5,7 +5,7 @@
     const data_href = '/data/pages.json'
 
     export async function load({fetch}) {
-        if(get(pages) === null) {
+        if(get(pages).length === 0) {
             console.log('load pages')
             const resp = await fetch(data_href)
             pages.set((await resp.json()).routes)

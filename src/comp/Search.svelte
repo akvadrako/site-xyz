@@ -6,7 +6,6 @@
         font-size: 16px;
         padding: 0px 20px 0px 40px;
         margin-right: 10px;
-        border-radius: 40px;
         outline: none;
         border: solid gray 2px;
         background: url('/sprites.svg#search') 7px center no-repeat;
@@ -21,7 +20,8 @@
     }
     
     .suggest {
-        @apply origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none;
+        width: 100%;
+        @apply origin-top-right absolute shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none;
     }
 
 </style>

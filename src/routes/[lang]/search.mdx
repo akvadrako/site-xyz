@@ -13,7 +13,7 @@ noindex: true
 
     $: query = $page.url.searchParams.get('q')
     
-    $: ahits = prerendering ? [] : search(query)
+    $: ahits = prerendering ? (async () => [])() : search(query)
 
     function findMarks(field, term) {
         let pat = new RegExp(term, 'gi')
@@ -31,28 +31,46 @@ noindex: true
     // marks: [[start, length], ...]
     function highlight(field, term) {
         let marks = findMarks(field, term)
+        let context = 20
 
         try {
-            let out = ''
+            let outs = []
             for(let pair of marks) {
-                let begin = Math.max(pair[0] - 10, 0)
+                let begin = Math.max(pair[0] - context, 0)
                 let sub = [pair[0], pair[0] + pair[1]]
-                let end = Math.min(sub[1] + 10, field.length)
+                let end = Math.min(sub[1] + context, field.length)
             
-                if(out)
-                    out += '<br/>'
+                //if(out)
+                //    out += '<br/>'
 
-                out += '' // `${pair} `
+                let out = '' // `${pair} `
                     + field.substring(begin, sub[0])
                     + '<mark>'
                     + field.substring(sub[0], sub[1])
                     + '</mark>'
                     + field.substring(sub[1], end)
+
+                outs.push(out)
             }
-            return out;
+            return outs;
         } catch(e) {
             return `error: ${e}`
         }
+    }
+
+    function marks(hit) {
+        let marks = []
+
+        for(let term of hit.terms) {
+            for(let field of hit.match[term]) {
+                console.log(hit[field], term, field)
+                for(let mark of highlight(hit[field], term)) {
+                    marks.push(mark)
+                }
+            }
+        }
+
+        return marks
     }
 </script>
 
@@ -66,7 +84,12 @@ noindex: true
     .side {
         width: 10em;
         position: relative;
+        flex: 0 0 auto;
     }
+    .hit :global(mark) {
+        background: unset;
+    }
+
 </style>
 
 {#await ahits}
@@ -75,7 +98,7 @@ noindex: true
     <h2>Search results for {query} ({hits.length})</h2>
 
     {#each hits as hit}
-        <a href={hit.path}>
+        <a class="hit" href={hit.path}>
         <div class="flex justify-center w-full p-5">
             <div class="flex flex-col min-h-40 w-full md:flex-row md:max-w-2xl rounded-lg bg-white shadow-lg">
                 <div class="side">
@@ -85,15 +108,13 @@ noindex: true
                 </div>
                 <div class="p-6 flex flex-col justify-start">
                     <h5 class="text-gray-900 text-xl font-medium mb-2">{hit.title}</h5>
-                    {#each Object.entries(hit.match) as [term, fields] }
-                        {#each fields as field }
-                            <p class="text-gray-700 text-base mb-2">
-                                <b>{field}</b>: {@html highlight(hit[field], term)}
-                            </p>
-                        {/each}
+                    <p class="text-gray-700 text-base text-sm mb-2">
+                    {#each marks(hit) as mark, index}
+                        {#if index == 0}
+                            ...
+                        {/if}
+                        {@html mark}...
                     {/each}
-                    <p class="text-gray-600 text-xs">
-                        {hit.layout || "page"}, relevance score {hit.score}
                     </p>
                 </div>
             </div>

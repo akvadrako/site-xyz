@@ -4,6 +4,8 @@
     import { lang, pages } from '$lib';
     import { Search } from '$comp';
     import { beforeNavigate } from '$app/navigation';
+    import { range } from 'lodash-es';
+    import { onMount } from 'svelte';
 
     let sidebar
     let open = false
@@ -27,7 +29,7 @@
     for(let n of navItems) {
         n.current = $page.url.pathname == `/${lang}/${n.path}`
     }
-
+    
     $: calcNavItems = (() => {
         const nav = [ ...navItems ]
 
@@ -63,6 +65,38 @@
             document.body.addEventListener('click', handleDropdownOutsideClick, true)
         }
     }
+
+
+    let navRoot
+    let sheet
+
+    onMount(() => {
+        let observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                let ratio = entry.intersectionRatio
+        
+                if(ratio < 0.1) {
+                    ratio = 0
+                } else if(ratio > 0.9) {
+                    ratio = 1
+                }
+
+                let val = 155 + Math.floor(100 * ratio)
+
+                if(! navRoot) {
+                    return
+                }
+
+                navRoot.style.backgroundColor = `rgb(${val},${val},${val})`
+                navRoot.style.color = ratio < 0.3 ? '#F5F5F5' : 'black'
+            });
+        }, {
+            root: null,
+            rootMargin: '0px',
+            threshold: range(0, 1, 0.05),
+        });
+        observer.observe(sheet)
+    })
 </script>
 
 <style>
@@ -81,7 +115,17 @@
         left: 0;
         z-index: 100;
         white-space: nowrap;
+        transition: background-color 0.5s, color 0.5s;
     }
+
+    .sheet {
+        position: absolute;
+        height: 200px;
+        width: 100%;
+        top: 0;
+        z-index: -10;
+    }
+
     nav h1 {
         font-size: inherit;
     }
@@ -143,6 +187,7 @@
 
     .link {
         display: none;
+        text-transform: uppercase;
     }
     
     ul {
@@ -169,7 +214,10 @@
     }
 </style>
 
-<nav>
+<div bind:this={sheet} class="sheet" />
+
+<nav bind:this={navRoot}>
+
     <a id="logo" class="flex-initial" href="/{$lang}">
         <img class="mr-3 h-5" src="/media/logo.svg" alt="home">
     </a>
@@ -195,7 +243,7 @@
     {#each navItems as item}
         <a
             href="/{$lang}{item.path}"
-            class="flex-initial max-w-xs link block py-2 pr-4 pl-3 text-white rounded dark:text-white" 
+            class="link flex-initial max-w-xs block py-2 pr-4 pl-3 text-white rounded dark:text-white" 
             aria-current={ item.current ? "page" : '' }>
             {item.label[$lang]}
         </a>
@@ -204,7 +252,7 @@
     <a
         href="#works"
         on:click|preventDefault={onClick}
-        class="flex-initial max-w-xs link block py-2 pr-4 pl-3 text-white rounded dark:text-white">
+        class="link flex-initial max-w-xs block py-2 pr-4 pl-3 text-white rounded dark:text-white">
         Works
     </a>
 
@@ -235,4 +283,4 @@
     </li>
     {/each}
 </ul>
-
+    
