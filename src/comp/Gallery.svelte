@@ -46,14 +46,23 @@
         text-decoration: none;
         position: relative;
         display: block;
+        padding: 1em;
 
-        @apply my-2 w-full;
+        @apply my-2 w-full h-auto;
 
-        @apply lg:(my-0 w-[480px] h-[calc(480px + 20px)]);
+        @apply lg:(my-0 h-[30vh] w-auto);
     }
     a.work div {
-        width: 100%;
-        aspect-ratio: 1 / 1;
+        height: 100%;
+    }
+    a.work :global(img) {
+        height: 100%;
+        width: auto;
+        /*
+        max-height: 100%;
+        max-width: 100%;
+         */
+        object-fit: contain;
     }
     .title {
         display: none;
@@ -127,11 +136,11 @@ in de regio noord/zuid holland. hieronder vindt u enkele voorbeelden van mijn we
                 <h3 class="text-lg text-black font-semibold">{work.title}</h3>
             </div>
             <div>
-                <Photo src={work.image} alt={work.title} sizes="400px" />
+                <Photo src={work.image} alt={work.title} sizes="30vh" />
             </div>
-            <svg class="border" viewBox="0 0 100 10" preserveAspectRatio="none">
-                <line x1="5" y1="2" x2="95" y2="2" stroke="#CCC" stroke-width="2px" />
-                <line x1="10" y1="5" x2="90" y2="5" stroke="#DDD" stroke-width="2px" />
+            <svg class="border" height="20px" width="100%" viewBox="0 0 10 10" preserveAspectRatio="none">
+                <line x1="0.1" y1="2" x2="9.9" y2="2" stroke="#CCC" stroke-width="1px" />
+                <line x1="0.5" y1="4" x2="9.5" y2="4" stroke="#DDD" stroke-width="1px" />
             </svg>
         </a>
     {/each}
