@@ -39,40 +39,39 @@
         margin: 2em auto;
     }
 
-    .row {
+    .group {
         justify-items: center;
-        /*
-        display: flex;
-        align-items: start;
-        justify-content: space-evenly;
+        max-width: 160vh;
         margin: auto;
-        */
+        clear: both;
     }
-    a.work {
-        text-decoration: none;
+    .work {
         position: relative;
         padding: 4px;
         margin: 8px;
-
-        _filter: grayscale(100%);
-        
+        filter: grayscale(100%);
+    }
+    .work a {
+        text-decoration: none;
     }
     @screen lg {
-        a.work {
+        .work {
+            min-width: 40vh;
             width: auto;
-            display: inline-block;
+            display: inline-flex;
+            justify-items: center;
+        }
+        .work a {
+            width: auto;
+            margin: auto;
         }
     }
 
-    a.work:hover {
+    .work:hover {
         filter: grayscale(0);
     }
 
-    a.work div {
-        _height: 100%;
-    }
-    a.work :global(img) {
-        background: red;
+    .work :global(img) {
         display: block;
         width: 100%;
         
@@ -89,12 +88,14 @@
         padding: 10px;
         margin: auto;
     }
-    a.work:hover .title {
+    .work:hover .title {
         display: flex;
         align-items: center;
         justify-items: center;
         position: absolute;
         z-index: 10;
+        width: 100%;
+        height: 100%;
     }
     h2 {
         margin-top: 10px;
@@ -127,6 +128,8 @@ in de regio noord/zuid holland. hieronder vindt u enkele voorbeelden van mijn we
     please <Link path="/contact" title="contact me" />
 </p>
 
+<section>
+
 <div class="chooser">
 {#each kinds as kind}
 <div>
@@ -143,16 +146,15 @@ in de regio noord/zuid holland. hieronder vindt u enkele voorbeelden van mijn we
 
 <h2>Gallery ({filtered.length} of {works.length})</h2>
 
-<section>
     {#each chunk(filtered, 30) as group}
-        <div class="row">
+        <div class="group">
             {#each group as work}
-                <a
-                    class="work"
-                    href={work.path}>
+                <div class="work">
                     <div class="title">
                         <h3 class="text-lg text-black font-semibold">{work.title}</h3>
                     </div>
+                <a
+                    href={work.path}>
                     <div>
                         <Photo src={work.image} alt={work.title} sizes="30vh" />
                     </div>
@@ -161,6 +163,7 @@ in de regio noord/zuid holland. hieronder vindt u enkele voorbeelden van mijn we
                         <line x1="0.5" y1="4" x2="9.5" y2="4" stroke="#DDD" stroke-width="1px" />
                     </svg>
                 </a>
+                </div>
             {/each}
         </div>
     {/each}
