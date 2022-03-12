@@ -94,8 +94,10 @@
         justify-items: center;
         position: absolute;
         z-index: 10;
-        width: 100%;
-        height: 100%;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
     }
     h2 {
         margin-top: 10px;
@@ -150,11 +152,11 @@ in de regio noord/zuid holland. hieronder vindt u enkele voorbeelden van mijn we
         <div class="group">
             {#each group as work}
                 <div class="work">
+                <a
+                    href={work.path}>
                     <div class="title">
                         <h3 class="text-lg text-black font-semibold">{work.title}</h3>
                     </div>
-                <a
-                    href={work.path}>
                     <div>
                         <Photo src={work.image} alt={work.title} sizes="30vh" />
                     </div>
