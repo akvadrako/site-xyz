@@ -33,6 +33,8 @@
     .preload {
         z-index: 1;
         position: absolute;
+        width: 100%;
+        height: 100%;
     }
     div {
         _height: 100%;

@@ -121,7 +121,14 @@
     div :global(img) {
         object-fit: contain;
         object-position: left;
+        max-width: 100%;
+        max-height: 100%;
     }
+    .frame > :global(div) {
+        height: 60vh;
+        width: 100%;
+    }
+
     nav {
         margin-top: 1em;
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
