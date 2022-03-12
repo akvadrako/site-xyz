@@ -1,15 +1,15 @@
 
 <style>
     input {
-        width: 100%;
         height: 40px;
         font-size: 16px;
         padding: 0px 20px 0px 40px;
         margin-right: 10px;
         outline: none;
-        border: solid gray 2px;
+        border: none;
         background: url('/sprites.svg#search') 7px center no-repeat;
         background-size: 1.5em;
+        width: 1em;
     }
     
     .item {
@@ -24,6 +24,20 @@
         @apply origin-top-right absolute shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none;
     }
 
+    .open input {
+        width: 100%;
+        border: solid gray 2px;
+    }
+
+    #search.open {
+        max-width: 20em;
+    }
+
+    #search {
+        margin: 0;
+        padding: 0;
+        max-width: 2em;
+    }
 </style>
 
 <script>
@@ -35,6 +49,7 @@
     let suggestions = []
     let active = -1
     let query = ''
+    let open = false;
 
     $: results_link = item => $route('/search', { q: item.suggestion })
 
@@ -47,6 +62,7 @@
 
     beforeNavigate(() => {
         suggestions = []
+        open = false
     })
 
     $: console.log('suggestions', suggestions)
@@ -90,10 +106,18 @@
         
         wrap_suggest()
     }
+
+    function click() {
+        open = true
+        console.log('opened')
+    }
 </script>
 
 <div class="relative"
+    id="search"
+    class:open
     on:keydown={onKey}
+    on:click={click}
 >
     <input type="search"
         bind:value={query}

@@ -2,7 +2,7 @@
 <script>
     import { page } from '$app/stores';
     import { lang, pages } from '$lib';
-    import { Search } from '$comp';
+    import { Search, Photo } from '$comp';
     import { beforeNavigate } from '$app/navigation';
     import { range } from 'lodash-es';
     import { onMount } from 'svelte';
@@ -76,19 +76,20 @@
                 let ratio = entry.intersectionRatio
         
                 if(ratio < 0.1) {
-                    ratio = 0
+                    ratio = 0.3
                 } else if(ratio > 0.9) {
                     ratio = 1
                 }
 
-                let val = 155 + Math.floor(100 * ratio)
+                let alpha = Math.max(0.4, (1 - ratio));
+                let light = 100 * ratio;
 
                 if(! navRoot) {
                     return
                 }
 
-                navRoot.style.backgroundColor = `rgb(${val},${val},${val})`
-                navRoot.style.color = ratio < 0.3 ? '#F5F5F5' : 'black'
+                navRoot.style.backgroundColor = `hsla(0, 0%, ${light}%, ${alpha})`
+                navRoot.style.color = ratio < 0.4 ? '#F5F5F5' : 'black'
             });
         }, {
             root: null,
@@ -103,14 +104,15 @@
     nav {
         @apply px-3 py-2;
         @apply text-base text-black;
-        background-color: white;
+        _background-color: white;
         margin: 0;
         display: flex;
         gap: 10px;
         height: 55px;
         justify-content: left;
         align-items: center;
-        position: sticky;
+        position: fixed;
+        width: 100%;
         top: 0;
         left: 0;
         z-index: 100;
@@ -123,7 +125,7 @@
         height: 200px;
         width: 100%;
         top: 0;
-        z-index: -10;
+        z-index: -100;
     }
 
     nav h1 {
@@ -201,8 +203,11 @@
     #sidebar.open {
         left: 0px;
     }
-
     
+    #backdrop {
+        width: 100%;
+    }
+
     /* desktop */
     @screen sm {
         .link {
@@ -215,6 +220,12 @@
 </style>
 
 <div bind:this={sheet} class="sheet" />
+
+<header>
+
+<div id="backdrop">
+    <Photo src="/media/image_top.jpg" sizes="100vw" />
+</div>
 
 <nav bind:this={navRoot}>
 
@@ -256,7 +267,7 @@
         Works
     </a>
 
-    <span class="flex-grow-[10] flex-shrink-[10] max-w-sm hidden sm:(block w-16)">
+    <span class="flex-grow-[0] flex-shrink-[10] hidden sm:(block )">
         <Search />
     </span>
     
@@ -271,16 +282,17 @@
     </span>
 </nav>
 
-<ul bind:this={sidebar} id="sidebar" class:open class="flex">
-    {#each calcNavItems as item}
-    <li>
-        <a href="/{$lang}{item.path}"
-            class="block py-2 pr-4 pl-3 text-white dark:text-white"
-            aria-current="{ item.current ? 'page' : '' }"
-        >
-            {item.label[$lang]}
-        </a>
-    </li>
-    {/each}
-</ul>
+    <ul bind:this={sidebar} id="sidebar" class:open class="flex">
+        {#each calcNavItems as item}
+        <li>
+            <a href="/{$lang}{item.path}"
+                class="block py-2 pr-4 pl-3 text-white dark:text-white"
+                aria-current="{ item.current ? 'page' : '' }"
+            >
+                {item.label[$lang]}
+            </a>
+        </li>
+        {/each}
+    </ul>
+</header>
     

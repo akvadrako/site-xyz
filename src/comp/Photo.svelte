@@ -26,16 +26,16 @@
 </script>
 <style>
     img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
+        _width: 100%;
+        _height: 100%;
+        _object-fit: cover;
     }
     .preload {
         z-index: 1;
         position: absolute;
     }
     div {
-        height: 100%;
+        _height: 100%;
         position: relative;
     }
     .real {
