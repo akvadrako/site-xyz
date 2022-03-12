@@ -34,23 +34,34 @@
         justify-content: center;
 
         /* break out of main */
-        width: 100vw;
+        width: 94vw;
         position: relative;
         left: 50%;
         transform: translateX(-50%);
+        margin: auto;
+
+        grid-template-columns: repeat(3, 1fr);
+        _grid-template-columns: repeat(3, min-content);
+        grid-gap: 1em;
+        grid-template-rows: masonry;
+        grid-auto-flow: row dense;
+        justify-items: center;
+        align-items: center;
 
         @apply my-4;
-        @apply lg:(flex flex-wrap);
+        /* @apply lg:(flex flex-wrap); */
     }
     a.work {
         text-decoration: none;
         position: relative;
         display: block;
-        padding: 1em;
+        _padding: 1em;
+        height: 100%;
 
         @apply my-2 w-full h-auto;
+        @apply lg:(my-0 w-auto);
 
-        @apply lg:(my-0 h-[30vh] w-auto);
+        @apply _lg:(my-0 h-[50vh] w-auto);
     }
     a.work div {
         height: 100%;
