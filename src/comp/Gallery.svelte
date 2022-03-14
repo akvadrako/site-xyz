@@ -49,7 +49,14 @@
         position: relative;
         padding: 4px;
         margin: 8px;
-        filter: grayscale(100%);
+    }
+    @media (hover: hover) {
+        .work {
+            filter: grayscale(100%);
+        }
+        .work:hover {
+            filter: grayscale(0);
+        }
     }
     .work a {
         text-decoration: none;
@@ -65,10 +72,6 @@
             width: auto;
             margin: auto;
         }
-    }
-
-    .work:hover {
-        filter: grayscale(0);
     }
 
     .work :global(img) {
