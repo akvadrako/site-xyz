@@ -1,10 +1,11 @@
 <script>
     import {metadata as md_store} from '$lib'
     
-    import { Photo } from '$comp';
+    import { Photo, Thumbnail } from '$comp';
     import { lang, formatDate, small } from '$lib';
     import { loadWorks } from '$lib/metadata';
-    import { prefetch, goto } from '$app/navigation';
+    import { prefetch, goto, disableScrollHandling, afterNavigate } from '$app/navigation';
+    import { onMount } from 'svelte';
 
     export let title_en;
     export let title_nl;
@@ -19,6 +20,21 @@
 
     layout;
     _text;
+
+    let frame
+
+    onMount(() => {
+        disableScrollHandling()
+    })
+
+    afterNavigate(({ from, to }) => {
+        if(from && from.toString().includes('/works/'))
+            return;
+
+        window.scrollTo({
+            top: frame.getBoundingClientRect().top + window.pageYOffset - 100,
+        });
+    })
 
     md_store.set({
         title_en: title_en,
@@ -35,11 +51,19 @@
     function hover(work) {
         console.log('hover', work.image)
         prefetch(work.path)
+    }
+
+    function preloadImage(active, offset) {
+        if(typeof Image === 'undefined')
+            return;
+
+        let idx = (active + offset + works.length) % works.length
+        let work = works[idx]
 
         if(! work._cache) {
             work._cache = new Image()
             work._cache.onload = e => {
-                console.log('preloaded image', e.target.src)
+                //console.log('preload', e.target.src)
             }
             work._cache.src = small(work.image)
         }
@@ -56,8 +80,13 @@
         return w
     })
 
-    $: next = (active + 1) % works.length;
-    $: prev = (active - 1 + works.length) % works.length;
+    $: preloadImage(active, -2)
+    $: preloadImage(active, -1)
+    $: preloadImage(active, 1)
+    $: preloadImage(active, 2)
+
+    $: next = works[(active + 1) % works.length];
+    $: prev = works[(active - 1 + works.length) % works.length];
 
     $: subimage = image;
 
@@ -86,9 +115,9 @@
         // touchendX = e.changedTouches[0].clientX
 
         if (xDiff < 0) {
-            goto(works[prev].path, { noscroll: true })
+            goto(prev.path, { noscroll: true })
         } else {
-            goto(works[next].path, { noscroll: true })
+            goto(next.path, { noscroll: true })
         }
     }
 
@@ -112,7 +141,87 @@
 
     $: all_images = [image, ...more_images];
 </script>
+
+<div
+    class="frame"
+    bind:this={frame}
+    on:touchstart={handleTouchStart}
+    on:touchmove={handleTouchMove}
+    on:touchend={handleTouchEnd}
+>
+    <Photo src={subimage} />
+</div>
+
+<slot />
+
+<p>Date: {formatDate(date)}</p>
+<p>Kind: {kind}</p>
+
+{#if more_images.length > 0}
+<div class="subs">
+    {#each all_images as src}
+        <a href='#src' on:click={() => setSub(src)}>
+            <Thumbnail src={src} />
+        </a>
+    {/each}
+</div>
+{/if}
+
+<nav>
+    <a href={prev.path}
+        sveltekit:noscroll
+        on:mouseover={() => hover(prev)}
+        on:focus={() => hover(prev)}
+    >
+        <figure>
+            <x-title>Previous</x-title>
+            <Thumbnail src={prev.image} />
+            <figcaption>{get_title(prev)}</figcaption>
+        </figure>
+    </a>
+    <div class="middle">
+        <x-title>
+            {title}
+        </x-title>
+    </div>
+    <a href={next.path}
+        sveltekit:noscroll
+        on:mouseover={() => hover(next)}
+        on:focus={() => hover(next)}
+    >
+        <figure>
+            <x-title>Next</x-title>
+            <Thumbnail src={next.image} />
+            <figcaption>{get_title(next)}</figcaption>
+        </figure>
+    </a>
+</nav>
+
 <style>
+    figure {
+        width: 100%;
+    }
+
+    figure :global(img) {
+        height: 20vh;
+        width: 100%;
+        object-fit: contain;
+    }
+    x-title, figcaption {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        @apply py-2 px-8;
+    }
+    x-title {
+        top: 0;
+    }
+
+    nav a {
+        color: inherit;
+    }
+
     .frame {
         height: 60vh;
         margin: 1em;
@@ -120,9 +229,9 @@
 
     div :global(img) {
         object-fit: contain;
-        object-position: left;
-        max-width: 100%;
-        max-height: 100%;
+        object-position: center;
+        width: 100%;
+        height: 100%;
     }
     .frame > :global(div) {
         height: 60vh;
@@ -130,31 +239,28 @@
     }
 
     nav {
-        margin-top: 1em;
-        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-        @apply border border-gray-300 rounded-lg;
+        /* break out of main */
+        width: 100%;
+        display: flex;
+    }
+    nav {
+        margin: 10px 0 20px 0;
     }
     nav > * {
         text-align: center;
+        position: relative;
         @apply cursor-default;
         flex-grow: 1;
         flex-basis: 20%;
-        @apply py-2 px-3 ml-0 border-gray-300;
     }
-    nav > *:hover {
+    nav > a:hover {
         @apply bg-gray-100 text-gray-700;
     }
-
     nav > *:first-child {
         text-align: left;
     }
     nav > *:last-child {
         text-align: right;
-    }
-    nav {
-        display: flex;
-        width: 100%;
-        margin: 0 0 1em 0;
     }
     .subs {
         display: flex;
@@ -174,45 +280,3 @@
         @apply bg-gray-100 text-gray-700;
     }
 </style>
-
-<nav>
-    <a href={works[prev].path}
-        on:mouseover={() => hover(works[prev])}
-        on:focus={() => hover(works[prev])}
-    >
-        Prev: {get_title(works[prev])}
-    </a>
-    <span>
-        {title}
-    </span>
-    <a href={works[next].path}
-        on:mouseover={() => hover(works[next])}
-        on:focus={() => hover(works[next])}
-    >
-        Next: {get_title(works[next])}
-    </a>
-</nav>
-
-<div
-    class="frame"
-    on:touchstart={handleTouchStart}
-    on:touchmove={handleTouchMove}
-    on:touchend={handleTouchEnd}
->
-    <Photo src={subimage} />
-</div>
-
-{#if more_images.length > 0}
-<div class="subs">
-    {#each all_images as src}
-        <a href='#src' on:click={() => setSub(src)}>
-            <Photo src={src} />
-        </a>
-    {/each}
-</div>
-{/if}
-
-<slot />
-
-<p>Date: {formatDate(date)}</p>
-<p>Kind: {kind}</p>

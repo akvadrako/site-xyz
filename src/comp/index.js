@@ -3,7 +3,7 @@ export {default as Link} from './Link'
 //export {default as Gallery} from './Gallery'
 export {default as Search} from './Search'
 export {default as Photo} from './Photo'
-export {default as SmallPhoto} from './SmallPhoto'
+export {default as Thumbnail} from './Thumbnail'
 export {default as JsonView} from './JsonView'
 
 // experimental stuff

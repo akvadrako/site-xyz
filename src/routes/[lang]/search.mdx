@@ -7,7 +7,7 @@ noindex: true
     import {page} from '$app/stores'
     import {search} from '$lib/search'
     import {prerendering} from '$app/env'
-    import {SmallPhoto} from '$comp'
+    import {Thumbnail} from '$comp'
 
     export const title = 'search'
 
@@ -89,7 +89,6 @@ noindex: true
     .hit :global(mark) {
         background: unset;
     }
-
 </style>
 
 {#await ahits}
@@ -103,7 +102,7 @@ noindex: true
             <div class="flex flex-col min-h-40 w-full md:flex-row md:max-w-2xl rounded-lg bg-white shadow-lg">
                 <div class="side">
                     {#if hit.image}
-                        <SmallPhoto src="{hit.image}" alt="{hit.title}" />
+                        <Thumbnail src="{hit.image}" alt="{hit.title}" />
                     {/if}
                 </div>
                 <div class="p-6 flex flex-col justify-start">

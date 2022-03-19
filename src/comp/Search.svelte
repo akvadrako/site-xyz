@@ -65,8 +65,6 @@
         open = false
     })
 
-    $: console.log('suggestions', suggestions)
-
     function onKey(e) {
         console.log('key', e.key)
         

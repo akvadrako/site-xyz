@@ -24,8 +24,8 @@
     import 'virtual:windi.css'
     import '/src/global.css'
     
-    if (browser)
-        import("virtual:windi-devtools")
+    //if (browser)
+    //    import("virtual:windi-devtools")
 
     $: ititle = {en: $metadata.title_en, nl: $metadata.title_nl}[$lang];
 
@@ -71,9 +71,13 @@
         opacity: 100%;
     }
     main {
-        @apply px-3 py-3;
-        max-width: 1000px;
-        margin: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    main > :global(*) {
+        width: min(100vh, 1000px);
+        margin: 0 4px;
     }
     svg {
         height: 1.5em;

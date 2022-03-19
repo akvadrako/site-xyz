@@ -10,7 +10,7 @@ html {
 }
 
 html:focus-within {
-  scroll-behavior: smooth;
+    _scroll-behavior: smooth;
 }
 
 body {

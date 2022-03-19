@@ -1,5 +1,11 @@
+<!--
+    Display JSON data in a collapsable tree.
+
+    :fork: json-view
+
+    :see: @zerodevx/svelte-json-view 
+-->
 <script>
-    // from @zerodevx/svelte-json-view 
     export let json
     export let depth = Infinity
     export let _lvl = 0
