@@ -1,9 +1,13 @@
----
-title_en: Contact
----
+<script context="module">
+    export const title_en = 'Contact'
+    export const _text = 'contact form email inquery'
+</script>
 
 <script>
-    import { base, lang, createToast } from '$lib';
+    import { base, lang } from '$lib';
+    import { goto } from '$app/navigation';
+    import { page } from '$app/stores';
+    import { browser } from '$app/env';
 
     let form;
 
@@ -20,78 +24,63 @@ title_en: Contact
         console.log('form', reply)
 
         if(reply.status == 200 || reply.status == 0) {
-            let msg = 'Form successfully submitted'
-            createToast({ msg: msg, type: 'success', persist: true })
+            goto('#done')
         } else {
-            let msg = `Error submitting form: ${reply.status}`
-            createToast({ msg: msg, type: 'error', persist: true })
+            goto('#error')
         }
     }
+
+    $: console.log('hash', $page.url.hash)
+    $: hash = $page.url.hash;
 </script>
 
-<style>
-
-    input[type="file"]::file-selector-button {
-        -webkit-margin-start: -1rem;
-        -webkit-margin-end: 1rem;
-        background: #374151;
-        border: 0;
-        color: #fff;
-        cursor: pointer;
-        font-size: .875rem;
-        font-weight: 500;
-        margin-inline-end: 1rem;
-        margin-inline-start: -1rem;
-        padding: .625rem 1rem .625rem 2rem;
-    }
-    
-    @variants dark {
-        input[type="file"]::file-selector-button {
-            background: #4b5563;
-            color: #fff;
-        }
-    }
-
-    section {
-        @apply p-4 bg-white rounded-lg border border-gray-200 shadow-md sm:p-6 lg:p-8 dark:bg-gray-800 dark:border-gray-700 bg-gray-200
-    }
-    table {
-        width: 100%;
-    }
-</style>
-
-## Contact Details
-
-<section>
-    <div class="shadow-md border-4 border-white rounded-lg">
-    <table>
-        <tbody>
-            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    Email
-                </td>
-                <td class="py-4 px-6 text-sm text-gray-500 dark:text-gray-400">
-                    <a href='mailto:info@doubly.so'>info@doubly.so</a>
-
-                </td>
-            </tr>
-            <tr class="bg-white dark:bg-gray-800">
-                <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    Address
-                </td>
-                <td class="py-4 px-6 text-sm text-gray-500 dark:text-gray-400">
-                    Delft and Amsterdam, The Netherlands
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    </div>
+<section class="blurb">
+    <h2 lang="en">Inquiry</h2>
+    <h2 lang="nl">Contact (NL)</h2>
 </section>
 
-## Contact Form
+<div class:hidden={hash != '#error'} class="bg-red-50 border-l-4 border-red-400 p-4">
+    <div class="flex">
+        <div class="flex-shrink-0">
+            <!-- Heroicon name: solid/x-circle -->
+            <svg class="h-5 w-5 text-red-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" />
+            </svg>
+        </div>
+        <div class="ml-3">
+            <h3 class="text-sm font-medium text-red-800">Error</h3>
+            <p class="text-sm text-red-700">
+                There was an error submitting the form. Sorry about that,
+                please try emailing me at <a href="mailto:info@doubly.so">info@doubly.so</a>.
+            </p>
+        </div>
+    </div>
+</div>
 
-<section>
-<form bind:this={form} name="contact" method="POST" data-netlify="true">
+<div class:hidden={hash != '#done'} class="bg-green-50 border-l-4 border-green-400 p-4">
+    <div class="flex">
+        <div class="flex-shrink-0">
+            <!-- Heroicon name: solid/check-circle -->
+            <svg class="h-5 w-5 text-green-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+            </svg>
+        </div>
+        <div class="ml-3">
+            <h3 class="text-sm font-medium text-green-800">Success</h3>
+            <p class="text-sm text-green-700">
+                Thank you, your inquiry has been sent. I'll try to get back to you soon.
+            </p>
+        </div>
+    </div>
+</div>
+
+<form
+    class:hidden={hash == '#done' || hash == '#error'}
+    bind:this={form}
+    name="contact"
+    method="POST"
+    data-netlify="true"
+>
     <input type="hidden" name="form-name" value="contact">
     <div class="mb-6">
         <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Your name</label>
@@ -129,3 +118,33 @@ title_en: Contact
     <button on:click={submit} name="submit" type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Send</button>
 </form>
 
+<style type="postcss">
+    .msg {
+        border: thin double black;
+        @apply my-6 mx-4 p-4;
+    }
+    form {
+        @apply my-4;
+    }
+
+    input[type="file"]::file-selector-button {
+        -webkit-margin-start: -1rem;
+        -webkit-margin-end: 1rem;
+        background: #374151;
+        border: 0;
+        color: #fff;
+        cursor: pointer;
+        font-size: .875rem;
+        font-weight: 500;
+        margin-inline-end: 1rem;
+        margin-inline-start: -1rem;
+        padding: .625rem 1rem .625rem 2rem;
+    }
+    
+    @variants dark {
+        input[type="file"]::file-selector-button {
+            background: #4b5563;
+            color: #fff;
+        }
+    }
+</style>

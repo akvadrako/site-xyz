@@ -39,28 +39,18 @@ main[lang="nl"] *[lang="en"] {
  * Standard components
  */
 
-  h1, h2, h3, h4 {
+h1, h2, h3, h4 {
     font-weight: bold;
-  }
+}
 
-  h2 {
+h2 {
     @apply mt-4;
     font-size: 120%;
-  }
+}
 
-  a {
+a {
     text-decoration-skip-ink: auto;
-    color: blue;
-  }
-
-  a:visited {
-    color: purple;
-  }
-
-  a:hover {
-    color: red;
-    outline: 2px;
-  }
+}
 
 /**********************************************
  * Custom components
@@ -68,26 +58,48 @@ main[lang="nl"] *[lang="en"] {
 
 x-debug { display: none; }
 
+.blurb {
+    p {
+        @apply my-4;
+    }
+
+    a:link {
+        color: blue;
+    }
+
+    a:visited {
+        color: purple;
+    }
+
+    a:hover {
+        color: red;
+        outline: 2px;
+        text-decoration: underline;
+    }
+}
+
 /**********************************************
  * Dark Mode
  */
 
 @media (prefers-color-scheme: dark) {
-  body {
-    background: black;
-    color: white;
-  }
+    body {
+        background: black;
+        color: white;
+    }
 
-  a {
-    color: yellow;
-  }
+    .blurb {
+        a { 
+            color: yellow;
+        }
 
-  a:visited {
-    color: pink;
-  }
+        a:visited {
+            color: pink;
+        }
 
-  a:hover {
-    color: red;
-  }
+        a:hover {
+            color: red;
+        }
+    }
 }
 

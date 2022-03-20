@@ -100,6 +100,83 @@
     })
 </script>
 
+<div bind:this={sheet} class="sheet" />
+
+<header>
+
+    <div id="backdrop">
+        <Photo src="/media/image_top.jpg" sizes="100vw" />
+    </div>
+
+    <nav bind:this={navRoot}>
+
+        <a id="logo" class="flex-initial" href="/{$lang}">
+            <img class="mr-3 h-5" src="/media/logo.svg" alt="home" />
+        </a>
+
+        <a
+            href="/{$lang}"
+            class="flex-initial py-2 pr-4 pl-3 text-white rounded dark:text-white">
+            <h1>Wall To Wall</h1>
+        </a>
+
+        <button class:open on:click={onClick}>
+            <svg width=32 height=32>
+                <line id="top" x1=0 y1=9    x2=32 y2=9    style="transition: transform 0.4s ease-in-out, opacity 0.4s ease-in-out;"/>
+                <line id="mid" x1=0 y1=18.5 x2=32 y2=18.5 style="transition: transform 0.4s ease-in-out, opacity 0.4s ease-in-out;"/>
+                <line id="bot" x1=0 y1=28    x2=32 y2=28  style="transition: transform 0.4s ease-in-out, opacity 0.4s ease-in-out;"/>
+            </svg>
+        </button>
+
+        <span class="flex-grow-[5]">
+            &nbsp;
+        </span>
+
+        {#each navItems as item}
+            <a
+                href="/{$lang}{item.path}"
+                class="link flex-initial max-w-xs block py-2 pr-4 pl-3 text-white rounded dark:text-white" 
+                aria-current={ item.current ? "page" : '' }>
+                {item.label[$lang]}
+            </a>
+        {/each}
+
+        <a
+            href="#works"
+            on:click|preventDefault={onClick}
+            class="link flex-initial max-w-xs block py-2 pr-4 pl-3 text-white rounded dark:text-white">
+            Works
+        </a>
+
+        <span class="flex-grow-[0] flex-shrink-[10] hidden sm:(block )">
+            <Search />
+        </span>
+
+        <span class="flex-initial pl-4">
+            {#if $page.url.pathname == '/'}
+                <b>EN</b> / <a sveltekit:noscroll href="/nl">NL</a>
+            {:else if $lang == 'nl'}
+                <a sveltekit:noscroll href="{$page.url.pathname.replace('/nl', '/en')}">EN</a> / <b>NL</b>
+            {:else}
+                <b>EN</b> / <a sveltekit:noscroll href="{$page.url.pathname.replace('/en', '/nl')}">NL</a>
+            {/if}
+        </span>
+    </nav>
+
+    <ul bind:this={sidebar} id="sidebar" class:open class="flex">
+        {#each calcNavItems as item}
+        <li>
+            <a href="/{$lang}{item.path}"
+                class="block py-2 pr-4 pl-3 text-white dark:text-white"
+                aria-current="{ item.current ? 'page' : '' }"
+            >
+                {item.label[$lang]}
+            </a>
+        </li>
+        {/each}
+    </ul>
+</header>
+    
 <style>
     nav {
         @apply px-3 py-2;
@@ -218,81 +295,3 @@
         }
     }
 </style>
-
-<div bind:this={sheet} class="sheet" />
-
-<header>
-
-<div id="backdrop">
-    <Photo src="/media/image_top.jpg" sizes="100vw" />
-</div>
-
-<nav bind:this={navRoot}>
-
-    <a id="logo" class="flex-initial" href="/{$lang}">
-        <img class="mr-3 h-5" src="/media/logo.svg" alt="home">
-    </a>
-
-    <a
-        href="/{$lang}"
-        class="flex-initial py-2 pr-4 pl-3 text-white rounded dark:text-white">
-        <h1>Wall To Wall</h1>
-    </a>
-    
-    <button class:open on:click={onClick}>
-        <svg width=32 height=32>
-            <line id="top" x1=0 y1=9    x2=32 y2=9    style="transition: transform 0.4s ease-in-out, opacity 0.4s ease-in-out;"/>
-            <line id="mid" x1=0 y1=18.5 x2=32 y2=18.5 style="transition: transform 0.4s ease-in-out, opacity 0.4s ease-in-out;"/>
-            <line id="bot" x1=0 y1=28    x2=32 y2=28  style="transition: transform 0.4s ease-in-out, opacity 0.4s ease-in-out;"/>
-        </svg>
-    </button>
-    
-    <span class="flex-grow-[5]">
-        &nbsp;
-    </span>
-        
-    {#each navItems as item}
-        <a
-            href="/{$lang}{item.path}"
-            class="link flex-initial max-w-xs block py-2 pr-4 pl-3 text-white rounded dark:text-white" 
-            aria-current={ item.current ? "page" : '' }>
-            {item.label[$lang]}
-        </a>
-    {/each}
-    
-    <a
-        href="#works"
-        on:click|preventDefault={onClick}
-        class="link flex-initial max-w-xs block py-2 pr-4 pl-3 text-white rounded dark:text-white">
-        Works
-    </a>
-
-    <span class="flex-grow-[0] flex-shrink-[10] hidden sm:(block )">
-        <Search />
-    </span>
-    
-    <span class="flex-initial pl-4">
-        {#if $page.url.pathname == '/'}
-            <b>EN</b> / <a href="/nl">NL</a>
-        {:else if $lang == 'nl'}
-            <a href="{$page.url.pathname.replace('/nl', '/en')}">EN</a> / <b>NL</b>
-        {:else}
-            <b>EN</b> / <a href="{$page.url.pathname.replace('/en', '/nl')}">NL</a>
-        {/if}
-    </span>
-</nav>
-
-    <ul bind:this={sidebar} id="sidebar" class:open class="flex">
-        {#each calcNavItems as item}
-        <li>
-            <a href="/{$lang}{item.path}"
-                class="block py-2 pr-4 pl-3 text-white dark:text-white"
-                aria-current="{ item.current ? 'page' : '' }"
-            >
-                {item.label[$lang]}
-            </a>
-        </li>
-        {/each}
-    </ul>
-</header>
-    

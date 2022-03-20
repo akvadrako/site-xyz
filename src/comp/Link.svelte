@@ -26,13 +26,6 @@
 </script>
 
 <style>
-    .link {
-        margin: 0 10px;
-        text-align: center;
-        width: 100px;
-        background: #112233;
-        color: #EEFF77;
-    }
 </style>
 
 <a class=link

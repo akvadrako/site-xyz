@@ -23,6 +23,21 @@ const config = {
                 myPlugin,
                 WindiCSS(),
             ],
+            css: {
+                /*
+                postcss: {
+                    plugins: [
+                        // require('postcss-import'),
+                        require('tailwindcss/nesting'),
+                        require('tailwindcss'),
+                        // 'postcss-import': {},
+                        // 'tailwindcss/nesting': {},
+                        // tailwindcss: {},
+                        // autoprefixer: {},
+                    ]
+                },
+                */
+            },
             logLevel: 'info',
             clearScreen: false,
             resolve: {

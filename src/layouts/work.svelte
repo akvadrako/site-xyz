@@ -152,10 +152,11 @@
     <Photo src={subimage} />
 </div>
 
-<slot />
-
-<p>Date: {formatDate(date)}</p>
-<p>Kind: {kind}</p>
+<section class="blurb">
+    <h2>{title}</h2>
+    <slot />
+    <p>date: {formatDate(date)}, category: {kind}</p>
+</section>
 
 {#if more_images.length > 0}
 <div class="subs">
@@ -181,7 +182,6 @@
     </a>
     <div class="middle">
         <x-title>
-            {title}
         </x-title>
     </div>
     <a href={next.path}

@@ -29,22 +29,24 @@
 
 </script>
 
-<div lang="en">
-Hello. my name is iulia and wall to wall is my mural servicing center, active
-in the north/south holland area. below you will find some examples of my work.
-</div>
+<section class="blurb">
+    <p lang="en">
+    Hello. my name is iulia and wall to wall is my mural servicing center, active
+    in the north/south holland area. below you will find some examples of my work.
+    </p>
 
-<div lang="nl">
-Hallo. mijn naam is iulia en van muur tot muur is mijn muurschilderingservicecentrum, actief
-in de regio noord/zuid holland. hieronder vindt u enkele voorbeelden van mijn werk. 
-</div>
+    <p lang="nl">
+    Hallo. mijn naam is iulia en van muur tot muur is mijn muurschilderingservicecentrum, actief
+    in de regio noord/zuid holland. hieronder vindt u enkele voorbeelden van mijn werk. 
+    </p>
 
-<p>
-    If you would like to commision a mural,
-    please <Link path="/contact" title="contact me" />
-</p>
+    <p>
+        If you would like to commision a mural,
+        please <Link path="/contact" title="contact me" />
+    </p>
+</section>
 
-<section>
+<section id="gallery">
 
 <div class="chooser">
 {#each kinds as kind}
@@ -86,25 +88,13 @@ in de regio noord/zuid holland. hieronder vindt u enkele voorbeelden van mijn we
 </section>
 
 <style>
-    section {
-        /* break out of main */
-        width: 94vw;
-        position: relative;
-        left: 50%;
-        transform: translateX(-50%);
-        margin: 2em auto;
-    }
-
-    .group {
-        justify-items: center;
-        max-width: 160vh;
-        margin: auto;
-        clear: both;
-    }
     .work {
         position: relative;
         padding: 4px;
         margin: 8px;
+    }
+    .work a {
+        text-decoration: none;
     }
     @media (hover: hover) {
         .work {
@@ -114,10 +104,22 @@ in de regio noord/zuid holland. hieronder vindt u enkele voorbeelden van mijn we
             filter: grayscale(0);
         }
     }
-    .work a {
-        text-decoration: none;
-    }
     @screen lg {
+        #gallery {
+            /* break out of main */
+            width: min(94vw, 160vh);
+            _position: relative;
+            _left: 50%;
+            _transform: translateX(-50%);
+            margin: 2em auto;
+        }
+
+        .group {
+            justify-items: center;
+            _max-width: 160vh;
+            margin: auto;
+            clear: both;
+        }
         .work {
             min-width: 40vh;
             width: auto;

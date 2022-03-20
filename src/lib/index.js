@@ -8,7 +8,8 @@ import {page, session} from '$app/stores'
 export {goto} from '$app/navigation'
 export {createToast} from './toasts'
 
-export const base = "https://lucid-hodgkin-cc7294.netlify.app"
+//export const base = "https://lucid-hodgkin-cc7294.netlify.app"
+export const base = "https://walltowall.nl"
 
 export const pages = writable([]);
 
