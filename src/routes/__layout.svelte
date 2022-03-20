@@ -43,7 +43,7 @@
 />
 
 <svelte:head>
-    <title>Wall 2 Wall || {ititle}</title>
+    <title>Wall To Wall || {ititle}</title>
     <meta http-equiv="content-language" content="{$lang}" />
 </svelte:head>
 
@@ -78,10 +78,13 @@
 </main>
 
 <footer class="bg-white mx-3 my-4 dark:border-white-500 border-black-500 border-t-2 border-solid clear-both`">
-    <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 md:flex md:items-center md:justify-between lg:px-8">
+    <div class="max-w-4xl mx-auto py-12 px-4 sm:px-6 md:flex md:items-center md:justify-between lg:px-8">
         <div class="mt-8 md:mt-0 md:order-1">
-            <p class="text-center text-base text-gray-400">
-                2611 KR Delft &amp; 1013 LC Amsterdam
+            <p class="text-base text-gray-400">
+                2611 KR Delft
+            </p>
+            <p class="text-base text-gray-400">
+                1013 LC Amsterdam
             </p>
         </div>
 

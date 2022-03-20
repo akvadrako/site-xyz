@@ -1,6 +1,9 @@
 <script context="module">
-    export const title_en = 'Contact'
-    export const _text = 'contact form email inquery'
+    export const metadata = {
+        title_en: 'Contact',
+        title_nl: 'Contact',
+        _text: 'contact form email inquery',
+    }
 </script>
 
 <script>
@@ -8,6 +11,9 @@
     import { goto } from '$app/navigation';
     import { page } from '$app/stores';
     import { browser } from '$app/env';
+    import {metadata as md_store} from '$lib'
+    
+    md_store.set(metadata)
 
     let form;
 
@@ -36,7 +42,7 @@
 
 <section class="blurb">
     <h2 lang="en">Inquiry</h2>
-    <h2 lang="nl">Contact (NL)</h2>
+    <h2 lang="nl">Contact</h2>
 </section>
 
 <div class:hidden={hash != '#error'} class="bg-red-50 border-l-4 border-red-400 p-4">
