@@ -83,11 +83,15 @@ if(process.env.NODE_ENV == 'development') {
    // }
 } else {
     config.kit.prerender = { 
+        default: true,
         crawl: true,
         enabled: true,
         onError: 'fail',
         entries: [
             '*',
+            '/',
+            '/en',
+            '/nl',
             '/data/search_index.json',
         ],
     }
