@@ -4,7 +4,10 @@
     - without 'sizes', FF and Safari always pick largest image
     - srcset: 400w is intrinsic width in pixels
     - sizes: media-condition + width-of-element (px, em or vw)
-    - nf_resize: "fit" or "smartcrop"
+- nf_resize: "fit" or "smartcrop"
+
+
+related: https://github.com/matyunya/svelte-image
 -->
 <script>
     import {base, small} from '$lib'

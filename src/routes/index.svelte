@@ -1,9 +1,5 @@
----
-title_en: Home
----
-
 <script>
-    import Gallery from '$comp/Gallery'
+    import Home from '../pages/index.mdx'
     import { onMount } from 'svelte';
 
     // netlify login
@@ -14,4 +10,4 @@ title_en: Home
     });
 </script>
 
-<Gallery />
+<Home />

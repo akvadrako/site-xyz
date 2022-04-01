@@ -42,6 +42,7 @@ Develop locally:
 
 ```
 npm install
+npx netlify-cms-proxy-server
 npm run dev -- --open
 npm run build
 npm run preview

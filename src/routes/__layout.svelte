@@ -4,7 +4,7 @@
 
     const data_href = '/data/pages.json'
 
-    export async function load({fetch}) {
+    export async function load({fetch, params}) {
         if(get(pages).length === 0) {
             console.log('load pages')
             const resp = await fetch(data_href)
@@ -62,7 +62,7 @@
         align-items: center;
     }
     main > :global(*) {
-        width: min(100vh, 1000px);
+        width: min(calc(100vw - 8px), 1000px);
         margin: 0 4px;
     }
     svg {

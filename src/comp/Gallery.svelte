@@ -29,23 +29,6 @@
 
 </script>
 
-<section class="blurb">
-    <p lang="en">
-    Hello. my name is iulia and wall to wall is my mural servicing center, active
-    in the north/south holland area. below you will find some examples of my work.
-    </p>
-
-    <p lang="nl">
-    Hallo. mijn naam is iulia en van muur tot muur is mijn muurschilderingservicecentrum, actief
-    in de regio noord/zuid holland. hieronder vindt u enkele voorbeelden van mijn werk. 
-    </p>
-
-    <p>
-        If you would like to commision a mural,
-        please <Link path="/contact" title="contact me" />
-    </p>
-</section>
-
 <section id="gallery">
 
 <div class="chooser">

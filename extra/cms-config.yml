@@ -1,0 +1,23 @@
+
+i18n:
+  # structure: multiple_folders
+  # structure: multiple_files
+  structure: single_file
+  locales: [en, nl]
+  default_locale: en
+
+collections:
+  - name: blurbs
+    label: blurbs
+    i18n: true
+    folder: 'src/blurbs'
+    extension: mdx
+    format: yaml-frontmatter
+    create: true
+    slug: "{{slug}}"
+    identifier_field: slug
+    fields:
+      - name: slug
+      - name: body
+        i18n: true
+        widget: markdown

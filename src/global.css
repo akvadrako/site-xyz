@@ -58,10 +58,8 @@ a {
 
 x-debug { display: none; }
 
-.blurb {
-    p {
-        @apply my-4;
-    }
+p, .blurb {
+    @apply my-4;
 
     a:link {
         color: blue;

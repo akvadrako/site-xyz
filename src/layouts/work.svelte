@@ -142,15 +142,50 @@
     $: all_images = [image, ...more_images];
 </script>
 
-<div
-    class="frame"
-    bind:this={frame}
+<section id="outer"
     on:touchstart={handleTouchStart}
     on:touchmove={handleTouchMove}
     on:touchend={handleTouchEnd}
->
-    <Photo src={subimage} />
+    >
+    <a class="arrow" href={prev.path}
+        sveltekit:noscroll
+        on:mouseover={() => hover(prev)}
+        on:focus={() => hover(prev)}
+    >
+        <svg width="40.469px" height="115.75px" viewBox="0 0 40.469 115.75">
+            <polyline fill="none" stroke="#999999" stroke-width="5.6693" stroke-miterlimit="10" points="38.069,1.578 3.565,57.912
+    38.069,114.245 "/>
+        </svg>
+    </a>
+
+    <a class="frame"
+        href={subimage}
+        bind:this={frame}
+        >
+        <Photo src={subimage} />
+    </a>
+    
+    <a class="arrow" href={next.path}
+        sveltekit:noscroll
+        on:mouseover={() => hover(next)}
+        on:focus={() => hover(next)}
+    >
+        <svg width="40.469px" height="115.75px" viewBox="0 0 40.469 115.75">
+            <polyline fill="none" stroke="#999999" stroke-width="5.6693" stroke-miterlimit="10" points="2.565,1.578 37.07,57.912
+                2.565,114.245 "/>
+        </svg>
+    </a>
+</section>
+
+{#if more_images.length > 0}
+<div class="subs">
+    {#each all_images as src}
+    <button on:click={() => setSub(src)}>
+        <Thumbnail src={src} />
+    </button>
+    {/each}
 </div>
+{/if}
 
 <section class="blurb">
     <h2>{title}</h2>
@@ -158,16 +193,7 @@
     <p>date: {formatDate(date)}, category: {kind}</p>
 </section>
 
-{#if more_images.length > 0}
-<div class="subs">
-    {#each all_images as src}
-        <a href='#src' on:click={() => setSub(src)}>
-            <Thumbnail src={src} />
-        </a>
-    {/each}
-</div>
-{/if}
-
+<!--
 <nav>
     <a href={prev.path}
         sveltekit:noscroll
@@ -195,9 +221,10 @@
             <figcaption>{get_title(next)}</figcaption>
         </figure>
     </a>
-</nav>
+    </nav>
+    -->
 
-<style>
+<style type="postcss">
     figure {
         width: 100%;
     }
@@ -222,19 +249,42 @@
         color: inherit;
     }
 
-    .frame {
+    #outer {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: min(90vh, 100vw);
+        gap: 4px;
         height: 60vh;
-        margin: 1em;
+        margin: 4px;
     }
 
-    div :global(img) {
+    .blurb {
+        width: min(90vh, 100vw);
+    }
+
+    .arrow {
+        flex-grow: 0;
+        opacity: 20%;
+    }
+
+    .arrow:hover {
+        opacity: 100%;
+    }
+
+    .frame {
+        height: 100%;
+        flex-grow: 1;
+    }
+
+    .frame :global(img) {
         object-fit: contain;
         object-position: center;
         width: 100%;
         height: 100%;
     }
     .frame > :global(div) {
-        height: 60vh;
+        height: 100%;
         width: 100%;
     }
 
@@ -264,19 +314,22 @@
     }
     .subs {
         display: flex;
-        gap: 10px;
-        margin: 1em 0;
-        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-        @apply border border-gray-300 rounded-lg;
+        width: min(80vh, 90vw);
+        gap: 2px;
+        _margin: 1em 0;
+        _box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        @_apply border border-gray-300 rounded-lg;
     }
-    .subs a {
-        width: 100px;
-        height: 100px;
+    .subs button {
+        width: 120px;
+        _height: 100px;
         cursor: pointer;
-        padding: 10px;
+        _padding: 10px;
+        filter: grayscale(100%);
     }
 
-    .subs a:hover {
+    .subs button:hover {
+        filter: grayscale(0);
         @apply bg-gray-100 text-gray-700;
     }
 </style>

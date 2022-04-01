@@ -29,12 +29,12 @@ export function getRoute(path, lang) {
 export function loadWorks(lang) {
     const works = []
 
-    let pages = import.meta.globEager('/src/routes/[lang]/works/*.mdx')
+    let pages = import.meta.globEager('/src/works/*.mdx')
 
     for (const file in pages) {
         const mod = pages[file]
 
-        const path = file.replace('/src/routes/','/').replace('index','').replace('.mdx','')
+        const path = file.replace('/src/works','/[lang]/works').replace('index','').replace('.mdx','')
         const route = {
             path: path,
             ...mod.metadata,
@@ -54,8 +54,8 @@ function loadRoutes() {
     if (routes)
        return routes
     
-    let mds = import.meta.globEager('/src/routes/**/*.mdx')
-    let srcs = import.meta.globEager('/src/routes/**/*.svelte')
+    let mds = import.meta.globEager('/src/pages/**/*.mdx')
+    let srcs = import.meta.globEager('/src/pages/**/*.svelte')
    
     let pages = { ...mds, ...srcs }
 
@@ -69,7 +69,7 @@ function loadRoutes() {
 
         console.log('path', file, mod.metadata)
 
-        const path = file.replace('/src/routes/','/').replace('index','').replace('.mdx','').replace('.svelte', '')
+        const path = file.replace('/src/pages','/[lang]').replace('index','').replace('.mdx','').replace('.svelte', '')
         const route = {
             path: path,
             text: mod.metadata._text,

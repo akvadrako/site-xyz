@@ -7,7 +7,7 @@ public_folder: "/media"
 local_backend: true
 
 site_url: /
-logo_url: https://lucid-hodgkin-cc7294.netlify.app/media/logo.svg
+logo_url: https://walltowall.nl/media/logo.svg
 display_url: /
 
 backend:
@@ -16,22 +16,26 @@ backend:
   branch: master
 
 collections:
-  - name: routes
-    label: routes
-    label_singular: route
-    folder: 'src/routes/[lang]'
+  - name: pages
+    label: pages
+    label_singular: page
+    folder: 'src/pages'
     extension: mdx
     format: yaml-frontmatter
     create: true
+    slug: "{{slug}}"
+    identifier_field: slug
     fields:
-      - name: title
+      - name: slug
+        label: slug (short, unique ID for URL path)
+      - name: title_en
+      - name: title_nl
       - name: body
         widget: markdown
   - name: works
-    #i18n: true
     label: works
     label_singular: work
-    folder: 'src/routes/[lang]/works'
+    folder: 'src/works'
     extension: mdx
     format: yaml-frontmatter
     create: true
