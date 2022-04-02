@@ -72,12 +72,12 @@
 
 <style>
     .work {
-        position: relative;
         padding: 4px;
         margin: 8px;
     }
     .work a {
         text-decoration: none;
+        position: relative;
     }
     @media (hover: hover) {
         .work {

@@ -6,9 +6,9 @@ media_folder: "static/media"
 public_folder: "/media"
 local_backend: true
 
-site_url: /
+site_url: https://walltowall.nl
 logo_url: https://walltowall.nl/media/logo.svg
-display_url: /
+display_url: https://walltowall.nl
 
 backend:
   name: git-gateway

@@ -24,6 +24,10 @@
             path: '/contact',
             label: { en: 'Contact', nl: 'Contact' },
         },
+        { 
+            path: '/',
+            label: { en: 'Works', nl: 'Works' },
+        },
     ]
 
     for(let n of navItems) {
@@ -140,13 +144,6 @@
                 {item.label[$lang]}
             </a>
         {/each}
-
-        <a
-            href="#works"
-            on:click|preventDefault={onClick}
-            class="link flex-initial max-w-xs block py-2 pr-4 pl-3 text-white rounded dark:text-white">
-            Works
-        </a>
 
         <span class="flex-grow-[0] flex-shrink-[10] hidden sm:(block )">
             <Search />

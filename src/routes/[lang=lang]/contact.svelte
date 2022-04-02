@@ -97,60 +97,95 @@
         <input name="email" type="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="who@woo.com" required>
     </div>
     <div class="mb-6">
-        <label for="role" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Your role</label>
-        <fieldset id="role">
-            <legend class="sr-only">Role</legend>
-
-            <div class="flex items-center mb-4">
-                <input name="leader" id="leader" aria-describedby="checkbox-1" type="checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" checked>
-                <label for="leader" class="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">Leader</label>
-            </div>
-
-            <div class="flex items-center mb-4">
-                <input name="follower" id="follower" aria-describedby="checkbox-2" type="checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                <label for="checkbox-2" class="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">Follower</label>
-            </div>
-        </fieldset>
-    </div>
-    <div class="mb-6">
         <label for="message" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">Your message</label>
         <textarea name="message" id="message" rows="4" class="block p-2 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Leave a comment..."></textarea>
     </div>
     <div class="mb-6">
         <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300" for="photo">Upload file</label>
-        <input name="photo" class="block w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 cursor-pointer dark:text-gray-400 focus:outline-none focus:border-transparent dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" aria-describedby="user_avatar_help" id="user_avatar" type="file">
+        <input name="photo" aria-describedby="user_avatar_help" id="user_avatar" type="file">
         <div class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="photo">A photo of the place for a mural</div>
     </div>
-    <button on:click={submit} name="submit" type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Send</button>
+    <button on:click={submit} name="submit" type="submit">Send</button>
 </form>
+            
+<section class="my-8 py-2 flex gap-2">
+    <x-area>
+        <img src="/media/delft.jpg" alt="delft map" />
+        <h2>Delft</h2>
+        <div>
+2611 KR Delft
+Netherlands
+
+T: +31 (0)65 353 42 22
+        </div>
+    </x-area>
+    <x-area>
+        <img src="/media/amdam.jpg" alt="amdam map" />
+        <h2>Amsterdam</h2>
+        <div>
+1013 LC Amsterdam
+Netherlands
+
+T: +31 (0)65 353 42 22
+        </div>
+    </x-area>
+</section>
 
 <style type="postcss">
-    .msg {
-        border: thin double black;
-        @apply my-6 mx-4 p-4;
-    }
-    form {
-        @apply my-4;
+x-area {
+    width: 50%;
+    div {
+        white-space: pre;
     }
 
-    input[type="file"]::file-selector-button {
-        -webkit-margin-start: -1rem;
-        -webkit-margin-end: 1rem;
-        background: #374151;
-        border: 0;
+    h2 {
+        margin: 16px 0;
+        font-size: 140%;
+    }
+}
+
+#user_avatar {
+    @apply block w-full text-sm rounded-lg border border-gray-300 cursor-pointer focus:outline-none focus:border-transparent dark:border-gray-600 dark:placeholder-gray-400;
+}
+
+button {
+    @apply focus:ring-4 focus:ring-blue-300 rounded-lg w-full sm:w-auto px-5 py-2.5 text-center dark:focus:ring-blue-800;
+}
+
+.msg {
+    border: thin double black;
+    @apply my-6 mx-4 p-4;
+}
+form {
+    @apply my-4;
+}
+
+textarea, input {
+    max-width: 50%;
+}
+
+input[type="file"]::file-selector-button, button {
+    background: #374151;
+    color: #fff;
+    font-size: .875rem;
+    font-weight: 500;
+    font-family: inherit;
+    cursor: pointer;
+}
+
+input[type="file"]::file-selector-button {
+    -webkit-margin-start: -1rem;
+    -webkit-margin-end: 1rem;
+    margin-inline-end: 1rem;
+    margin-inline-start: -1rem;
+    padding: .625rem 1rem .625rem 2rem;
+    border: none;
+}
+
+@variants dark {
+    input[type="file"]::file-selector-button, button {
+        background: #4b5563;
         color: #fff;
-        cursor: pointer;
-        font-size: .875rem;
-        font-weight: 500;
-        margin-inline-end: 1rem;
-        margin-inline-start: -1rem;
-        padding: .625rem 1rem .625rem 2rem;
     }
-    
-    @variants dark {
-        input[type="file"]::file-selector-button {
-            background: #4b5563;
-            color: #fff;
-        }
-    }
+}
 </style>

@@ -47,29 +47,6 @@
     <meta http-equiv="content-language" content="{$lang}" />
 </svelte:head>
 
-<style>
-    footer a {
-        height: 40px;
-        width: 40px;
-        opacity: 50%;
-    }
-    footer a:hover {
-        opacity: 100%;
-    }
-    main {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-    main > :global(*) {
-        width: min(calc(100vw - 8px), 1000px);
-        margin: 0 4px;
-    }
-    svg {
-        height: 1.5em;
-    }
-</style>
-
 <Nav />
 <Notify />
 
@@ -77,18 +54,15 @@
 <slot />
 </main>
 
-<footer class="bg-white mx-3 my-4 dark:border-white-500 border-black-500 border-t-2 border-solid clear-both`">
-    <div class="max-w-4xl mx-auto py-12 px-4 sm:px-6 md:flex md:items-center md:justify-between lg:px-8">
-        <div class="mt-8 md:mt-0 md:order-1">
-            <p class="text-base text-gray-400">
+<footer class="bg-white my-4 dark:border-white-500 border-black-500 border-t-2 border-solid clear-both`">
+    <div class="py-12 md:flex md:justify-between">
+        <div class="mt-8 md:mt-0 text-base text-gray-400">
                 2611 KR Delft
-            </p>
-            <p class="text-base text-gray-400">
-                1013 LC Amsterdam
-            </p>
         </div>
-
-        <div class="flex justify-center space-x-6 md:order-2">
+        <div class="mt-8 md:mt-0 text-center text-base text-gray-400">
+                1013 LC Amsterdam
+        </div>
+        <div class="space-x-6 text-right">
             <a class="text-gray-400 hover:text-gray-500" href="https://www.facebook.com/Wall-to-Wall-103953875589378" rel="external">
                 <span class="sr-only">Facebook</span>
                 <svg id="facebook" fill="none" viewBox="0 0 24 24"
@@ -130,3 +104,35 @@
         </div>
     </div>
 </footer>
+
+<style>
+    svg {
+        display: inline-block;
+    }
+    footer {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    footer a {
+        height: 40px;
+        width: 40px;
+        opacity: 50%;
+    }
+    footer a:hover {
+        opacity: 100%;
+    }
+    main {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    main > :global(*), footer > div {
+        width: min(calc(100vw - 8px), 1000px);
+        margin: 0 4px;
+    }
+    svg {
+        height: 1.5em;
+    }
+</style>
+
