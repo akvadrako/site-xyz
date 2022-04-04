@@ -36,30 +36,21 @@ main[lang="nl"] *[lang="en"] {
 }
 
 /**********************************************
- * Standard components
+ * Markdown Styling
  */
 
-h1, h2, h3, h4 {
+h1.md, h2.md, h3.md, h4.md {
     font-weight: bold;
 }
 
-h2 {
+h2.md {
     @apply mt-4;
     font-size: 120%;
 }
 
-a {
-    text-decoration-skip-ink: auto;
-}
-
-/**********************************************
- * Custom components
- */
-
-x-debug { display: none; }
-
-p, .blurb {
+p.md {
     @apply my-4;
+    font-family: "NoeDisplay";
 
     a:link {
         color: blue;
@@ -77,6 +68,12 @@ p, .blurb {
 }
 
 /**********************************************
+ * Custom components
+ */
+
+x-debug { display: none; }
+    
+/**********************************************
  * Dark Mode
  */
 
@@ -86,7 +83,7 @@ p, .blurb {
         color: white;
     }
 
-    .blurb {
+    p.md {
         a { 
             color: yellow;
         }

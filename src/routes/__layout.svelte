@@ -23,6 +23,7 @@
     
     import 'virtual:windi.css'
     import '/src/global.css'
+    import '/src/fonts.css'
 
     $: ititle = {en: $metadata.title_en, nl: $metadata.title_nl}[$lang];
 
@@ -35,6 +36,42 @@
         let msg = event.message || 'unknown';
         createToast({ msg: `Error: ${msg}` })
     }
+
+import { afterNavigate } from '$app/navigation';
+
+var main
+
+afterNavigate(({ from }) => {
+    console.log('afterNav', { from })
+
+    // noscroll or targeted element 
+    if(window.scrollY != 0)
+        return;
+
+    // initial page load
+    if(! from)
+        return;
+
+    /*
+    see client.js
+    const deep_linked = to.hash && document.getElementById(to.hash.slice(1));
+    if (deep_linked) {
+        deep_linked.scrollIntoView();
+    const scroll = scroll_positions[current_history_index];
+	if (scroll) scrollTo(scroll.x, scroll.y);
+    if (scroll) {
+        scrollTo(scroll.x, scroll.y);
+        return;
+    }
+
+    window.scrollY = main.getBoundingClientRect().top + window.pageYOffset - 100
+    */
+
+    window.scrollTo({
+        top: main.getBoundingClientRect().top + window.pageYOffset - 100,
+        behavior: 'auto',
+    });
+})
 </script>
 
 <svelte:window
@@ -50,7 +87,7 @@
 <Nav />
 <Notify />
 
-<main lang={$lang}>
+<main bind:this={main} lang={$lang}>
 <slot />
 </main>
 
@@ -129,7 +166,6 @@
     }
     main > :global(*), footer > div {
         width: min(calc(100vw - 8px), 1000px);
-        margin: 0 4px;
     }
     svg {
         height: 1.5em;

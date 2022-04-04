@@ -8,6 +8,8 @@ title_nl: Start
     import Gallery from '$comp/Gallery'
 </script>
 
+<x-intro>
+
 [en]
 Hello. my name is iulia and wall to wall is my mural servicing center, active
 in the north/south holland area. below you will find some examples of my work.
@@ -18,5 +20,14 @@ in de regio noord/zuid holland. hieronder vindt u enkele voorbeelden van mijn we
 
 If you would like to commision a mural, please [[contact|contact me]].
 
+</x-intro>
+
 <Gallery />
 
+<style type="postcss">
+x-intro {
+    @apply bg-stone-200;
+    width: 100% !important;
+    padding: 2rem 4rem;
+}
+</style>

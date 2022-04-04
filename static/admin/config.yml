@@ -19,7 +19,7 @@ collections:
   - name: pages
     label: pages
     label_singular: page
-    folder: 'src/pages'
+    folder: 'pages'
     extension: mdx
     format: yaml-frontmatter
     create: true
@@ -35,7 +35,7 @@ collections:
   - name: works
     label: works
     label_singular: work
-    folder: 'src/works'
+    folder: 'pages/works'
     extension: mdx
     format: yaml-frontmatter
     create: true

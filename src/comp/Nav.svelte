@@ -85,7 +85,7 @@
                     ratio = 1
                 }
 
-                let alpha = Math.max(0.4, (1 - ratio));
+                let alpha = Math.max(0.9, ratio);
                 let light = 100 * ratio;
 
                 if(! navRoot) {
@@ -107,10 +107,6 @@
 <div bind:this={sheet} class="sheet" />
 
 <header>
-
-    <div id="backdrop">
-        <Photo src="/media/image_top.jpg" sizes="100vw" />
-    </div>
 
     <nav bind:this={navRoot}>
 
@@ -160,6 +156,12 @@
         </span>
     </nav>
 
+    <div id="backdrop">
+<div id="wrap">
+            <Photo src="/media/image_top.jpg" sizes="100vw" />
+        </div>
+    </div>
+
     <ul bind:this={sidebar} id="sidebar" class:open class="flex">
         {#each calcNavItems as item}
         <li>
@@ -174,7 +176,11 @@
     </ul>
 </header>
     
-<style>
+<style type="postcss">
+
+header {
+    --nav-height: 3rem;
+}
     nav {
         @apply px-3 py-2;
         @apply text-base text-black;
@@ -182,7 +188,7 @@
         margin: 0;
         display: flex;
         gap: 10px;
-        height: 55px;
+        height: var(--nav-height);
         justify-content: left;
         align-items: center;
         position: fixed;
@@ -278,9 +284,19 @@
         left: 0px;
     }
     
-    #backdrop {
-        width: 100%;
-    }
+#backdrop {
+    margin-top: var(--nav-height);
+    width: 100%;
+    height: min(calc(100vw / 3707 * 1980), calc(100vh - var(--nav-height)));
+    overflow: clip;
+    position: relative;
+}
+
+#wrap {
+    position: absolute;
+    bottom: 0;
+}
+
 
     /* desktop */
     @screen sm {

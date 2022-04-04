@@ -40,10 +40,10 @@
     $: hash = $page.url.hash;
 </script>
 
-<section class="blurb">
-    <h2 lang="en">Inquiry</h2>
-    <h2 lang="nl">Contact</h2>
-</section>
+<h2 class="md">
+    <span lang="en">Inquiry</span>
+    <span lang="nl">Contact</span>
+</h2>
 
 <div class:hidden={hash != '#error'} class="bg-red-50 border-l-4 border-red-400 p-4">
     <div class="flex">

@@ -10,6 +10,7 @@ export {createToast} from './toasts'
 
 //export const base = "https://lucid-hodgkin-cc7294.netlify.app"
 export const base = "https://walltowall.nl"
+//export const base = ""
 
 export const pages = writable([]);
 

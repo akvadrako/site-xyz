@@ -4,8 +4,7 @@
     import { Photo, Thumbnail } from '$comp';
     import { lang, formatDate, small } from '$lib';
     import { loadWorks } from '$lib/metadata';
-    import { prefetch, goto, disableScrollHandling, afterNavigate } from '$app/navigation';
-    import { onMount } from 'svelte';
+    import { prefetch, goto } from '$app/navigation';
 
     export let title_en;
     export let title_nl;
@@ -20,21 +19,6 @@
 
     layout;
     _text;
-
-    let frame
-
-    onMount(() => {
-        disableScrollHandling()
-    })
-
-    afterNavigate(({ from, to }) => {
-        if(from && from.toString().includes('/works/'))
-            return;
-
-        window.scrollTo({
-            top: frame.getBoundingClientRect().top + window.pageYOffset - 100,
-        });
-    })
 
     md_store.set({
         title_en: title_en,
@@ -152,7 +136,7 @@
         on:mouseover={() => hover(prev)}
         on:focus={() => hover(prev)}
     >
-        <svg width="40.469px" height="115.75px" viewBox="0 0 40.469 115.75">
+        <svg width="28px" height="80px" viewBox="0 0 40.469 115.75">
             <polyline fill="none" stroke="#999999" stroke-width="5.6693" stroke-miterlimit="10" points="38.069,1.578 3.565,57.912
     38.069,114.245 "/>
         </svg>
@@ -160,7 +144,6 @@
 
     <a class="frame"
         href={subimage}
-        bind:this={frame}
         >
         <Photo src={subimage} />
     </a>
@@ -170,7 +153,7 @@
         on:mouseover={() => hover(next)}
         on:focus={() => hover(next)}
     >
-        <svg width="40.469px" height="115.75px" viewBox="0 0 40.469 115.75">
+        <svg width="28px" height="80px" viewBox="0 0 40.469 115.75">
             <polyline fill="none" stroke="#999999" stroke-width="5.6693" stroke-miterlimit="10" points="2.565,1.578 37.07,57.912
                 2.565,114.245 "/>
         </svg>
@@ -187,10 +170,10 @@
 </div>
 {/if}
 
-<section class="blurb">
-    <h2>{title}</h2>
+<section id="desc">
+    <h2 class="md">{title}</h2>
     <slot />
-    <p>date: {formatDate(date)}, category: {kind}</p>
+    <p class="md"><b>Date:</b> {formatDate(date)}, <b>Category:</b> {kind}</p>
 </section>
 
 <!--
@@ -253,14 +236,15 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        width: min(90vh, 100vw);
-        gap: 4px;
-        height: 60vh;
-        margin: 4px;
+        width: min(90vh, 98vw);
+        gap: 18px;
+    height: 60vh;
+    @apply mt-4;
     }
 
-    .blurb {
+    #desc {
         width: min(90vh, 100vw);
+        @apply mt-4;
     }
 
     .arrow {
