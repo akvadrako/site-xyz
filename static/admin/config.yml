@@ -11,7 +11,8 @@ logo_url: https://walltowall.nl/media/logo.svg
 display_url: https://walltowall.nl
 
 backend:
-  name: git-gateway
+  #name: git-gateway
+  name: github
   repo: akvadrako/site-xyz
   branch: master
 
