@@ -105,3 +105,9 @@ In repo
     netlify lm:setup
     git lfs track "static/media/**"
     git lfs ls-files
+
+3. Alternative to Git Gateway
+
+Add Github to Access 
+- https://docs.netlify.com/visitor-access/oauth-provider-tokens/
+

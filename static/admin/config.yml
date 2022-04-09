@@ -1,6 +1,8 @@
 #
 # Netlify CMS
 #
+# Note: symlinks will result in SHA errors
+#
 
 media_folder: "static/media"
 public_folder: "/media"
@@ -20,7 +22,7 @@ collections:
   - name: pages
     label: pages
     label_singular: page
-    folder: 'pages'
+    folder: 'src/routes/[lang=lang]'
     extension: mdx
     format: yaml-frontmatter
     create: true
@@ -36,7 +38,7 @@ collections:
   - name: works
     label: works
     label_singular: work
-    folder: 'pages/works'
+    folder: 'src/routes/[lang=lang]/works'
     extension: mdx
     format: yaml-frontmatter
     create: true
