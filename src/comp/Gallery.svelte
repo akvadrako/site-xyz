@@ -81,7 +81,7 @@
     }
     @media (hover: hover) {
         .work {
-            filter: grayscale(100%);
+            filter: grayscale(20%);
         }
         .work:hover {
             filter: grayscale(0);

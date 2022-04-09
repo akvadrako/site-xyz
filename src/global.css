@@ -50,7 +50,7 @@ h2.md {
 
 p.md {
     @apply my-4;
-    font-family: "NoeDisplay";
+    font-family: "Poppins";
 
     a:link {
         color: blue;

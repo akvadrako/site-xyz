@@ -69,7 +69,7 @@ afterNavigate(({ from }) => {
 
     window.scrollTo({
         top: main.getBoundingClientRect().top + window.pageYOffset - 100,
-        behavior: 'auto',
+        behavior: 'instant',
     });
 })
 </script>
