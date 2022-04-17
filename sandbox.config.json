@@ -1,10 +1,12 @@
 {
-    "template": "node",
-    "infiniteLoopProtection": true,
-    "hardReloadOnChange": false,
-    "view": "browser",
-    "container": {
-        "node": "12"
-    }
+  "template": "node",
+  "infiniteLoopProtection": true,
+  "hardReloadOnChange": true,
+  "view": "browser",
+  "startScript": "dev",
+  "container": {
+    "node": "16",
+    "startScript": "npm run dev",
+    "port": 3000
+  }
 }
-
