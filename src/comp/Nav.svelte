@@ -157,7 +157,7 @@
     </nav>
 
     <div id="backdrop">
-<div id="wrap">
+        <div id="wrap">
             <Photo src="/media/image_top.jpg" sizes="100vw" />
         </div>
     </div>
@@ -287,15 +287,25 @@ header {
 #backdrop {
     margin-top: var(--nav-height);
     width: 100%;
-    height: min(calc(100vw / 3707 * 1980), calc(100vh - var(--nav-height)));
+    height: max(50vh, min(calc(100vw / 3707 * 1980), calc(100vh - var(--nav-height))));
     overflow: clip;
     position: relative;
+
+    #wrap {
+        position: absolute;
+        bottom: 0;
+        height: 100%;
+        display: flex;
+
+        :global(img) {
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+        }
+    }
 }
 
-#wrap {
-    position: absolute;
-    bottom: 0;
-}
+
 
 
     /* desktop */

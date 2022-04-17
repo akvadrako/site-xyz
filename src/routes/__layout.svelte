@@ -165,7 +165,8 @@ afterNavigate(({ from }) => {
         align-items: center;
     }
     main > :global(*), footer > div {
-        width: min(calc(100vw - 8px), 1000px);
+    /* width: min(calc(100vw - 8px), 1000px); */
+        width: min(100%, 1000px);
     }
     svg {
         height: 1.5em;

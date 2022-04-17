@@ -71,14 +71,20 @@
 </section>
 
 <style>
-    .work {
-        padding: 4px;
-        margin: 8px;
-    }
     .work a {
         text-decoration: none;
-        position: relative;
-    }
+    position: relative;
+    display: block;
+}
+/* <lg */
+.work {
+    width: 100%;
+    margin: 8px 0;
+}
+#gallery {
+    width: 100%;
+}
+
     @media (hover: hover) {
         .work {
             filter: grayscale(20%);
@@ -94,7 +100,7 @@
             _position: relative;
             _left: 50%;
             _transform: translateX(-50%);
-            margin: 2em auto;
+            margin: 4px auto;
         }
 
         .group {
@@ -104,6 +110,8 @@
             clear: both;
         }
         .work {
+            padding: 4px;
+            margin: 8px;
             min-width: 40vh;
             width: auto;
             display: inline-flex;
@@ -144,7 +152,7 @@
         bottom: 0;
     }
     h2 {
-        margin-top: 10px;
+        margin: 10px 4px 4px 4px;
     }
     .border {
         display: block;
