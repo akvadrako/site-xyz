@@ -79,45 +79,36 @@
         </div>
     </div>
 </div>
-
-<form
-    class:hidden={hash == '#done' || hash == '#error'}
-    bind:this={form}
-    name="contact"
-    method="POST"
-    data-netlify="true"
->
-    <input type="hidden" name="form-name" value="contact">
-    <div class="mb-6">
-        <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Your name</label>
-        <input name="name" type="name" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Joe Joesph Justified" required>
-    </div>
-    <div class="mb-6">
-        <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Your email</label>
-        <input name="email" type="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="who@woo.com" required>
-    </div>
-    <div class="mb-6">
-        <label for="message" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">Your message</label>
-        <textarea name="message" id="message" rows="4" class="block p-2 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Leave a comment..."></textarea>
-    </div>
-    <div class="mb-6">
-        <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300" for="photo">Upload file</label>
-        <input name="photo" aria-describedby="user_avatar_help" id="user_avatar" type="file">
-        <div class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="photo">A photo of the place for a mural</div>
-    </div>
-    <button on:click={submit} name="submit" type="submit">Send</button>
-</form>
             
 <section class="my-8 py-2 flex gap-2">
     <x-area>
-        <img src="/media/delft.jpg" alt="delft map" />
-        <h2>Delft</h2>
-        <div>
-2611 KR Delft
-Netherlands
-
-T: +31 (0)65 353 42 22
-        </div>
+        <form
+            class:hidden={hash == '#done' || hash == '#error'}
+            bind:this={form}
+            name="contact"
+            method="POST"
+            data-netlify="true"
+        >
+            <input type="hidden" name="form-name" value="contact">
+            <div class="mb-6">
+                <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Your name</label>
+                <input name="name" type="name" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Joe Joesph Justified" required>
+            </div>
+            <div class="mb-6">
+                <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Your email</label>
+                <input name="email" type="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="who@woo.com" required>
+            </div>
+            <div class="mb-6">
+                <label for="message" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">Your message</label>
+                <textarea name="message" id="message" rows="4" class="block p-2 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Leave a comment..."></textarea>
+            </div>
+            <div class="mb-6">
+                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300" for="photo">Upload file</label>
+                <input name="photo" aria-describedby="user_avatar_help" id="user_avatar" type="file">
+                <div class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="photo">A photo of the place for a mural</div>
+            </div>
+            <button on:click={submit} name="submit" type="submit">Send</button>
+        </form>
     </x-area>
     <x-area>
         <img src="/media/amdam.jpg" alt="amdam map" />
@@ -161,7 +152,7 @@ form {
 }
 
 textarea, input {
-    max-width: 50%;
+    max-width: 90%;
 }
 
 input[type="file"]::file-selector-button, button {

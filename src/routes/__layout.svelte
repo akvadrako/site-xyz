@@ -93,9 +93,6 @@ afterNavigate(({ from }) => {
 
 <footer class="bg-white my-4 dark:border-white-500 border-black-500 border-t-2 border-solid clear-both`">
     <div class="py-12 md:flex md:justify-between">
-        <div class="mt-8 md:mt-0 text-base text-gray-400">
-                2611 KR Delft
-        </div>
         <div class="mt-8 md:mt-0 text-center text-base text-gray-400">
                 1013 LC Amsterdam
         </div>

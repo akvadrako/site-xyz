@@ -53,7 +53,7 @@ export const route = derived(lang, $lang => {
 import dayjs from 'dayjs'
 
 export function formatDate(when) {
-    return dayjs(route.date).format('YYYY-MM-DD')
+    return dayjs(when).format('YYYY-MM-DD')
 }
 
 export function assert(test, ...args) {
