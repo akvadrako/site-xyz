@@ -55,7 +55,7 @@ related: https://github.com/matyunya/svelte-image
 
 <div>
     <img 
-        class="preload"
+        class="photo preload"
         src="{small(src)}"
         alt="{alt} thumbnail"
     />
@@ -63,7 +63,7 @@ related: https://github.com/matyunya/svelte-image
         bind:this={real}
         on:load={onLoad}
         class:loaded
-        class="real"
+        class="photo real"
         srcset="
         {base}{src}?nf_resize=fit&w=200   200w,
         {base}{src}?nf_resize=fit&w=400   400w,

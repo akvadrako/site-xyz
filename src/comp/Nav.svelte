@@ -1,11 +1,12 @@
 
 <script>
-    import { page } from '$app/stores';
-    import { lang, pages } from '$lib';
-    import { Search, Photo } from '$comp';
-    import { beforeNavigate } from '$app/navigation';
-    import { range } from 'lodash-es';
-    import { onMount } from 'svelte';
+import { page } from '$app/stores';
+import { lang, pages } from '$lib';
+import { Search, Photo } from '$comp';
+import Hero from '$comp/Hero.svelte';
+import { beforeNavigate } from '$app/navigation';
+import { range } from 'lodash-es';
+import { onMount } from 'svelte';
 
     let sidebar
     let open = false
@@ -156,11 +157,7 @@
         </span>
     </nav>
 
-    <div id="backdrop">
-        <div id="wrap">
-            <Photo src="/media/image_top.jpg" sizes="100vw" />
-        </div>
-    </div>
+    <Hero />
 
     <ul bind:this={sidebar} id="sidebar" class:open class="flex">
         {#each calcNavItems as item}
@@ -177,6 +174,13 @@
 </header>
     
 <style type="postcss">
+#mask {
+    position: fixed;
+    width: 100vw;
+    height: 100%;
+    bottom: 0;
+    background: red;
+}
 
 header {
     --nav-height: 3rem;
@@ -215,7 +219,7 @@ header {
         text-align: center;
     }
     nav a, #sidebar a {
-        color: inherit;
+        background: inherit;
     }
     nav img {
         height: 40px;
@@ -233,13 +237,13 @@ header {
         flex: 2 0 0%;
         text-align: center;
     }
-    svg {
+    button svg {
         display: inline-block;
         _position: absolute;
         _left: 50%;
         _transform: translate(-50%, -50%);
     }
-    svg line {
+    button svg line {
         stroke: currentColor;
         stroke-width: 3;
     }
@@ -284,30 +288,6 @@ header {
         left: 0px;
     }
     
-#backdrop {
-    margin-top: var(--nav-height);
-    width: 100%;
-    height: max(50vh, min(calc(100vw / 3707 * 1980), calc(100vh - var(--nav-height))));
-    overflow: clip;
-    position: relative;
-
-    #wrap {
-        position: absolute;
-        bottom: 0;
-        height: 100%;
-        display: flex;
-
-        :global(img) {
-            height: 100%;
-            width: 100%;
-            object-fit: cover;
-            object-position: 40% bottom;
-        }
-    }
-}
-
-
-
 
     /* desktop */
     @screen sm {
