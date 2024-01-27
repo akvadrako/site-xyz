@@ -6,8 +6,8 @@ import { Photo } from '$comp';
     <div id="wrap">
         <Photo src="/media/image_top.jpg" sizes="100vw" />
         <div id="mask">
-            <img alt="mask" src="/media/hero-mask.svg" height="100%" width="100%" />
             <div />
+            <img alt="mask" src="/media/hero-mask.svg" height="100%" width="100%" />
         </div>
     </div>
 </div>
@@ -16,23 +16,20 @@ import { Photo } from '$comp';
 #mask {
     position: fixed;
     z-index: 20;
-    _opacity: 50%;
-    top: var(--nav-height);
+    top: 0;
     width: 100%;
-    overflow: clip;
-    height: max(50vh, min(calc(100vw / 3707 * 1980), calc(100vh - var(--nav-height))));
 }
 
 #mask img {
-    height: 100%;
-    width: 100%;
+    display: block;
+    height: max(50vh, min(calc(100vw / 3707 * 1980), calc(100vh - var(--nav-height))));
     object-fit: fill;
     object-position: 50% 50%;
 }
 
 #mask div {
-    height: 20em;
-    background: red;
+    height: var(--nav-height);
+    background: white;
 }
 
 #backdrop {
