@@ -83,6 +83,7 @@ afterNavigate(({ from }) => {
 <svelte:head>
     <title>Wall To Wall || {ititle}</title>
     <meta http-equiv="content-language" content="{$lang}" />
+    <link rel="icon" href="/media/favicon.svg">
 </svelte:head>
 
 <Nav />
