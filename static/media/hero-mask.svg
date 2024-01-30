@@ -1,47 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 width="3705.545px" height="1970px" viewBox="0 0 3705.545 1900" enable-background="new 0 0 3705.545 1980" xml:space="preserve">
-<g id="Layer_2_2_">
-	<rect x="0" fill="#F8EDE8" width="45.272" height="1980"/>
-</g>
-<g id="Layer_1">
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="3705.545px" height="1980px" viewBox="0 0 3705.545 1980" enable-background="new 0 0 3705.545 1980" xml:space="preserve">
+<g id="Layer_1_2_">
 	<g id="Layer_1_1_" display="none">
-		<line display="inline" fill="#F8EDE8" x1="1749" y1="1232.719" x2="1749" y2="1229.719"/>
-		<rect x="1712" y="1211.719" display="inline" fill="#F8EDE8" width="2" height="18"/>
-		<polyline display="inline" fill="#F8EDE8" stroke="#010202" stroke-width="3" stroke-miterlimit="10" points="1737.5,1209.719 
-			1737.5,1230.75 1724.989,1210.193 1712.565,1230.514 		"/>
-		<polygon display="inline" fill="#F8EDE8" points="1711,1209.719 1700.999,1209.719 1697.999,1209.719 1697.999,1212.719 
-			1697.999,1229.719 1700.999,1229.719 1700.999,1212.719 1711,1212.719 1711,1229.719 1714,1229.719 1714,1212.719 1714,1209.719 
-					"/>
-		<polyline display="inline" fill="#F8EDE8" stroke="#010202" stroke-width="3" stroke-miterlimit="10" points="1674.499,1209.719 
-			1674.499,1230.709 1687.203,1210.193 1698.766,1230.535 		"/>
-		<line display="inline" fill="#F8EDE8" x1="1702.999" y1="1232.719" x2="1702.999" y2="1229.719"/>
+		<line display="inline" fill="#F2EDE8" x1="1742.788" y1="1208.468" x2="1742.788" y2="1205.333"/>
+		<rect x="1704.14" y="1186.533" display="inline" fill="#F2EDE8" width="2.089" height="18.8"/>
+		<polyline display="inline" fill="#F2EDE8" stroke="#010202" stroke-width="3" stroke-miterlimit="10" points="1730.776,1184.442 
+			1730.776,1206.411 1717.707,1184.939 1704.73,1206.165 		"/>
+		<polygon display="inline" fill="#F2EDE8" points="1703.096,1184.442 1692.649,1184.442 1689.515,1184.442 1689.515,1187.576 
+			1689.515,1205.333 1692.649,1205.333 1692.649,1187.576 1703.096,1187.576 1703.096,1205.333 1706.23,1205.333 1706.23,1187.576 
+			1706.23,1184.442 		"/>
+		<polyline display="inline" fill="#F2EDE8" stroke="#010202" stroke-width="3" stroke-miterlimit="10" points="1664.969,1184.442 
+			1664.969,1206.368 1678.239,1184.939 1690.318,1206.187 		"/>
+		<line display="inline" fill="#F2EDE8" x1="1694.738" y1="1208.468" x2="1694.738" y2="1205.333"/>
 		<g display="inline">
-			<rect x="1675.999" y="1229.719" fill="#F8EDE8" width="27" height="9"/>
+			<rect x="1666.536" y="1205.333" fill="#F2EDE8" width="28.202" height="9.402"/>
 		</g>
 		<g display="inline">
-			<rect x="1666.999" y="1229.719" fill="#F8EDE8" width="82.001" height="11"/>
-			<polygon fill="#F8EDE8" points="1749.571,1204.719 1669.589,1204.719 1669.724,1209.719 1749.704,1209.719 			"/>
+			<rect x="1657.135" y="1205.333" fill="#F2EDE8" width="85.652" height="11.491"/>
+			<polygon fill="#F2EDE8" points="1743.384,1179.222 1659.841,1179.222 1659.982,1184.442 1743.522,1184.442 			"/>
 		</g>
 	</g>
 	<g id="Layer_2" display="none">
-		<rect x="1283.999" y="905.719" display="inline" fill="#F8EDE8" width="841.891" height="384.281"/>
-		<polygon display="inline" fill="#F8EDE8" stroke="#FFFFFF" stroke-width="2.8347" stroke-miterlimit="10" points="
-			1307.999,985.719 1344.6,985.719 1344.6,1177.68 1461.261,985.719 1498.815,985.719 1612.998,1185.494 1612.998,1229.719 
-			1593.936,1229.719 1480.895,1027.086 1355.465,1229.719 1307.999,1229.719 		"/>
-		<polygon display="inline" fill="#F8EDE8" stroke="#FFFFFF" stroke-width="2.8347" stroke-miterlimit="10" points="
-			2113.196,985.719 2076.598,985.719 2076.598,1177.68 1960.697,985.719 1924.671,985.719 1808.197,1175.832 1808.197,1229.719 
-			1818.11,1229.719 1942.017,1026.133 2066.113,1229.719 2113.196,1229.719 		"/>
-		<polygon display="inline" fill="#F8EDE8" stroke="#FFFFFF" stroke-width="2.8347" stroke-miterlimit="10" points="
-			1771.597,985.719 1649.599,985.719 1612.998,985.719 1612.998,1022.32 1612.998,1229.719 1649.599,1229.719 1649.599,1022.32 
-			1771.597,1022.32 1771.597,1229.719 1808.197,1229.719 1808.197,1022.32 1808.197,985.719 		"/>
+		<rect x="1257.083" y="866.909" display="inline" fill="#F2EDE8" width="879.375" height="401.39"/>
+		<polygon display="inline" fill="#F2EDE8" stroke="#FFFFFF" stroke-width="2.8347" stroke-miterlimit="10" points="
+			1282.152,950.47 1320.382,950.47 1320.382,1150.979 1442.238,950.47 1481.463,950.47 1600.731,1159.139 1600.731,1205.333 
+			1580.82,1205.333 1462.746,993.679 1331.731,1205.333 1282.152,1205.333 		"/>
+		<polygon display="inline" fill="#F2EDE8" stroke="#FFFFFF" stroke-width="2.8347" stroke-miterlimit="10" points="
+			2123.199,950.47 2084.972,950.47 2084.972,1150.979 1963.909,950.47 1926.281,950.47 1804.619,1149.048 1804.619,1205.333 
+			1814.974,1205.333 1944.398,992.684 2074.019,1205.333 2123.199,1205.333 		"/>
+		<polygon display="inline" fill="#F2EDE8" stroke="#FFFFFF" stroke-width="2.8347" stroke-miterlimit="10" points="1766.39,950.47 
+			1638.96,950.47 1600.731,950.47 1600.731,988.701 1600.731,1205.333 1638.96,1205.333 1638.96,988.701 1766.39,988.701 
+			1766.39,1205.333 1804.619,1205.333 1804.619,988.701 1804.619,950.47 		"/>
 	</g>
-	<rect x="-0.001" y="288.601" display="none" fill="#F8EDE8" width="3705.549" height="1691.399"/>
-	<path fill="#F8EDE8" d="M0.5-807.765v2779.14h3705.545v-2779.14H0.5z M3628.168,1706.049h-207.235l-546.201-896.075
-		l-545.374,896.075h-43.627H2124.63V793.188h-536.965v912.861h-161.101h-83.903L845.12,814.168l-552.074,891.88H84.128V632.092
-		h161.1v844.906l513.477-844.906h165.291l502.569,879.304V793.188V632.092h161.101h536.969h161.102v161.097v675.688l512.649-836.785
-		h158.567l510.128,844.906V632.092h161.088V1706.049L3628.168,1706.049z"/>
+	<rect x="-84.084" y="222.315" display="none" fill="#F2EDE8" width="3870.531" height="1766.705"/>
+	<path fill="#F2EDE8" d="M-83.561-922.865v2902.876h3870.528V-922.865H-83.561z M3705.622,1702.871h-216.463L2918.64,766.9
+		l-569.654,935.971h-45.57h-168.272V749.367h-560.875v953.504h-168.273h-87.639l-519.693-931.59L222.01,1702.87H3.79V581.099
+		h168.272v882.524l536.338-882.524h172.65l524.945,918.454V749.367V581.099h168.273h560.879h168.272v168.271v705.771
+		l535.475-874.042h165.626l532.841,882.524V581.099h168.26V1702.871L3705.622,1702.871z"/>
 </g>
 </svg>
