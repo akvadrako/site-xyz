@@ -1,6 +1,10 @@
 # Wall to Wall Site
 
-- [netlify](https://app.netlify.com/sites/lucid-hodgkin-cc7294/overview)
+CMS On Netlify
+- https://lucid-hodgkin-cc7294.netlify.app/admin/index.html
+
+Netlify Admin Page
+- https://app.netlify.com/sites/lucid-hodgkin-cc7294/overview
 
 ## TODO
 

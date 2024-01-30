@@ -9,7 +9,7 @@ const myPlugin = {
   name: 'log-request-middleware',
   configureServer(server) {
     server.middlewares.use((req, res, next) => {
-      console.log(req.method, req.url);
+      // console.log(req.method, req.url);
       return next();
     })
   }
@@ -76,7 +76,7 @@ const config = {
     preprocess: [mdsvex(mdsvexConfig)]
 };
 
-console.log('config', process.env.NODE_ENV)
+// console.log('config', process.env.NODE_ENV)
 if(process.env.NODE_ENV == 'development') {
    // config.hot =  {
    //     preserveLocalState: true,

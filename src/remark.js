@@ -9,7 +9,7 @@ import visit from 'unist-util-visit'
 import { toString } from 'mdast-util-to-string'
 
 export const extractText = () => (tree, vFile) => {
-    console.log('TEXT', vFile.filename)
+    //console.log('TEXT', vFile.filename)
 
     let text = ''
 

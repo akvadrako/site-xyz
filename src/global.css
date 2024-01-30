@@ -16,8 +16,8 @@ html:focus-within {
 body {
     margin: 0;
     padding: 0;
-    background: white;
-    color: black;
+    background: #F8EDE8;
+    color: #3D3732;
     min-height: 100vh;
     text-rendering: optimizeSpeed;
     line-height: 1.5;

@@ -2,7 +2,7 @@
   "name": "w2w",
   "version": "1.2.3",
   "scripts": {
-    "dev": "svelte-kit dev",
+    "dev": "svelte-kit dev --host 0.0.0.0",
     "build": "svelte-kit build",
     "preview": "svelte-kit preview",
     "postbuild": "svelte-sitemap --domain https://walltowall.nl"

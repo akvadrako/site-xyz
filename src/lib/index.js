@@ -61,7 +61,7 @@ export function assert(test, ...args) {
 }
 
 export function log(...args) {
-    console.log(...args)
+    console.log('LOG', ...args)
 }
 
 log.error = (msg, ...args) => {

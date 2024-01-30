@@ -1,43 +1,23 @@
 
 <style>
-    input {
-        height: 40px;
-        font-size: 16px;
-        padding: 0px 20px 0px 40px;
-        margin-right: 10px;
-        outline: none;
-        border: none;
-        background: url('/sprites.svg#search') 7px center no-repeat;
-        background-size: 1.5em;
-        width: 1em;
-    }
-    
-    .item {
-        @apply text-gray-700 block px-4 py-2 text-sm;
-    }
-    .active {
-        @apply bg-gray-100 text-gray-900;
-    }
-    
-    .suggest {
-        width: 100%;
-        @apply origin-top-right absolute shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none;
-    }
+#icon {
+    position: absolute;
+}
 
-    .open input {
-        width: 100%;
-        border: solid gray 2px;
-    }
+#icon img {
+    display: block;
+}
 
-    #search.open {
-        max-width: 20em;
-    }
+input {
+    outline: none;
+    border: solid gray 2px;
+    width: 100%;
+}
 
-    #search {
-        margin: 0;
-        padding: 0;
-        max-width: 2em;
-    }
+.suggest {
+    width: 100%;
+    @apply origin-top-right absolute shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none;
+}
 </style>
 
 <script>
@@ -75,6 +55,7 @@
         }
         
         if(e.key == "Escape") {
+            open = false
             suggestions = []
             return
         }
@@ -107,34 +88,39 @@
 
     function click() {
         open = true
-        console.log('opened')
+        console.log("open", open)
     }
 </script>
 
-<div class="relative"
-    id="search"
-    class:open
-    on:keydown={onKey}
-    on:click={click}
+<div
+    class="box relative text-black h-8 {open ? "w-80" : "w-8"}"
 >
+
+<div id="icon" on:click={click} class="w-6 h-6 m-1">
+    <img src='/sprites.svg#search' />
+</div>
+
     <input type="search"
         bind:value={query}
-        placeholder="search..." />
+        on:keydown={onKey}
+        placeholder="search..." 
+        class="pl-8 h-8 { open || 'hidden' }"
+    />
 
     {#if suggestions.length > 0}
-    <div class="suggest"
+    <div class="suggest overflow-hidden"
         role="menu"
         tabindex="-1">
         <div class="py-1" role="none">
             {#each suggestions as item, i}
                 <a href={results_link(item)}
-                    class:item
-                    class:active={i == active}
+                    class="text-gray-700 block px-4 py-2 text-sm
+                        { i == active && 'bg-gray-100 text-gray-900'}"
                     role="menuitem"
                     tabindex="-1"
                 >{item.suggestion}</a>
             {/each}
         </div>
     </div>
-{/if}
+    {/if}
 </div>

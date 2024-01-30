@@ -29,7 +29,7 @@ import { Photo } from '$comp';
 
 #mask div {
     height: var(--nav-height);
-    background: white;
+    background: inherit;
 }
 
 #backdrop {
