@@ -11,6 +11,7 @@
 html {
     margin: 0;
     padding: 0;
+    font-family: "Poppins";
 }
 
 html:focus-within {
@@ -40,8 +41,14 @@ main[lang="nl"] *[lang="en"] {
 }
 
 /**********************************************
- * Markdown Styling
+ * Default Markdown Styling
  */
+
+/* top-level elements are given max width */
+main > .md {
+    max-width: 500px;
+    @apply mx-8;
+}
 
 h1.md, h2.md, h3.md, h4.md {
     font-weight: bold;
@@ -54,7 +61,6 @@ h2.md {
 
 p.md {
     @apply my-4;
-    font-family: "Poppins";
 
     a:link {
         color: blue;

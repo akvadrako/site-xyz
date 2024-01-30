@@ -94,15 +94,3 @@ afterNavigate(({ from }) => {
 
 <Footer />
 
-<style>
-    main {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-    main > :global(*) {
-    /* width: min(calc(100vw - 8px), 1000px); */
-        width: min(100%, 1000px);
-    }
-</style>
-

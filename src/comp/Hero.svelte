@@ -11,7 +11,7 @@ import { Photo } from '$comp';
 
 <style type="postcss">
 .hero {
-    --ratio: calc(3707 / 1980); 
+    --ratio: calc(3707 / 1980);
 }
 
 .mask {
@@ -28,7 +28,7 @@ import { Photo } from '$comp';
 
 .inner, .mask {
     /* fill screen with hero image without cropping */
-    height: min(calc((100vw - 4rem) / var(--ratio)), calc(100vh - var(--nav-height)));
+    height: min(calc((100vw - 2rem) / var(--ratio)), calc(100vh - var(--nav-height)));
     aspect-ratio: var(--ratio);
 }
 
