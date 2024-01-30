@@ -4,6 +4,10 @@
  * See: https://tailwindcss.com/docs/preflight
  */
 
+:root {
+    --theme-bg: #F8EDE8;
+}
+
 html {
     margin: 0;
     padding: 0;
@@ -16,7 +20,7 @@ html:focus-within {
 body {
     margin: 0;
     padding: 0;
-    background: #F8EDE8;
+    background: var(--theme-bg);
     color: #3D3732;
     min-height: 100vh;
     text-rendering: optimizeSpeed;
