@@ -80,21 +80,18 @@ onMount(() => {
         entries.forEach(entry => {
             let ratio = entry.intersectionRatio
 
-            if(ratio < 0.1) {
-                ratio = 0.3
-            } else if(ratio > 0.9) {
-                ratio = 1
+            console.log('io', ratio)
+
+            if(ratio > 0.5) {
+                // initial
+                navRoot.style.backgroundColor = '#FFF'
+                navRoot.style.color = '#3D3732'
+            } else {
+                // scrolled down
+                navRoot.style.backgroundColor = '#3D3732'
+                navRoot.style.color = '#F2EDE8'
+                navRoot.style.opacity = 0.75
             }
-
-            let alpha = Math.max(0.9, ratio);
-            let light = 100 * ratio;
-
-            if(! navRoot) {
-                return
-            }
-
-            navRoot.style.backgroundColor = `hsla(0, 0%, ${light}%, ${alpha})`
-            navRoot.style.color = ratio < 0.4 ? '#F5F5F5' : 'black'
         });
     }, {
         root: null,
@@ -174,7 +171,6 @@ header {
 }
 
 nav {
-    _background-color: white;
     height: var(--nav-height);
     justify-content: left;
     align-items: center;
@@ -185,6 +181,8 @@ nav {
     z-index: 100;
     white-space: nowrap;
     transition: background-color 0.5s, color 0.5s;
+    background-color: #3D3732;
+    color: #3D3732;
 }
 
 .sheet {
