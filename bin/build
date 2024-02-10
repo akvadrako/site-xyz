@@ -1,7 +1,5 @@
 #!/bin/bash -ex
 
 npm install
-cksum node_modules/@sveltejs/kit/assets/app/navigation.js
-grep version node_modules/@sveltejs/kit/package.json
 npm run build
 

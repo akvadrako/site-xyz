@@ -1,5 +1,5 @@
 <script>
-import {Photo, Link} from '$comp'
+import {Photo} from '$comp'
 import {loadWorks} from '$lib/metadata'
 import {lang} from '$lib'
 

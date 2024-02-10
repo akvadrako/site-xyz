@@ -1,9 +1,10 @@
-
 import {getRoutes} from '$lib/metadata'
 import {log} from '$lib'
 import MiniSearch from 'minisearch'
 
 import { json } from '@sveltejs/kit';
+
+export const prerender = true;
 
 export function GET({}) {
     // FIXME - handle nl

@@ -1,1 +1,1 @@
-src/routes
+src/routes/[lang=lang]/

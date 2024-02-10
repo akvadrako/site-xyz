@@ -57,10 +57,11 @@ function loadRoutes() {
     if (routes)
        return routes
     
+    let works = import.meta.glob('/src/works/*.mdx', { eager: true })
     let mds = import.meta.glob('/src/routes/[lang=lang]/**/*.mdx', { eager: true })
     let srcs = import.meta.glob('/src/routes/[lang=lang]/**/*.svelte', { eager: true })
    
-    let pages = { ...mds, ...srcs }
+    let pages = { ...works, ...mds, ...srcs }
 
     routes = {}
 

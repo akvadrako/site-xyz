@@ -1,4 +1,4 @@
 
-export function load_work(slug) {
-    return import(`../works/${slug}.mdx`);
+export async function load_work(slug) {
+    return (await import(`../works/${slug}.mdx`)).default;
 }

@@ -10,12 +10,12 @@ title_nl: Zoek
     import {search} from '$lib/search'
     import {building} from '$app/environment'
     import {Thumbnail} from '$comp'
+    import { onMount } from 'svelte';
+
+    $: query = building ? "" : $page.url.searchParams.get('q')
+    $: ahits = building ? (async () => [])() : search(query)
 
     export const title = 'search'
-
-    $: query = $page.url.searchParams.get('q')
-    
-    $: ahits = building ? (async () => [])() : search(query)
 
     function findMarks(field, term) {
         let pat = new RegExp(term, 'gi')
