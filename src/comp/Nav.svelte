@@ -1,12 +1,14 @@
 
 <script>
 import { page } from '$app/stores';
-import { lang, pages } from '$lib';
+import { lang } from '$lib';
 import { Search, Photo } from '$comp';
 import Hero from '$comp/Hero.svelte';
 import { beforeNavigate } from '$app/navigation';
 import { range } from 'lodash-es';
 import { onMount } from 'svelte';
+
+export let routes
 
 let sidebar
 let open = false
@@ -38,7 +40,7 @@ for(let n of navItems) {
 $: calcNavItems = (() => {
     const nav = [ ...navItems ]
 
-    for(let work of $pages) {
+    for(let work of routes) {
         nav.push({
             path: work.bare_path,
             label: { en: work.title_en, nl: work.title_nl },

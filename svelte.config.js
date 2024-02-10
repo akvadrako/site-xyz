@@ -1,100 +1,23 @@
-
 import { mdsvex } from "mdsvex";
 import mdsvexConfig from "./mdsvex.config.js";
-//import adapter from '@sveltejs/adapter-netlify'
-import adapter from '@sveltejs/adapter-static'
-import WindiCSS from 'vite-plugin-windicss'
+import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
+import adapter from '@sveltejs/adapter-static';
 
-const myPlugin = {
-  name: 'log-request-middleware',
-  configureServer(server) {
-    server.middlewares.use((req, res, next) => {
-      // console.log(req.method, req.url);
-      return next();
-    })
-  }
-}
-
+/** @type {import('@sveltejs/kit').Config} */
 const config = {
-    kit: {
-        adapter: adapter({}),
-        vite: {
-	    plugins: [
-                myPlugin,
-                WindiCSS(),
-            ],
-            css: {
-                /*
-                postcss: {
-                    plugins: [
-                        // require('postcss-import'),
-                        require('tailwindcss/nesting'),
-                        require('tailwindcss'),
-                        // 'postcss-import': {},
-                        // 'tailwindcss/nesting': {},
-                        // tailwindcss: {},
-                        // autoprefixer: {},
-                    ]
-                },
-                */
-            },
-            logLevel: 'info',
-            clearScreen: false,
-            resolve: {
-                extensions: ['.svelte', '.js', '.mdx'],
-                alias: {
-                    $comp: '/src/comp'
-                }
-            },
-            optimizeDeps: {
-                exclude: [
-                    //'@beyonk/svelte-notifications',
-                    //'@beyonk/svelte-notifications/store.js',
-                ],
-                include: [
-                    /*
-                        'lodash',
-                        'lodash-es',
-                        'ace-builds/src-noconflict/ace',
-                        'ace-builds/src-noconflict/ext-searchbox',
-                        'ace-builds/src-noconflict/mode-json',
-                        'ajv',
-                        'classnames',
-                        'diff-sequences',
-                        'jmespath',
-                        'json-source-map',
-                        'natural-compare-lite',
-                        */
-                ]
-            }
-        },
-        // experimental: {
-        //     //prebundleSvelteLibraries: true;
-        // }
-    },
-    extensions: [".svelte", ...mdsvexConfig.extensions],
-    preprocess: [mdsvex(mdsvexConfig)]
-};
+  extensions: [".svelte", ...mdsvexConfig.extensions],
 
-// console.log('config', process.env.NODE_ENV)
-if(process.env.NODE_ENV == 'development') {
-   // config.hot =  {
-   //     preserveLocalState: true,
-   // }
-} else {
-    config.kit.prerender = { 
-        default: true,
-        crawl: true,
-        enabled: true,
-        onError: 'fail',
-        entries: [
-            '*',
-            '/',
-            '/en',
-            '/nl',
-            '/data/search_index.json',
-        ],
-    }
-}
+  kit: {
+    alias: {
+        '$comp': 'src/comp',
+    },
+    adapter: adapter(),
+  },
+
+  preprocess: [
+        vitePreprocess(),
+        mdsvex(mdsvexConfig)
+    ],
+};
 
 export default config;

@@ -39,22 +39,22 @@ root
 ## Usage
 
 Prereqs:
-- git LFS
 - npm
 
 Develop locally:
 
 ```
 npm install
-npx netlify-cms-proxy-server
-npm run dev -- --open
+npm run dev
 npm run build
 npm run preview
 ```
 
 Deploy:
 
-- git commit
+```
+git commit
+```
 
 ## Technical Intro
 
@@ -63,7 +63,6 @@ Style
 - windicss
     - https://windicss.org/guide/configuration.html
     - `npx windicss-analysis`
-    -
 - flowbite - https://flowbite.com/docs/getting-started/introduction/
 
 Mdsvex

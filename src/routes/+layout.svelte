@@ -1,22 +1,5 @@
-<script context="module">
-    import {pages} from '$lib'
-    import {get} from 'svelte/store'
-
-    const data_href = '/data/pages.json'
-
-    export async function load({fetch, params}) {
-        if(get(pages).length === 0) {
-            console.log('load pages')
-            const resp = await fetch(data_href)
-            pages.set((await resp.json()).routes)
-        }
-
-        return {}
-    }
-</script>
-
 <script>
-    import { browser } from "$app/env";
+    import { browser } from "$app/environment";
     import { lang, metadata, createToast } from '$lib';
     import Notify from '$comp/Notify.svelte';
     import Nav from '$comp/Nav.svelte';
@@ -25,6 +8,8 @@
     import 'virtual:windi.css'
     import '/src/global.css'
     import '/src/fonts.css'
+
+    export let data
 
     $: ititle = {en: $metadata.title_en, nl: $metadata.title_nl}[$lang];
 
@@ -86,7 +71,7 @@ afterNavigate(({ from }) => {
     <link rel="icon" href="/media/favicon.svg">
 </svelte:head>
 
-<Nav />
+<Nav routes={data.routes} />
 <Notify />
 
 <main bind:this={main} lang={$lang}>

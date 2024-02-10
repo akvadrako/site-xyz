@@ -10,7 +10,7 @@
     import { base, lang } from '$lib';
     import { goto } from '$app/navigation';
     import { page } from '$app/stores';
-    import { browser } from '$app/env';
+    import { browser } from '$app/environment';
     import {metadata as md_store} from '$lib'
     
     md_store.set(metadata)

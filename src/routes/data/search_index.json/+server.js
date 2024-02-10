@@ -4,7 +4,9 @@ import {log} from '$lib'
 import MiniSearch from 'minisearch'
 import {filter} from 'lodash-es'
 
-export async function get({ params }) {
+import { json } from '@sveltejs/kit';
+
+export function GET({}) {
     // FIXME - handle nl
     const routes = filter(getRoutes('en'), r => !r.noindex)
 
@@ -30,11 +32,9 @@ export async function get({ params }) {
     
     idx.addAll(routes)
 
-    return {
-        body: {
-            config: config,
-            index: idx.toJSON(),
-        }
-    }
+    return json({
+        config: config,
+        index: idx.toJSON(),
+    })
 }
 

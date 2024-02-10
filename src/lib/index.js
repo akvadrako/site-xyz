@@ -8,11 +8,7 @@ import {page, session} from '$app/stores'
 export {goto} from '$app/navigation'
 export {createToast} from './toasts'
 
-//export const base = "https://lucid-hodgkin-cc7294.netlify.app"
 export const base = "https://walltowall.nl"
-//export const base = ""
-
-export const pages = writable([]);
 
 export const metadata = writable({
     title_en: 'title_en',
@@ -21,7 +17,7 @@ export const metadata = writable({
 
 // return thumbnail image
 export function small(src) {
-    return `${base}${src}?nf_resize=fit&w=200`
+    return `/.netlify/images?url=${src}&w=200`
 }
 
 // store: current language

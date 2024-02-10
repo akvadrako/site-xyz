@@ -1,18 +1,21 @@
+import { defineMDSveXConfig as defineConfig } from "mdsvex";
 
 import { tagLang } from './src/rehype.js'
 import { wikiLink, extractText, betterImage } from './src/remark.js'
 
-export default {
-    "extensions": [".mdx"],
-    "smartypants": {
-        "dashes": "oldschool"
+const config = defineConfig({
+    extensions: [".mdx"],
+
+    smartypants: {
+        dashes: "oldschool",
     },
-    "layout": {
+    layout: {
         _: "./src/layouts/default.svelte",
         blog: "./src/layouts/blog.svelte",
         work: "./src/layouts/work.svelte",
     },
-    "remarkPlugins": [
+
+    remarkPlugins: [
         [wikiLink, {
             wikiLinkClassName: 'internal wikilink',
             hrefTemplate(permalink) {
@@ -23,8 +26,10 @@ export default {
         [extractText, {}],
         //betterImage,
     ],
-    "rehypePlugins": [
+    rehypePlugins: [
         tagLang,
-    ]
-};
+    ],
+});
+
+export default config;
 
