@@ -9,7 +9,7 @@ import { Photo } from '$comp';
     </div>
 </div>
 
-<style type="postcss">
+<style lang="postcss">
 .hero {
     --ratio: calc(3702 / 1121);
 }

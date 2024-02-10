@@ -32,7 +32,7 @@ function onLoad(event) {
     loaded = true;
 }
 </script>
-<style>
+<style lang="postcss">
 img {
     _width: 100%;
     _height: 100%;

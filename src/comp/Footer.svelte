@@ -47,7 +47,7 @@
     </div>
 </footer>
 
-<style>
+<style lang="postcss">
     svg {
         display: inline-block;
     }

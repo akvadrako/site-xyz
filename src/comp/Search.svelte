@@ -1,5 +1,5 @@
 
-<style>
+<style lang="postcss">
 #icon {
     position: absolute;
 }
@@ -22,7 +22,6 @@ input {
 
 <script>
     import { goto, route } from '$lib'
-    import {debounce} from 'lodash-es'
     import {suggest} from '$lib/search'
     import {beforeNavigate} from '$app/navigation'
 
@@ -32,6 +31,19 @@ input {
     let open = false;
 
     $: results_link = item => $route('/search', { q: item.suggestion })
+
+    function debounce(func, wait, immediate) {
+        var timeout;
+        return function() {
+                var context = this, args = arguments;
+                clearTimeout(timeout);
+                if (immediate && !timeout) func.apply(context, args);
+                timeout = setTimeout(function() {
+                        timeout = null;
+                        if (!immediate) func.apply(context, args);
+                }, wait);
+        };
+    }
 
     let wrap_suggest = 
     debounce(() => {

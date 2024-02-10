@@ -2,7 +2,16 @@
 import {Photo, Link} from '$comp'
 import {loadWorks} from '$lib/metadata'
 import {lang} from '$lib'
-import {keyBy, chunk} from 'lodash-es'
+
+const keyBy = (array, key) => (array || []).reduce((r, x) => ({ ...r, [key ? x[key] : x]: x }), {});
+
+const chunk = (input, size) => {
+  return input.reduce((arr, item, idx) => {
+    return idx % size === 0
+      ? [...arr, [item]]
+      : [...arr.slice(0, -1), [...arr.slice(-1)[0], item]];
+  }, []);
+};
 
 let kinds = [
     {
@@ -69,7 +78,7 @@ $: filtered = works.filter(w => bykey[w.kind || 'mural'].checked)
 {/each}
 </section>
 
-<style type="postcss">
+<style lang="postcss">
 .work a {
     text-decoration: none;
     position: relative;

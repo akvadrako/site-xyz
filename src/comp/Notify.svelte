@@ -14,7 +14,7 @@
   }
 
 </script>
-<style>
+<style lang="postcss">
   .toasts {
     list-style: none;
     position: fixed;

@@ -5,7 +5,7 @@
     import Nav from '$comp/Nav.svelte';
     import Footer from '$comp/Footer.svelte';
     
-    import 'virtual:windi.css'
+    import 'virtual:uno.css'
     import '/src/global.css'
     import '/src/fonts.css'
 

@@ -48,7 +48,7 @@
     }
 </script>
 
-<style>
+<style lang="postcss">
     ul {
         list-style: none;
         margin: 0;

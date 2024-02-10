@@ -25,7 +25,7 @@
 
 </script>
 
-<style>
+<style lang="postcss">
 </style>
 
 <a class=link

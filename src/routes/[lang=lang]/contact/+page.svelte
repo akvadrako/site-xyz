@@ -122,7 +122,7 @@ T: +31 (0)65 353 42 22
     </x-area>
 </section>
 
-<style type="postcss">
+<style lang="postcss">
 x-area {
     width: 50%;
     div {

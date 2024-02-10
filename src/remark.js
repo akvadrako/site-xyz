@@ -4,7 +4,6 @@
 
 import strip from 'strip-markdown'
 import visit from 'unist-util-visit'
-//import _ from 'lodash-es'
     
 import { toString } from 'mdast-util-to-string'
 

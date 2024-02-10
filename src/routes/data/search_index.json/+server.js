@@ -2,13 +2,12 @@
 import {getRoutes} from '$lib/metadata'
 import {log} from '$lib'
 import MiniSearch from 'minisearch'
-import {filter} from 'lodash-es'
 
 import { json } from '@sveltejs/kit';
 
 export function GET({}) {
     // FIXME - handle nl
-    const routes = filter(getRoutes('en'), r => !r.noindex)
+    const routes = getRoutes('en').filter(r => !r.noindex)
 
     log('loading search_index.json', { routes: routes.length })
 

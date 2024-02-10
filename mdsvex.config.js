@@ -1,7 +1,7 @@
 import { defineMDSveXConfig as defineConfig } from "mdsvex";
 
 import { tagLang } from './src/rehype.js'
-import { wikiLink, extractText, betterImage } from './src/remark.js'
+import { wikiLink, extractText } from './src/remark.js'
 
 const config = defineConfig({
     extensions: [".mdx"],
@@ -24,7 +24,6 @@ const config = defineConfig({
             aliasDivider: '|',
         }],
         [extractText, {}],
-        //betterImage,
     ],
     rehypePlugins: [
         tagLang,

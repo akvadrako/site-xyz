@@ -1,13 +1,13 @@
 <script>
-import Home from './[lang=lang]/+page.mdx'
-    import { onMount } from 'svelte';
+import Home from '$comp/Home.mdx'
+import { onMount } from 'svelte';
 
-    // netlify login
-    onMount(() => {
-        if (window.location.hash.includes('_token=')) {
-            window.location.replace('/admin/' + window.location.hash)
-        }
-    });
+// netlify login
+onMount(() => {
+    if (window.location.hash.includes('_token=')) {
+        window.location.replace('/admin/' + window.location.hash)
+    }
+});
 </script>
 
 <Home />

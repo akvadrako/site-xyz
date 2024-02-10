@@ -5,7 +5,6 @@ import { lang } from '$lib';
 import { Search, Photo } from '$comp';
 import Hero from '$comp/Hero.svelte';
 import { beforeNavigate } from '$app/navigation';
-import { range } from 'lodash-es';
 import { onMount } from 'svelte';
 
 export let routes
@@ -98,7 +97,7 @@ onMount(() => {
     }, {
         root: null,
         rootMargin: '0px',
-        threshold: range(0, 1, 0.05),
+        threshold: Array.from({length: 20}, (_, i) => i * 0.05),
     });
     observer.observe(sheet)
 })
@@ -141,11 +140,11 @@ onMount(() => {
 
         <span class="flex-initial">
             {#if $page.url.pathname == '/'}
-                <b>EN</b> / <a sveltekit:noscroll href="/nl">NL</a>
+                <b>EN</b> / <a data-sveltekit-noscroll href="/nl">NL</a>
             {:else if $lang == 'nl'}
-                <a sveltekit:noscroll href="{$page.url.pathname.replace('/nl', '/en')}">EN</a> / <b>NL</b>
+                <a data-sveltekit-noscroll href="{$page.url.pathname.replace('/nl', '/en')}">EN</a> / <b>NL</b>
             {:else}
-                <b>EN</b> / <a sveltekit:noscroll href="{$page.url.pathname.replace('/en', '/nl')}">NL</a>
+                <b>EN</b> / <a data-sveltekit-noscroll href="{$page.url.pathname.replace('/en', '/nl')}">NL</a>
             {/if}
         </span>
     </nav>
@@ -166,7 +165,7 @@ onMount(() => {
     </ul>
 </header>
     
-<style type="postcss">
+<style lang="postcss">
 
 header {
     --nav-height: 3rem;

@@ -19,6 +19,22 @@ backend:
   branch: master
 
 collections:
+  - name: comp
+    label: components
+    label_singular: component
+    folder: 'src/comp'
+    extension: mdx
+    format: yaml-frontmatter
+    create: true
+    slug: "{{slug}}"
+    identifier_field: slug
+    fields:
+      - name: slug
+        label: slug (short, unique ID for URL path)
+      - name: title_en
+      - name: title_nl
+      - name: body
+        widget: markdown
   - name: pages
     label: pages
     label_singular: page
@@ -38,7 +54,7 @@ collections:
   - name: works
     label: works
     label_singular: work
-    folder: 'src/routes/[lang=lang]/works'
+    folder: 'src/works'
     extension: mdx
     format: yaml-frontmatter
     create: true

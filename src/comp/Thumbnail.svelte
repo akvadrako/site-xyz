@@ -9,7 +9,7 @@
     export let alt = "image"
 </script>
 
-<style>
+<style lang="postcss">
 </style>
 
 <img
