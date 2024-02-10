@@ -4,7 +4,7 @@
     import { Photo, Thumbnail } from '$comp';
     import { lang, formatDate, small } from '$lib';
     import { loadWorks } from '$lib/metadata';
-    import { prefetch, goto } from '$app/navigation';
+    import { preloadData, goto } from '$app/navigation';
 
     export let title_en;
     export let title_nl;
@@ -34,7 +34,7 @@
     // prefetch images on hover
     function hover(work) {
         console.log('hover', work.image)
-        prefetch(work.path)
+        preloadData(work.path)
     }
 
     function preloadImage(active, offset) {
@@ -132,7 +132,7 @@
     on:touchend={handleTouchEnd}
     >
     <a class="arrow" href={prev.path}
-        sveltekit:noscroll
+        data-sveltekit-noscroll
         on:mouseover={() => hover(prev)}
         on:focus={() => hover(prev)}
     >
@@ -149,7 +149,7 @@
     </a>
     
     <a class="arrow" href={next.path}
-        sveltekit:noscroll
+        data-sveltekit-noscroll
         on:mouseover={() => hover(next)}
         on:focus={() => hover(next)}
     >
@@ -179,7 +179,7 @@
 <!--
 <nav>
     <a href={prev.path}
-        sveltekit:noscroll
+        data-sveltekit-noscroll
         on:mouseover={() => hover(prev)}
         on:focus={() => hover(prev)}
     >
@@ -194,7 +194,7 @@
         </x-title>
     </div>
     <a href={next.path}
-        sveltekit:noscroll
+        data-sveltekit-noscroll
         on:mouseover={() => hover(next)}
         on:focus={() => hover(next)}
     >
@@ -222,7 +222,7 @@
         bottom: 0;
         left: 0;
         width: 100%;
-        @apply py-2 px-8;
+        padding: 4px 16px;
     }
     x-title {
         top: 0;
@@ -238,13 +238,13 @@
         justify-content: center;
         width: min(90vh, 98vw);
         gap: 18px;
-    height: 60vh;
-    @apply mt-4;
+        height: 60vh;
+        margin-top: 8px;
     }
 
     #desc {
         width: min(90vh, 100vw);
-        @apply mt-4;
+        margin-top: 8px;
     }
 
     .arrow {
@@ -283,12 +283,13 @@
     nav > * {
         text-align: center;
         position: relative;
-        @apply cursor-default;
+        cursor: default;
         flex-grow: 1;
         flex-basis: 20%;
     }
     nav > a:hover {
-        @apply bg-gray-100 text-gray-700;
+        background-color: #222222;
+        color: #AAAAAA;
     }
     nav > *:first-child {
         text-align: left;
@@ -302,7 +303,7 @@
         gap: 2px;
         _margin: 1em 0;
         _box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-        @_apply border border-gray-300 rounded-lg;
+        border: solid #444444;
     }
     .subs button {
         width: 120px;
@@ -314,6 +315,7 @@
 
     .subs button:hover {
         filter: grayscale(0);
-        @apply bg-gray-100 text-gray-700;
+        background-color: #222222;
+        color: #AAAAAA;
     }
 </style>

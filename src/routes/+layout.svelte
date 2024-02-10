@@ -6,6 +6,7 @@
     import Footer from '$comp/Footer.svelte';
     
     import 'virtual:uno.css'
+    import '/src/reset.css'
     import '/src/global.css'
     import '/src/fonts.css'
 
@@ -28,8 +29,6 @@ import { afterNavigate } from '$app/navigation';
 var main
 
 afterNavigate(({ from }) => {
-    console.log('afterNav', { from })
-
     // noscroll or targeted element 
     if(window.scrollY != 0)
         return;

@@ -44,6 +44,18 @@ main[lang="nl"] *[lang="en"] {
  * Default Markdown Styling
  */
 
+a:link {
+    text-decoration: none;
+    color: inherit;
+}
+a:visited {
+    color: inherit;
+}
+
+/**********************************************
+ * Default Markdown Styling
+ */
+
 /* top-level elements are given max width */
 main > .md {
     max-width: 500px;
@@ -108,3 +120,23 @@ x-debug { display: none; }
     }
 }
 
+/**********************************************
+ * Search
+ */
+
+.side img {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    object-fit: cover;
+}
+
+.side {
+    width: 10em;
+    position: relative;
+    flex: 0 0 auto;
+}
+
+.hit mark {
+    background: unset;
+}

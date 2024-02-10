@@ -4,6 +4,9 @@ import {
     presetTypography,
     presetUno,
     presetAttributify,
+    transformerDirectives,
+    transformerVariantGroup,
+    transformerCompileClass,
 } from 'unocss'
 
 export default defineConfig({
@@ -37,4 +40,9 @@ export default defineConfig({
             },
         }
     },
+    transformers: [
+        transformerDirectives(),
+        transformerVariantGroup(),
+        transformerCompileClass(),
+    ],
 })

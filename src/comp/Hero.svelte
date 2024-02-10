@@ -18,7 +18,7 @@ import { Photo } from '$comp';
     position: fixed;
     z-index: 20;
     top: 0;
-    margin-top: 8rem; _var(--nav-height);
+    margin-top: 8rem;
     box-shadow: 0 0 0 400px var(--theme-bg);
 }
 

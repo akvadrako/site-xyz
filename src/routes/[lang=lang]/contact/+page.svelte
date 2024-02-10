@@ -36,7 +36,6 @@
         }
     }
 
-    $: console.log('hash', $page.url.hash)
     $: hash = $page.url.hash;
 </script>
 
@@ -84,6 +83,7 @@
     <x-area>
         <form
             class:hidden={hash == '#done' || hash == '#error'}
+            class="my-4"
             bind:this={form}
             name="contact"
             method="POST"
@@ -104,10 +104,13 @@
             </div>
             <div class="mb-6">
                 <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300" for="photo">Upload file</label>
-                <input name="photo" aria-describedby="user_avatar_help" id="user_avatar" type="file">
+                <input name="photo" aria-describedby="user_avatar_help" id="user_avatar" type="file"
+                class="block w-full text-sm rounded-lg border border-gray-300 cursor-pointer focus:outline-none focus:border-transparent dark:border-gray-600 dark:placeholder-gray-400">
                 <div class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="photo">A photo of the place for a mural</div>
             </div>
-            <button on:click={submit} name="submit" type="submit">Send</button>
+            <button 
+                class="focus:ring-4 focus:ring-blue-300 rounded-lg w-full sm:w-auto px-5 py-2.5 text-center dark:focus:ring-blue-800"
+                on:click={submit} name="submit" type="submit">Send</button>
         </form>
     </x-area>
     <x-area>
@@ -125,30 +128,15 @@ T: +31 (0)65 353 42 22
 <style lang="postcss">
 x-area {
     width: 50%;
-    div {
-        white-space: pre;
-    }
-
-    h2 {
-        margin: 16px 0;
-        font-size: 140%;
-    }
 }
 
-#user_avatar {
-    @apply block w-full text-sm rounded-lg border border-gray-300 cursor-pointer focus:outline-none focus:border-transparent dark:border-gray-600 dark:placeholder-gray-400;
+x-area div {
+    white-space: pre;
 }
 
-button {
-    @apply focus:ring-4 focus:ring-blue-300 rounded-lg w-full sm:w-auto px-5 py-2.5 text-center dark:focus:ring-blue-800;
-}
-
-.msg {
-    border: thin double black;
-    @apply my-6 mx-4 p-4;
-}
-form {
-    @apply my-4;
+x-area h2 {
+    margin: 16px 0;
+    font-size: 140%;
 }
 
 textarea, input {

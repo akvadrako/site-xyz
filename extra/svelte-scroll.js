@@ -8,8 +8,6 @@ onMount(() => {
 })
 
 afterNavigate(({ from, to }) => {
-    console.log('afterNav', { from })
-
     // noscroll or targeted element 
     if(window.scrollY != 0)
         return;

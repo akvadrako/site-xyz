@@ -11,7 +11,6 @@ const config = defineConfig({
     },
     layout: {
         _: "./src/layouts/default.svelte",
-        blog: "./src/layouts/blog.svelte",
         work: "./src/layouts/work.svelte",
     },
 

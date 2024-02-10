@@ -3,7 +3,7 @@
  */
 
 import {writable, readable, derived} from 'svelte/store'
-import {page, session} from '$app/stores'
+import {page} from '$app/stores'
 
 export {goto} from '$app/navigation'
 export {createToast} from './toasts'
@@ -17,7 +17,7 @@ export const metadata = writable({
 
 // return thumbnail image
 export function small(src) {
-    return `/.netlify/images?url=${src}&w=200`
+    return `${base}/.netlify/images?url=${src}&w=200`
 }
 
 // store: current language

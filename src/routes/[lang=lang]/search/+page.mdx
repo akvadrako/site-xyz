@@ -8,14 +8,14 @@ title_nl: Zoek
 <script>
     import {page} from '$app/stores'
     import {search} from '$lib/search'
-    import {prerendering} from '$app/environment'
+    import {building} from '$app/environment'
     import {Thumbnail} from '$comp'
 
     export const title = 'search'
 
     $: query = $page.url.searchParams.get('q')
     
-    $: ahits = prerendering ? (async () => [])() : search(query)
+    $: ahits = building ? (async () => [])() : search(query)
 
     function findMarks(field, term) {
         let pat = new RegExp(term, 'gi')
@@ -75,23 +75,6 @@ title_nl: Zoek
         return marks
     }
 </script>
-
-<style lang="postcss">
-    .side :global(img) {
-        height: 100%;
-        width: 100%;
-        position: absolute;
-        object-fit: cover;
-    }
-    .side {
-        width: 10em;
-        position: relative;
-        flex: 0 0 auto;
-    }
-    .hit :global(mark) {
-        background: unset;
-    }
-</style>
 
 {#await ahits}
     <div>...loading...</div>

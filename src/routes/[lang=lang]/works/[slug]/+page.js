@@ -1,5 +1,5 @@
 
-import {load_work} from '/src/works'
+import {load_work} from '$lib/works'
 
 export async function load({ params }) {
     return {

@@ -81,7 +81,8 @@ onMount(() => {
         entries.forEach(entry => {
             let ratio = entry.intersectionRatio
 
-            console.log('io', ratio)
+            if(! navRoot)
+                return;
 
             if(ratio > 0.5) {
                 // initial
@@ -115,7 +116,7 @@ onMount(() => {
             <h1>Wall To Wall</h1>
         </a>
 
-        <button class:open on:click={onClick}>
+        <button class="sm:hidden" class:open on:click={onClick}>
             <svg width=32 height=32>
                 <line id="top" x1=0 y1=9    x2=32 y2=9    style="transition: transform 0.4s ease-in-out, opacity 0.4s ease-in-out;"/>
                 <line id="mid" x1=0 y1=18.5 x2=32 y2=18.5 style="transition: transform 0.4s ease-in-out, opacity 0.4s ease-in-out;"/>
@@ -130,7 +131,7 @@ onMount(() => {
         {#each navItems as item}
             <a
                 href="/{$lang}{item.path}"
-                class="link flex-initial max-w-xs block dark:text-white" 
+                class="link sm:block flex-initial max-w-xs uppercase dark:text-white" 
                 aria-current={ item.current ? "page" : '' }>
                 {item.label[$lang]}
             </a>
@@ -151,11 +152,12 @@ onMount(() => {
 
     <Hero />
 
-    <ul bind:this={sidebar} id="sidebar" class:open class="flex">
+    <ul bind:this={sidebar} id="sidebar" class:open
+        class="flex bg-warm-gray-400">
         {#each calcNavItems as item}
         <li>
             <a href="/{$lang}{item.path}"
-                class="block py-2 pr-4 pl-3 dark:text-white"
+                class="block py-2 pr-4 pl-3 dark:text-white hover:bg-red-400"
                 aria-current="{ item.current ? 'page' : '' }"
             >
                 {item.label[$lang]}
@@ -231,7 +233,6 @@ button svg line {
 }
 
 #sidebar {
-    display: block;
     transition: left 0.4s ease-in-out;
     position: fixed;
     top: 55px;
@@ -241,34 +242,18 @@ button svg line {
     overflow-y: auto;
     width: 20ch;
     border-right: thin solid black;
-    @apply bg-warm-gray-400; 
-}
-
-.link {
     display: none;
-    text-transform: uppercase;
 }
 
 ul {
     display: flex;
     flex-direction: column;
 }
-ul a:hover {
-    @apply bg-red-400;
-}
 
 #sidebar.open {
     left: 0px;
+    display: block;
 }
 
 
-/* desktop */
-@screen sm {
-    .link {
-        display: block;
-    }
-    button {
-        display: none;
-    }
-}
 </style>

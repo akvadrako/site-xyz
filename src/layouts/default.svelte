@@ -4,7 +4,11 @@
     export let _text = '';
     export let title_en;
     export let title_nl;
-    export let layout;
+    export let layout = "";
+    export let data = {};
+    export let form = null;
+    export let slug;
+    export let noindex = false;
 
     _text;
     layout;

@@ -30,5 +30,5 @@
 
 <a class=link
     rel={ext && 'external'}
-    sveltekit:prefetch
+    data-sveltekit-preload-data="hover"
     href="{route.path}">{route.title}</a>

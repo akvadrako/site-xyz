@@ -17,11 +17,14 @@ export let src
 export let sizes = "100vw"
 export let alt = "image"
 
+let imgcls = ""
+export { imgcls as class }
+
 let real
 let loaded = false;
 
 function url(width) {
-    return `/.netlify/images?url=${url}&w=${width}`
+    return `${base}/.netlify/images?url=${src}&w=${width}`
 }
 
 $: if(real && real.complete) {
@@ -60,7 +63,7 @@ div {
 
 <div>
     <img 
-        class="photo preload"
+        class="photo preload {imgcls}"
         src="{small(src)}"
         alt="{alt} thumbnail"
     />
@@ -68,7 +71,7 @@ div {
         bind:this={real}
         on:load={onLoad}
         class:loaded
-        class="photo real"
+        class="photo real {imgcls}"
         srcset="
         {url(200)}  200w
         {url(400)}  400w

@@ -6,6 +6,8 @@
 
 #icon img {
     display: block;
+    max-width: 100%;
+    height: auto;
 }
 
 input {
@@ -16,7 +18,6 @@ input {
 
 .suggest {
     width: 100%;
-    @apply origin-top-right absolute shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none;
 }
 </style>
 
@@ -120,7 +121,7 @@ input {
     />
 
     {#if suggestions.length > 0}
-    <div class="suggest overflow-hidden"
+    <div class="suggest overflow-hidden origin-top-right absolute shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
         role="menu"
         tabindex="-1">
         <div class="py-1" role="none">

@@ -4,7 +4,7 @@ import {assert, log} from '$lib'
 let routes = null
 
 const pathPages = '/src/routes/[lang=lang]'
-const pathWorks = pathPages + '/works'
+const pathWorks = '/src/works'
 
 // return list localized routes
 export function getRoutes(lang) {
@@ -32,7 +32,7 @@ export function getRoute(path, lang) {
 export function loadWorks(lang) {
     const works = []
 
-    let pages = import.meta.globEager('/src/routes/[lang=lang]/works/*.mdx')
+    let pages = import.meta.glob('/src/works/*.mdx', { eager: true })
 
     for (const file in pages) {
         const mod = pages[file]
@@ -57,8 +57,8 @@ function loadRoutes() {
     if (routes)
        return routes
     
-    let mds = import.meta.globEager('/src/routes/[lang=lang]/**/*.mdx')
-    let srcs = import.meta.globEager('/src/routes/[lang=lang]/**/*.svelte')
+    let mds = import.meta.glob('/src/routes/[lang=lang]/**/*.mdx', { eager: true })
+    let srcs = import.meta.glob('/src/routes/[lang=lang]/**/*.svelte', { eager: true })
    
     let pages = { ...mds, ...srcs }
 

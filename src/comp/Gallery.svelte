@@ -65,7 +65,7 @@ $: filtered = works.filter(w => bykey[w.kind || 'mural'].checked)
                         <h3 class="text-lg text-black font-semibold">{work.title}</h3>
                     </div>
                     <div>
-                        <Photo src={work.image} alt={work.title} sizes="30vh" />
+                        <Photo src={work.image} alt={work.title} sizes="30vh" class="my-0 h-[40vh]" />
                     </div>
                     <svg class="border" height="20px" width="100%" viewBox="0 0 10 10" preserveAspectRatio="none">
                         <line x1="0.1" y1="2" x2="9.9" y2="2" stroke="#CCC" stroke-width="1px" />
@@ -98,7 +98,8 @@ $: filtered = works.filter(w => bykey[w.kind || 'mural'].checked)
         filter: grayscale(0);
     }
 }
-@screen lg {
+
+@media (min-width: 1024px) {
     #gallery {
         /* break out of main */
         width: min(94vw, 160vh);
@@ -131,8 +132,6 @@ $: filtered = works.filter(w => bykey[w.kind || 'mural'].checked)
 .work :global(img) {
     display: block;
     width: 100%;
-
-    @apply lg:(my-0 h-[40vh] _w-auto);
 
     object-fit: contain;
 }
