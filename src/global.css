@@ -6,6 +6,7 @@
 
 :root {
     --theme-bg: #F2EDE8;
+    color-scheme: light dark;
 }
 
 html {
@@ -99,10 +100,15 @@ x-debug { display: none; }
  * Dark Mode
  */
 
-@media (prefers-color-scheme: dark) {
+@media screen and (prefers-color-scheme: dark) {
+    :root {
+        --theme-text: #F2EDE8;
+        --theme-bg: #3D3732;
+        color-scheme: dark;
+    }
     body {
-        background: black;
-        color: white;
+        background: var(--theme-bg);
+        color: var(--theme-text);
     }
 
     p.md {

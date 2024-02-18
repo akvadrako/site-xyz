@@ -16,6 +16,7 @@ import {base, small} from '$lib'
 export let src
 export let sizes = "100vw"
 export let alt = "image"
+export let divcls = "photo h-full"
 
 let imgcls = ""
 export { imgcls as class }
@@ -37,9 +38,7 @@ function onLoad(event) {
 </script>
 <style lang="postcss">
 img {
-    _width: 100%;
-    _height: 100%;
-    _object-fit: cover;
+    display: block;
 }
 .preload {
     z-index: 1;
@@ -48,20 +47,20 @@ img {
     height: 100%;
 }
 div {
-    _height: 100%;
     position: relative;
 }
 .real {
-    z-index: 2;
-    position: relative;
     visibility: hidden;
 }
-.real.loaded {
+.loaded .real {
     visibility: visible;
+}
+.loaded .preload {
+    display: none;
 }
 </style>
 
-<div>
+<div class={divcls} class:loaded>
     <img 
         class="photo preload {imgcls}"
         src="{small(src)}"
@@ -70,7 +69,6 @@ div {
     <img
         bind:this={real}
         on:load={onLoad}
-        class:loaded
         class="photo real {imgcls}"
         srcset="
         {url(200)}  200w

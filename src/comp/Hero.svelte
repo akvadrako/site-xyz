@@ -4,8 +4,11 @@ import { Photo } from '$comp';
 
 <div class="hero">
     <div class="inner">
-        <img class="mask" alt="mask" src="/media/hero-mask.svg" />
-        <Photo src="/media/image_top.jpg" />
+        <img class="mask dark:hidden" alt="mark" src="/media/hero-mask.svg" />
+        <img class="mask light:hidden" alt="mask" src="/media/hero-mask-dark.svg" />
+        <Photo src="/media/image_top.jpg"
+            class="w-full h-full object-cover object-[50%_80%]"
+        />
     </div>
 </div>
 

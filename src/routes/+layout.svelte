@@ -67,6 +67,8 @@ afterNavigate(({ from }) => {
 <svelte:head>
     <title>Wall To Wall || {ititle}</title>
     <meta http-equiv="content-language" content="{$lang}" />
+    <!-- help dark reader detect dark mode support -->
+    <meta name="color-scheme" content="light dark">
     <link rel="icon" href="/media/favicon.svg">
 </svelte:head>
 

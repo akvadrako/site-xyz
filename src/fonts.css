@@ -6,6 +6,9 @@
     font-weight: 900;
     font-style: italic;
     font-display: swap;
+    ascent-override: 105%;
+    descent-override: 35%;
+    size-adjust: 88%;
 }
 
 @font-face {
@@ -16,6 +19,9 @@
     font-weight: 500;
     font-style: italic;
     font-display: swap;
+    ascent-override: 105%;
+    descent-override: 35%;
+    size-adjust: 88%;
 }
 
 @font-face {
@@ -26,6 +32,9 @@
     font-weight: bold;
     font-style: normal;
     font-display: swap;
+    ascent-override: 105%;
+    descent-override: 35%;
+    size-adjust: 88%;
 }
 
 @font-face {
@@ -36,6 +45,9 @@
     font-weight: normal;
     font-style: italic;
     font-display: swap;
+    ascent-override: 105%;
+    descent-override: 35%;
+    size-adjust: 88%;
 }
 
 @font-face {
@@ -46,6 +58,9 @@
     font-weight: 500;
     font-style: normal;
     font-display: swap;
+    ascent-override: 105%;
+    descent-override: 35%;
+    size-adjust: 88%;
 }
 
 @font-face {
@@ -56,6 +71,9 @@
     font-weight: bold;
     font-style: italic;
     font-display: swap;
+    ascent-override: 105%;
+    descent-override: 35%;
+    size-adjust: 88%;
 }
 
 @font-face {
@@ -66,6 +84,9 @@
     font-weight: normal;
     font-style: normal;
     font-display: swap;
+    ascent-override: 105%;
+    descent-override: 35%;
+    size-adjust: 88%;
 }
 
 @font-face {
@@ -76,6 +97,9 @@
     font-weight: bold;
     font-style: normal;
     font-display: swap;
+    ascent-override: 105%;
+    descent-override: 35%;
+    size-adjust: 88%;
 }
 
 @font-face {
@@ -86,6 +110,9 @@
     font-weight: 300;
     font-style: normal;
     font-display: swap;
+    ascent-override: 105%;
+    descent-override: 35%;
+    size-adjust: 88%;
 }
 
 @font-face {
@@ -96,6 +123,9 @@
     font-weight: 600;
     font-style: normal;
     font-display: swap;
+    ascent-override: 105%;
+    descent-override: 35%;
+    size-adjust: 88%;
 }
 
 @font-face {
@@ -106,6 +136,9 @@
     font-weight: 600;
     font-style: italic;
     font-display: swap;
+    ascent-override: 105%;
+    descent-override: 35%;
+    size-adjust: 88%;
 }
 
 @font-face {
@@ -116,6 +149,9 @@
     font-weight: 900;
     font-style: normal;
     font-display: swap;
+    ascent-override: 105%;
+    descent-override: 35%;
+    size-adjust: 88%;
 }
 
 @font-face {
@@ -126,6 +162,9 @@
     font-weight: 300;
     font-style: italic;
     font-display: swap;
+    ascent-override: 105%;
+    descent-override: 35%;
+    size-adjust: 88%;
 }
 
 @font-face {
@@ -136,6 +175,9 @@
     font-weight: bold;
     font-style: italic;
     font-display: swap;
+    ascent-override: 105%;
+    descent-override: 35%;
+    size-adjust: 88%;
 }
 
 @font-face {
@@ -146,6 +188,9 @@
     font-weight: 200;
     font-style: normal;
     font-display: swap;
+    ascent-override: 105%;
+    descent-override: 35%;
+    size-adjust: 88%;
 }
 
 @font-face {
@@ -156,6 +201,9 @@
     font-weight: 100;
     font-style: italic;
     font-display: swap;
+    ascent-override: 105%;
+    descent-override: 35%;
+    size-adjust: 88%;
 }
 
 @font-face {
@@ -166,6 +214,9 @@
     font-weight: 100;
     font-style: normal;
     font-display: swap;
+    ascent-override: 105%;
+    descent-override: 35%;
+    size-adjust: 88%;
 }
 
 @font-face {
@@ -176,5 +227,8 @@
     font-weight: 200;
     font-style: italic;
     font-display: swap;
+    ascent-override: 105%;
+    descent-override: 35%;
+    size-adjust: 88%;
 }
 

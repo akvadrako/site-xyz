@@ -1,5 +1,5 @@
 
-<footer class="my-4 dark:border-white-500 border-black-500 border-t-2 border-solid clear-both`">
+<footer class="my-4 dark:border-white-500 border-t-2 clear-both`">
     <div class="py-12 md:flex md:justify-between">
         <div class="mt-8 md:mt-0 text-center text-base text-gray-400">
                 1013 LC Amsterdam
