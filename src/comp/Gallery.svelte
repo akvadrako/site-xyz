@@ -30,14 +30,14 @@ $: filtered = works.filter(w => bykey[w.kind || 'mural'].checked)
 
 </script>
 
-<div class="chooser flex items-left text-2xl my-8">
+<div class="chooser flex flex-wrap items-left text-2xl my-8">
     {#each kinds as kind}
-    <div>
+    <div class="ws-nowrap">
         <input
             id={kind.key}
             bind:checked={kind.checked}
             type="checkbox"
-            class="text-[#3D3732] bg-[#3D3732] v--9% w-5 h-5 border-none m-0 p-0 appearance-none"
+            class="text-$theme-text bg-$theme-text v--9% w-5 h-5 border-none m-0 p-0 appearance-none"
         />
         <label for={kind.key} class="ml-2 mr-4">{kind.label[$lang]}</label>
     </div>

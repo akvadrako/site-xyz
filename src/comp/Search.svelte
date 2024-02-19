@@ -1,3 +1,87 @@
+<script>
+import { goto, route } from '$lib'
+import {suggest} from '$lib/search'
+import {beforeNavigate} from '$app/navigation'
+
+export let initialOpen = false;
+
+let open = initialOpen;
+let suggestions = []
+let active = -1
+let query = ''
+
+$: results_link = item => $route('/search', { q: item.suggestion })
+
+function debounce(func, wait, immediate) {
+    var timeout;
+    return function() {
+        var context = this, args = arguments;
+        clearTimeout(timeout);
+        if (immediate && !timeout) func.apply(context, args);
+        timeout = setTimeout(function() {
+            timeout = null;
+            if (!immediate) func.apply(context, args);
+        }, wait);
+    };
+}
+
+let wrap_suggest = 
+    debounce(() => {
+        suggest(query).then(s => {
+            suggestions = s
+        })
+    }, 300, {})
+
+beforeNavigate(() => {
+    suggestions = []
+    open = initialOpen;
+})
+
+function onKey(e) {
+    console.log('key', e.key)
+
+    if(e.key == "Enter") {
+        console.log('search', e.target.value)
+        goto($route('/search', { q: e.target.value }))
+        return
+    }
+
+    if(e.key == "Escape") {
+        open = initialOpen;
+        suggestions = []
+        return
+    }
+
+    let move = 0
+
+    if(e.key == "ArrowUp")
+        move = -1
+
+    if(e.key == "ArrowDown")
+        move = 1
+
+    if(move) {
+        e.preventDefault()
+        e.stopPropagation()
+
+        active += move
+        active = Math.max(-1, Math.min(suggestions.length - 1, active))
+
+        console.log(active, move)
+
+        if(active >= 0)
+            query = suggestions[active].suggestion
+
+        return
+    }
+
+    wrap_suggest()
+}
+
+function click() {
+    open = true
+}
+</script>
 
 <style lang="postcss">
 #icon {
@@ -21,92 +105,9 @@ input {
 }
 </style>
 
-<script>
-    import { goto, route } from '$lib'
-    import {suggest} from '$lib/search'
-    import {beforeNavigate} from '$app/navigation'
-
-    let suggestions = []
-    let active = -1
-    let query = ''
-    let open = false;
-
-    $: results_link = item => $route('/search', { q: item.suggestion })
-
-    function debounce(func, wait, immediate) {
-        var timeout;
-        return function() {
-                var context = this, args = arguments;
-                clearTimeout(timeout);
-                if (immediate && !timeout) func.apply(context, args);
-                timeout = setTimeout(function() {
-                        timeout = null;
-                        if (!immediate) func.apply(context, args);
-                }, wait);
-        };
-    }
-
-    let wrap_suggest = 
-    debounce(() => {
-        suggest(query).then(s => {
-            suggestions = s
-        })
-    }, 300, {})
-
-    beforeNavigate(() => {
-        suggestions = []
-        open = false
-    })
-
-    function onKey(e) {
-        console.log('key', e.key)
-        
-        if(e.key == "Enter") {
-            console.log('search', e.target.value)
-            goto($route('/search', { q: e.target.value }))
-            return
-        }
-        
-        if(e.key == "Escape") {
-            open = false
-            suggestions = []
-            return
-        }
-
-        let move = 0
-
-        if(e.key == "ArrowUp")
-            move = -1
-        
-        if(e.key == "ArrowDown")
-            move = 1
-
-        if(move) {
-            e.preventDefault()
-            e.stopPropagation()
-            
-            active += move
-            active = Math.max(-1, Math.min(suggestions.length - 1, active))
-
-            console.log(active, move)
-
-            if(active >= 0)
-                query = suggestions[active].suggestion
-
-            return
-        }
-        
-        wrap_suggest()
-    }
-
-    function click() {
-        open = true
-        console.log("open", open)
-    }
-</script>
 
 <div
-    class="box relative text-black h-8 {open ? "w-80" : "w-8"}"
+    class="box relative text-black h-8 {open ? "w-full" : "w-8"}"
 >
 
 <div id="icon" on:click={click} class="w-6 h-6 m-1">

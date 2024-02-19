@@ -115,15 +115,6 @@ onMount(() => {
             class="uppercase flex-initial dark:text-white">
             <h1>Wall To Wall</h1>
         </a>
-
-        <button class="sm:hidden" class:open on:click={onClick}>
-            <svg width=32 height=32>
-                <line id="top" x1=0 y1=9    x2=32 y2=9    style="transition: transform 0.4s ease-in-out, opacity 0.4s ease-in-out;"/>
-                <line id="mid" x1=0 y1=18.5 x2=32 y2=18.5 style="transition: transform 0.4s ease-in-out, opacity 0.4s ease-in-out;"/>
-                <line id="bot" x1=0 y1=28    x2=32 y2=28  style="transition: transform 0.4s ease-in-out, opacity 0.4s ease-in-out;"/>
-            </svg>
-        </button>
-
         <span class="flex-grow-[5]">
             &nbsp;
         </span>
@@ -131,13 +122,15 @@ onMount(() => {
         {#each navItems as item}
             <a
                 href="/{$lang}{item.path}"
-                class="link sm:block flex-initial max-w-xs uppercase dark:text-white" 
+                class="link <sm:hidden flex-initial max-w-xs uppercase dark:text-white" 
                 aria-current={ item.current ? "page" : '' }>
                 {item.label[$lang]}
             </a>
         {/each}
 
-        <Search />
+        <div class="<sm:hidden">
+                <Search />
+        </div>
 
         <span class="flex-initial">
             {#if $page.url.pathname == '/'}
@@ -148,23 +141,35 @@ onMount(() => {
                 <b>EN</b> / <a data-sveltekit-noscroll href="{$page.url.pathname.replace('/en', '/nl')}">NL</a>
             {/if}
         </span>
+
+        <button class="sm:hidden" class:open on:click={onClick}>
+            <svg width=32 height=32>
+                <line id="top" x1=0 y1=9    x2=32 y2=9    style="transition: transform 0.4s ease-in-out, opacity 0.4s ease-in-out;"/>
+                <line id="mid" x1=0 y1=18.5 x2=32 y2=18.5 style="transition: transform 0.4s ease-in-out, opacity 0.4s ease-in-out;"/>
+                <line id="bot" x1=0 y1=28    x2=32 y2=28  style="transition: transform 0.4s ease-in-out, opacity 0.4s ease-in-out;"/>
+            </svg>
+        </button>
+
     </nav>
 
-    <Hero />
+    <div bind:this={sidebar} id="sidebar" class:open
+        class="bg-warm-gray-400 p-4">
 
-    <ul bind:this={sidebar} id="sidebar" class:open
-        class="flex bg-warm-gray-400">
-        {#each calcNavItems as item}
-        <li>
-            <a href="/{$lang}{item.path}"
-                class="block py-2 pr-4 pl-3 dark:text-white hover:bg-red-400"
-                aria-current="{ item.current ? 'page' : '' }"
-            >
+        <div class="mb-4">
+            <Search initialOpen={true} />
+        </div>
+
+        {#each navItems as item}
+            <a
+                href="/{$lang}{item.path}"
+                class="block my-2" 
+                aria-current={ item.current ? "page" : '' }>
                 {item.label[$lang]}
             </a>
-        </li>
         {/each}
-    </ul>
+    </div>
+    
+    <Hero />
 </header>
     
 <style lang="postcss">
@@ -211,12 +216,14 @@ button {
     transition: color 0.4s ease-in-out;
     flex: 2 0 0%;
     text-align: center;
+
+    /* reset */
+    border: none;
+    background: inherit;
+    color: inherit;
 }
 button svg {
     display: inline-block;
-    _position: absolute;
-    _left: 50%;
-    _transform: translate(-50%, -50%);
 }
 button svg line {
     stroke: currentColor;
@@ -235,7 +242,7 @@ button svg line {
 #sidebar {
     transition: left 0.4s ease-in-out;
     position: fixed;
-    top: 55px;
+    top: var(--nav-height);
     bottom: 0;
     left: -20ch;
     z-index: 10;

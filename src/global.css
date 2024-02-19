@@ -5,7 +5,6 @@
  */
 
 :root {
-    --theme-bg: #F2EDE8;
     color-scheme: light dark;
 }
 
@@ -23,7 +22,7 @@ body {
     margin: 0;
     padding: 0;
     background: var(--theme-bg);
-    color: #3D3732;
+    color: var(--theme-text);
     min-height: 100vh;
     text-rendering: optimizeSpeed;
     line-height: 1.5;
@@ -52,10 +51,6 @@ a:link {
 a:visited {
     color: inherit;
 }
-
-/**********************************************
- * Default Markdown Styling
- */
 
 /* top-level elements are given max width */
 main > .md {
@@ -94,9 +89,21 @@ p.md {
  */
 
 x-debug { display: none; }
-    
+
 /**********************************************
- * Dark Mode
+ * Light Theme
+ */
+
+@media screen and (prefers-color-scheme: light) {
+    :root {
+        --theme-text: #3D3732;
+        --theme-bg: #F2EDE8;
+        color-scheme: light;
+    }
+}
+
+/**********************************************
+ * Dark Theme
  */
 
 @media screen and (prefers-color-scheme: dark) {
@@ -104,10 +111,6 @@ x-debug { display: none; }
         --theme-text: #F2EDE8;
         --theme-bg: #3D3732;
         color-scheme: dark;
-    }
-    body {
-        background: var(--theme-bg);
-        color: var(--theme-text);
     }
 
     p.md {
