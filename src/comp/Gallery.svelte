@@ -30,7 +30,7 @@ $: filtered = works.filter(w => bykey[w.kind || 'mural'].checked)
 
 </script>
 
-<div class="chooser flex items-left mb-4 text-2xl m-8">
+<div class="chooser flex items-left text-2xl my-8">
     {#each kinds as kind}
     <div>
         <input
@@ -44,7 +44,7 @@ $: filtered = works.filter(w => bykey[w.kind || 'mural'].checked)
     {/each}
 </div>
 
-<section class="m-8">
+<section class="my-8">
     {#each filtered as work}
     <div class="work">
         <a class="flex-1" href={work.path}>

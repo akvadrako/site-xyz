@@ -81,3 +81,10 @@ afterNavigate(({ from }) => {
 
 <Footer />
 
+<style>
+main {
+    margin-left: 32px;
+    margin-right: 32px;
+}
+</style>
+

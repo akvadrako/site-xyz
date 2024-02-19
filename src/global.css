@@ -59,8 +59,7 @@ a:visited {
 
 /* top-level elements are given max width */
 main > .md {
-    max-width: 500px;
-    @apply mx-8;
+    max-width: 50rem;
 }
 
 h1.md, h2.md, h3.md, h4.md {
