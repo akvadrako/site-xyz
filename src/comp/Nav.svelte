@@ -221,6 +221,7 @@ button {
     border: none;
     background: inherit;
     color: inherit;
+    padding: 0;
 }
 button svg {
     display: inline-block;
