@@ -38,7 +38,10 @@ export default defineConfig({
                 sans: ['Graphik', 'sans-serif'],
                 serif: ['Merriweather', 'serif'],
             },
-        }
+        },
+        breakpoints: {
+            sm: '640px',
+        },
     },
     transformers: [
         transformerDirectives(),

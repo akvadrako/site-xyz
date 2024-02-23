@@ -1,28 +1,29 @@
 <script>
-    import { browser } from "$app/environment";
-    import { lang, metadata, createToast } from '$lib';
-    import Notify from '$comp/Notify.svelte';
-    import Nav from '$comp/Nav.svelte';
-    import Footer from '$comp/Footer.svelte';
-    
-    import 'virtual:uno.css'
-    import '/src/reset.css'
-    import '/src/global.css'
-    import '/src/fonts.css'
+import { browser } from "$app/environment";
+import { lang, metadata, createToast } from '$lib';
+import Notify from '$comp/Notify.svelte';
+import Nav from '$comp/Nav.svelte';
+import Footer from '$comp/Footer.svelte';
 
-    export let data
+// CSS Imports
+import '/src/reset.css' // defaults
+import '/src/global.css'
+import '/src/fonts.css'
+import 'virtual:uno.css'  // utilities: top priority
 
-    $: ititle = {en: $metadata.title_en, nl: $metadata.title_nl}[$lang];
+export let data
 
-    function unhandledrejection(event) {
-        createToast({ msg: `Unhandled Promise: ${event.reason}` })
-    }
+$: ititle = {en: $metadata.title_en, nl: $metadata.title_nl}[$lang];
 
-    // https://developer.mozilla.org/en-US/docs/Web/API/ErrorEvent
-    function onerror(event) {
-        let msg = event.message || 'unknown';
-        createToast({ msg: `Error: ${msg}` })
-    }
+function unhandledrejection(event) {
+    createToast({ msg: `Unhandled Promise: ${event.reason}` })
+}
+
+// https://developer.mozilla.org/en-US/docs/Web/API/ErrorEvent
+function onerror(event) {
+    let msg = event.message || 'unknown';
+    createToast({ msg: `Error: ${msg}` })
+}
 
 import { afterNavigate } from '$app/navigation';
 
@@ -43,14 +44,14 @@ afterNavigate(({ from }) => {
     if (deep_linked) {
         deep_linked.scrollIntoView();
     const scroll = scroll_positions[current_history_index];
-	if (scroll) scrollTo(scroll.x, scroll.y);
+        if (scroll) scrollTo(scroll.x, scroll.y);
     if (scroll) {
         scrollTo(scroll.x, scroll.y);
         return;
     }
 
     window.scrollY = main.getBoundingClientRect().top + window.pageYOffset - 100
-    */
+     */
 
     window.scrollTo({
         top: main.getBoundingClientRect().top + window.pageYOffset - 100,
@@ -70,16 +71,16 @@ afterNavigate(({ from }) => {
     <!-- help dark reader detect dark mode support -->
     <meta name="color-scheme" content="light dark">
     <link rel="icon" href="/media/favicon.svg">
-</svelte:head>
+    </svelte:head>
 
-<Nav routes={data.routes} />
-<Notify />
+    <Nav routes={data.routes} />
+    <Notify />
 
-<main bind:this={main} lang={$lang}>
-<slot />
-</main>
+    <main bind:this={main} lang={$lang}>
+        <slot />
+    </main>
 
-<Footer />
+    <Footer />
 
 <style>
 main {

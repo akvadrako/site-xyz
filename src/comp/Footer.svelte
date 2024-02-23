@@ -1,7 +1,7 @@
 
 <footer class="my-4 dark:border-white-500 border-t-2 clear-both`">
-    <div class="py-12 md:flex md:justify-between">
-        <div class="mt-8 md:mt-0 text-center text-base text-gray-400">
+    <div class="py-12 sm:flex sm:justify-between">
+        <div class="mt-8 sm:mt-0 text-center text-base text-gray-400">
                 1013 LC Amsterdam
         </div>
         <div class="space-x-6 text-right">

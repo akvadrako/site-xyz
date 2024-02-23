@@ -90,6 +90,13 @@ p.md {
 
 x-debug { display: none; }
 
+.reset {
+    border: none;
+    background: inherit;
+    color: inherit;
+    padding: 0;
+}
+
 /**********************************************
  * Light Theme
  */

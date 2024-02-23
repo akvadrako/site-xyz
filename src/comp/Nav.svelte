@@ -75,6 +75,7 @@ function onClick(event) {
 
 let navRoot
 let sheet
+let scrolled = false
 
 onMount(() => {
     let observer = new IntersectionObserver((entries, observer) => {
@@ -85,14 +86,9 @@ onMount(() => {
                 return;
 
             if(ratio > 0.5) {
-                // initial
-                navRoot.style.backgroundColor = '#FFF'
-                navRoot.style.color = '#3D3732'
+                scrolled = false
             } else {
-                // scrolled down
-                navRoot.style.backgroundColor = '#3D3732'
-                navRoot.style.color = '#F2EDE8'
-                navRoot.style.opacity = 0.75
+                scrolled = true
             }
         });
     }, {
@@ -106,7 +102,7 @@ onMount(() => {
 
 <div bind:this={sheet} class="sheet" />
 
-<header>
+<header class:scrolled class:open>
 
     <nav bind:this={navRoot} class="px-8 flex gap-4">
 
@@ -122,17 +118,17 @@ onMount(() => {
         {#each navItems as item}
             <a
                 href="/{$lang}{item.path}"
-                class="link <sm:hidden flex-initial max-w-xs uppercase dark:text-white" 
-                aria-current={ item.current ? "page" : '' }>
+                class="link lt-sm:hidden flex-initial max-w-xs uppercase dark:text-white" 
+                aria-current={ item.current ? "page" : false }>
                 {item.label[$lang]}
             </a>
         {/each}
 
-        <div class="<sm:hidden">
+        <div class="lt-sm:hidden">
                 <Search />
         </div>
 
-        <span class="flex-initial">
+        <span class="lang-switcher flex-initial">
             {#if $page.url.pathname == '/'}
                 <b>EN</b> / <a data-sveltekit-noscroll href="/nl">NL</a>
             {:else if $lang == 'nl'}
@@ -142,7 +138,7 @@ onMount(() => {
             {/if}
         </span>
 
-        <button class="sm:hidden" class:open on:click={onClick}>
+        <button class="reset sm:hidden" on:click={onClick}>
             <svg width=32 height=32>
                 <line id="top" x1=0 y1=9    x2=32 y2=9    style="transition: transform 0.4s ease-in-out, opacity 0.4s ease-in-out;"/>
                 <line id="mid" x1=0 y1=18.5 x2=32 y2=18.5 style="transition: transform 0.4s ease-in-out, opacity 0.4s ease-in-out;"/>
@@ -152,18 +148,17 @@ onMount(() => {
 
     </nav>
 
-    <div bind:this={sidebar} id="sidebar" class:open
-        class="bg-warm-gray-400 p-4">
+    <div bind:this={sidebar} id="sidebar" class="px-4">
 
-        <div class="mb-4">
+        <div class="my-4">
             <Search initialOpen={true} />
         </div>
 
         {#each navItems as item}
             <a
                 href="/{$lang}{item.path}"
-                class="block my-2" 
-                aria-current={ item.current ? "page" : '' }>
+                class="block leading-none my-4" 
+                aria-current={ item.current ? "page" : false }>
                 {item.label[$lang]}
             </a>
         {/each}
@@ -189,8 +184,33 @@ nav {
     z-index: 100;
     white-space: nowrap;
     transition: background-color 0.5s, color 0.5s;
-    background-color: #3D3732;
+}
+
+/* scrolled to top */
+nav, #sidebar {
+    background-color: #FFF;
     color: #3D3732;
+}
+@media screen and (prefers-color-scheme: dark) {
+    nav, #sidebar {
+        background-color: #F2EDE8;
+    }
+}
+
+/* scrolled down */
+.scrolled #sidebar {
+    background-color: #3D3732;
+    color: #F2EDE8;
+}
+.scrolled nav {
+    background-color: #3D3732;
+    color: #F2EDE8;
+    opacity: 75%;
+}
+@media (max-width: 639px) {
+    .scrolled h1, .scrolled .lang-switcher {
+        display: none; 
+    }
 }
 
 .sheet {
@@ -214,29 +234,22 @@ nav > * {
 button {
     cursor: pointer;
     transition: color 0.4s ease-in-out;
-    flex: 2 0 0%;
     text-align: center;
-
-    /* reset */
-    border: none;
-    background: inherit;
-    color: inherit;
-    padding: 0;
 }
 button svg {
     display: inline-block;
 }
-button svg line {
+svg line {
     stroke: currentColor;
     stroke-width: 3;
 }
-.open #top {
+.open svg #top {
     transform: translate(10px, 0px) rotate(45deg)
 }
-.open #mid {
+.open svg #mid {
     opacity: 0
 }
-.open #bot {
+.open svg #bot {
     transform: translate(-15px, 8px) rotate(-45deg)
 }
 
@@ -253,15 +266,13 @@ button svg line {
     display: none;
 }
 
-ul {
-    display: flex;
-    flex-direction: column;
-}
-
-#sidebar.open {
+.open #sidebar {
     left: 0px;
     display: block;
 }
 
+.open h1 {
+    display: none;
+}
 
 </style>

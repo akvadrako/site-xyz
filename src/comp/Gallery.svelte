@@ -37,7 +37,7 @@ $: filtered = works.filter(w => bykey[w.kind || 'mural'].checked)
             id={kind.key}
             bind:checked={kind.checked}
             type="checkbox"
-            class="text-$theme-text bg-$theme-text v--9% w-5 h-5 border-none m-0 p-0 appearance-none"
+            class="bg-$theme-text v--9% w-5 h-5 border-none m-0 p-0 appearance-none checked:bg-[#E08331]"
         />
         <label for={kind.key} class="ml-2 mr-4">{kind.label[$lang]}</label>
     </div>
