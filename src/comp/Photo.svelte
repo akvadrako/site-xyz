@@ -17,19 +17,33 @@ export let alt = "image"
 export let divcls = "photo h-full"
 
 let imgcls = ""
+
 export { imgcls as class }
 
 let real
-let loaded = false;
+let loaded
+
+// reset when src changes
+$: if(src) {
+    loaded = false
+}
 
 $: if(real && real.complete) {
     loaded = true;
     console.log("loaded already")
 }
 
+$: srcset = `
+    ${resize(src, 200)}  200w,
+    ${resize(src, 400)}  400w,
+    ${resize(src, 800)}  800w,
+    ${resize(src, 1200)} 1200w,
+    ${resize(src, 2000)}
+`
+
 function onLoad(event) {
+    console.log("loaded", loaded, "→", true)
     loaded = true;
-    console.log("loaded")
 }
 </script>
 <style lang="postcss">
@@ -67,14 +81,8 @@ div {
         bind:this={real}
         on:load={onLoad}
         class="photo real {imgcls}"
-        srcset="
-        {resize(src, 200)}  200w
-        {resize(src, 400)}  400w
-        {resize(src, 800)}  800w
-        {resize(src, 1200)} 1200w
-        {resize(src, 2000)}
-        "
-        src="{resize(src, 800)}"
+        srcset={srcset}
+        src="{resize(src, 200)}"
         sizes="{sizes}"
         alt="{alt}"
     />
