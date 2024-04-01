@@ -1,5 +1,4 @@
 ---
-slug: grace
 kind: illustration
 title_en: Grace
 title_nl: "Genade "

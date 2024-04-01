@@ -1,5 +1,4 @@
 ---
-slug: sandro_masai
 kind: painting
 title_en: Sandro Masai
 title_nl: Sandro Masai

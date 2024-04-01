@@ -1,5 +1,4 @@
 ---
-slug: 3_years
 kind: illustration
 title_en: 3 years
 title_nl: 3 jaar

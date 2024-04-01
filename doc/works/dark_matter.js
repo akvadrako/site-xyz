@@ -1,5 +1,4 @@
 ---
-slug: dark_matter
 kind: painting
 title_en: Dark matter
 title_nl: Donkere materie

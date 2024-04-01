@@ -1,5 +1,4 @@
 ---
-slug: dreaming_under_water
 kind: illustration
 title_en: Dreaming under water
 title_nl: "Onderzeeër "

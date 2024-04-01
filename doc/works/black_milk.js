@@ -1,5 +1,4 @@
 ---
-slug: black_milk
 kind: illustration
 title_en: Black milk
 title_nl: "Zwarte melk "

@@ -1,5 +1,4 @@
 ---
-slug: hermit
 kind: illustration
 title_en: The hermit
 title_nl: "De kluizenaar "

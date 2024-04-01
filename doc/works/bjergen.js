@@ -1,5 +1,4 @@
 ---
-slug: bjergen
 kind: illustration
 title_en: Bjergen
 title_nl: Bjergen

@@ -1,5 +1,4 @@
 ---
-slug: contact
 title_en: Contact
 title_nl: Contact
 ---

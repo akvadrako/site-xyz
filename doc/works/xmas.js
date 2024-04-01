@@ -1,5 +1,4 @@
 ---
-slug: Christmas
 kind: illustration
 title_en: Ghost of Christmas Present
 title_nl: De Geest van de Huidige Kerst

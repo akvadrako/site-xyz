@@ -1,5 +1,4 @@
 ---
-slug: 1002nd_night
 kind: painting
 title_en: 1002nd Night
 title_nl: 1002e Nacht

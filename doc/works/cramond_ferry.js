@@ -1,5 +1,4 @@
 ---
-slug: Cramond Ferry
 kind: painting
 title_en: Ferry
 title_nl: Cramond Veerboot

@@ -1,5 +1,4 @@
 ---
-slug: cheshire_tree
 kind: mural
 title_en: Cheshire tree
 title_nl: Cheshire tree

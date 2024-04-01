@@ -1,5 +1,4 @@
 ---
-slug: portrait
 kind: illustration
 title_en: Self-portrait
 title_nl: Zelfportret

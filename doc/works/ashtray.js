@@ -1,5 +1,4 @@
 ---
-slug: ashtray
 kind: illustration
 title_en: Ashtray
 title_nl: Asbakje

@@ -1,5 +1,4 @@
 ---
-slug: Mom
 kind: painting
 title_en: Mom
 title_nl: Mom

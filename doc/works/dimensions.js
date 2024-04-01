@@ -1,5 +1,4 @@
 ---
-slug: dimensions
 kind: illustration
 title_en: Dimensions
 title_nl: Dimensies

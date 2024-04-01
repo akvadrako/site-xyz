@@ -1,5 +1,4 @@
 ---
-slug: acrilyc
 kind: painting
 title_en: G-m
 title_nl: Oma

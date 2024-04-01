@@ -6,6 +6,7 @@ import fs from 'fs'
 
 for(let slug of listDocs('works')) {
     let doc = await loadDoc(slug)
-    fs.renameSync(doc.src, 'doc/works/' + doc.meta.slug + '.js')
+    log(doc.src, 'doc/works/' + doc.meta.slug + '.js')
+    // fs.renameSync(doc.src, 'doc/works/' + doc.meta.slug + '.js')
 }
 

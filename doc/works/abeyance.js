@@ -1,5 +1,4 @@
 ---
-slug: abeyance
 kind: illustration
 title_en: Abeyance
 title_nl: "Opschorting "

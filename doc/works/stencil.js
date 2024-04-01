@@ -1,5 +1,4 @@
 ---
-slug: Stencil
 kind: mural
 title_en: Stencil
 title_nl: Stencil

@@ -1,5 +1,4 @@
 ---
-slug: composition_of_absence
 kind: illustration
 title_en: The composition of absence
 title_nl: "De samenstelling van afwezigheid "

@@ -1,5 +1,4 @@
 ---
-slug: seasons
 kind: illustration
 title_en: Seasons
 title_nl: Seizoenen

@@ -1,5 +1,4 @@
 ---
-slug: about
 title_en: About
 title_nl: Werkwijze
 ---

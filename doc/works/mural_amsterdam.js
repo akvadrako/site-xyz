@@ -1,5 +1,4 @@
 ---
-slug: mural_amsterdam
 kind: mural
 title_en: Palace of the Dragon King
 title_nl: "Paleis van de Drakenkoning "

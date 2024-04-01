@@ -1,5 +1,4 @@
 ---
-slug: couple
 kind: illustration
 title_en: Giger tribute
 title_nl: Giger tribute
