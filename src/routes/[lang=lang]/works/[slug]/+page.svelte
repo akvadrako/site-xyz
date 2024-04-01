@@ -141,7 +141,7 @@ $: all_images = [data.doc.image, ...more_images];
 <section id="middle">
     <section id="desc">
         <h2 class="font-bold text-xl">{data.doc.title}</h2>
-        <slot />
+        {@html data.doc.body}
         <div><b>Date:</b> {formatDate(data.doc.date)}</div>
         <div><b>Category:</b> {data.doc.kind}</div>
     </section>

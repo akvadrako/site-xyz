@@ -65,7 +65,6 @@ collections:
     format: yaml-frontmatter
     create: true
     slug: "{{slug}}"
-    identifier_field: slug
     preview_path: "/en/{{slug}}"
     fields:
       - name: title_en
