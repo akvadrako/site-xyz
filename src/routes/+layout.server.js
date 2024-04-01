@@ -1,40 +1,48 @@
 
-import {loadDoc} from '$lib'
+import {log, loadDoc} from '$lib'
 
 export const prerender = true;
 
 const pathPattern = new RegExp("/(nl|en)(/.+)")
 
 export async function load({ url, fetch }) {
-    console.log("load +layout")
-    
-    let routes = fetch('/data/pages.json')
-
-    let lang = 'en'
-    let slug = null
-
     let m = url.pathname.match(pathPattern)
+    let lang, slug
 
+    // extract language
     if(m) {
         lang = m[0]
-        if(m[1].startsWith('/works'))
-            slug = m[1]
-        else
-            slug = `pages/${slug}`
-    } else if(url.pathname == '/') {
-        slug = 'home'
+        slug = m[1]
+    } else {
+        lang = 'en'
+        slug = url.pathname.substr(1)
     }
 
-    let content = await loadDoc(slug)
+    // default
+    if(slug == '') {
+        slug = 'pages/home'
+    }
 
-    console.log("load +layout - done")
+    // prefix bare paths with 'pages/'
+    if(! slug.includes('/')) {
+        slug = `pages/${slug}`
+    }
 
-    let title = content.meta[`title_${lang}`]
-
-    return {
-        routes: routes,
-        content: content,
-        title: title,
+    let doc = await loadDoc(slug)
+    let data = {
+        meta: doc.meta,
+        body: doc.body,
+        title: doc.meta[`title_${lang}`],
         lang: lang,
     }
+   
+    // conditionally load more
+    if(slug == 'pages/home') {
+        let resp = await fetch('/data/pages.json')
+        let body = await resp.json()
+        data.routes = body.routes
+    }
+
+    log("$page.data.body.length=${data.body.length}")
+    return data
 }

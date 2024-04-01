@@ -73,7 +73,7 @@ afterNavigate(({ from }) => {
     <link rel="icon" href="/media/favicon.svg">
 </svelte:head>
 
-<Nav routes={data.routes} />
+<Nav />
 <Notify />
 
 <main bind:this={main} lang={data.lang} class="px-8 mt-[calc(var(--nav-height)*2)]">

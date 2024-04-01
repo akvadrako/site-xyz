@@ -1,12 +1,11 @@
 <script>
 import { Photo, Thumbnail } from '$comp';
 import { lang, formatDate, small } from '$lib';
-import { loadWorks } from '$lib/metadata';
 import { preloadData, goto } from '$app/navigation';
 
-export let title_en;
-export let title_nl;
-export let image;
+export let data
+
+export let data.meta.image;
 export let more_images = [];
 export let date;
 export let slug;
@@ -21,8 +20,6 @@ _text;
 function get_title(work) {
     return ($lang == 'nl' && work.title_nl) || work.title_en;
 }
-
-$: title = $lang == 'nl' ? title_nl : title_en;
 
 // prefetch images on hover
 function hover(work) {
@@ -163,7 +160,7 @@ $: all_images = [image, ...more_images];
 {/if}
 
 <section id="desc">
-    <h2 class="md">{title}</h2>
+    <h2 class="md">{data.title}</h2>
     <slot />
     <p class="md"><b>Date:</b> {formatDate(date)}, <b>Category:</b> {kind}</p>
 </section>

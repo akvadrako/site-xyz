@@ -1,0 +1,12 @@
+#!/usr/bin/env node
+
+import {log} from '../src/lib/shared.js'
+import {listDocs, loadDoc} from '../src/lib/docs.js'
+import fs from 'fs'
+
+for(let slug of listDocs('works')) {
+    let doc = await loadDoc(slug)
+    log(doc.src, doc.meta.slug + '.js')
+    // fs.rename(doc.src, doc.meta.slug + '.js')
+}
+

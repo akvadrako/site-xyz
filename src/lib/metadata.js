@@ -1,10 +1,13 @@
 
 import {listDocs, loadDoc} from '$lib/docs'
 
+/**
+ * @returns {Promise<Array>} List of routes
+ */
 export async function loadRoutes() {
-    let slugs = [ ...listDocs('works'), listDocs('pages') ]
+    let slugs = [ ...listDocs('works'), ...listDocs('pages') ]
 
-    let routes = {}
+    let routes = []
 
     for (const slug of slugs) {
         let doc = await loadDoc(slug)

@@ -7,7 +7,7 @@
 import rehypeRewrite from 'rehype-rewrite';
 
 const addClassTags = /^(div|em|strong|b|a|i|p|pre|kbd|blockquote|h\d|code|table|img|del|ul|ol)$/
-const debug = true;
+const debug = false;
 
 export const tagLang = () => {
     return rehypeRewrite({
@@ -37,34 +37,3 @@ export const tagLang = () => {
         }
     })
 }
-
-/******************************************************************************
- * extras
- */
-
-import {toString} from 'mdast-util-to-string'
-import {visit} from 'unist-util-visit'
-
-const extractText = () => (tree, vFile) => {
-
-    console.log('extractText', tree, vFile, toString)
-
-    let text = toString(tree)
-
-    tree.children.push({
-        type: 'element',
-        tagName: 'script',
-        properties: {
-            context: 'module',
-        },
-        children: [
-            {
-                type: 'text',
-                value: `
-    export const text = ${JSON.stringify(text)};
-`,
-            },
-        ],
-    })
-}
-

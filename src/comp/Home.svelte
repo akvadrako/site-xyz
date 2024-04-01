@@ -11,7 +11,7 @@ import { page } from '$app/stores'
 <h2 lang="nl">About</h2>
 
 <div class="md text-3xl my-10">
-    {@html $page.content.body}
+    {@html $page.data.body}
 </div>
 
 <div class="md my-14">

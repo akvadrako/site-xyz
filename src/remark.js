@@ -7,8 +7,6 @@ import { visit } from 'unist-util-visit'
 import { toString } from 'mdast-util-to-string'
 
 export const extractText = () => (tree, vFile) => {
-    console.log('extractText', vFile.filename)
-
     let text = ''
 
     visit(tree, (node) => {
@@ -65,10 +63,9 @@ export function wikiLink(opts) {
     let defaultPageResolver = (name) => [name.replace(/ /g, '_').toLowerCase()];
     let pageResolver = opts.pageResolver || defaultPageResolver
     let newClassName = opts.newClassName || 'new';
-    let wikiLinkClassName = opts.wikiLinkClassName || 'internal';
-    let defaultHrefTemplate = (permalink) => `#/page/${permalink}`
-    let hrefTemplate = opts.hrefTemplate || defaultHrefTemplate
-    let aliasDivider = opts.aliasDivider || ":";
+    let wikiLinkClassName = 'internal wikilink';
+    let hrefTemplate = (permalink) => `/en/${permalink}`
+    let aliasDivider = "|";
 
     function isAlias(pageTitle) {
         return pageTitle.indexOf(aliasDivider) !== -1;

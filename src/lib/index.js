@@ -9,6 +9,7 @@ export {goto} from '$app/navigation'
 export {createToast} from './toasts'
 export {loadDoc} from './docs'
 export {localRoute} from './metadata'
+export {log} from './shared'
 
 export const base = "https://walltowall.nl"
 
@@ -37,16 +38,4 @@ import dayjs from 'dayjs'
 
 export function formatDate(when) {
     return dayjs(when).format('YYYY-MM-DD')
-}
-
-export function assert(test, ...args) {
-    console.assert(test, ...args)
-}
-
-export function log(...args) {
-    console.log('LOG', ...args)
-}
-
-log.error = (msg, ...args) => {
-    console.error('ERROR: ' + msg, ...args)
 }

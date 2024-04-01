@@ -6,8 +6,6 @@ import { Search, Photo } from '$comp';
 import { beforeNavigate } from '$app/navigation';
 import { onMount } from 'svelte';
 
-export let routes
-
 let sidebar
 let open = false
 
@@ -34,19 +32,6 @@ const navItems = [
 for(let n of navItems) {
     n.current = $page.url.pathname == `/${lang}/${n.path}`
 }
-
-$: calcNavItems = (() => {
-    const nav = [ ...navItems ]
-
-    for(let work of routes) {
-        nav.push({
-            path: work.bare_path,
-            label: { en: work.title_en, nl: work.title_nl },
-        })
-    }
-
-    return nav;
-})()
 
 function handleDropdownOutsideClick(event) {
     if (! sidebar)

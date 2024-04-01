@@ -3,6 +3,8 @@
 #
 # Note: symlinks will result in SHA errors
 #
+# see https://www.staticcms.org/docs/configuration-options
+#
 
 media_folder: "static/media"
 public_folder: "/media"
@@ -11,6 +13,13 @@ local_backend: true
 site_url: https://walltowall.nl
 logo_url: https://walltowall.nl/media/logo.svg
 display_url: https://walltowall.nl
+
+i18n:
+  # multiple_files - persists files in `<folder>/<slug>.<locale>.<extension>`
+  # single_file - persists a single file in `<folder>/<slug>.<extension>`
+  structure: multiple_files
+  locales: [en, nl]
+  default_locale: en
 
 backend:
   #name: git-gateway
@@ -28,10 +37,7 @@ collections:
     create: true
     slug: "{{slug}}"
     preview_path: "/en/post/{{slug}}"
-    identifier_field: slug
     fields:
-      - name: slug
-        label: slug (short, unique ID for URL path)
       - name: title_en
       - name: title_nl
       - name: body
@@ -43,14 +49,13 @@ collections:
     extension: md
     format: yaml-frontmatter
     create: true
+    i18n: true
     slug: "{{slug}}"
-    identifier_field: slug
     fields:
-      - name: slug
-        label: slug (short, unique ID for URL path)
-      - name: title_en
-      - name: title_nl
+      - name: title
+        i18n: true
       - name: body
+        i18n: true
         widget: markdown
   - name: pages
     label: pages
@@ -63,8 +68,6 @@ collections:
     identifier_field: slug
     preview_path: "/en/{{slug}}"
     fields:
-      - name: slug
-        label: slug (short, unique ID for URL path)
       - name: title_en
       - name: title_nl
       - name: body
@@ -77,11 +80,8 @@ collections:
     format: yaml-frontmatter
     create: true
     slug: "{{slug}}"
-    identifier_field: slug
     preview_path: "/en/works/{{slug}}"
     fields:
-      - name: slug
-        label: slug (short, unique ID for URL path)
       - name: kind
         widget: select
         options: ['illustration', 'mural', 'painting']

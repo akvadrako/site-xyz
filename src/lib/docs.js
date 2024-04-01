@@ -16,7 +16,7 @@ import yaml from 'js-yaml';
 import { parse } from 'svelte/compiler';
 import rehypeFormat from 'rehype-format'
 import remarkParse from 'remark-parse'
-
+import {VFile} from 'vfile'
 import { tagLang } from '../rehype.js'
 import { wikiLink, extractText } from '../remark.js'
 
@@ -25,14 +25,19 @@ import fs from 'fs'
 // return slugs like `pages/home` and `works/mural`
 export function listDocs(folder) {
     return fs.readdirSync(`doc/${folder}`).map(e => {
-        return e.replace('.md', '')
+        return `${folder}/${e.replace('.md', '')}`
     })
 }
 
 export async function loadDoc(slug) {
-    let mdsrc = fs.readFileSync(`doc/${slug}.md`, { encoding: 'utf8' })
-   
-    let result = await parser().process(mdsrc)
+    let filename = `doc/${slug}.md`
+    let mdsrc = fs.readFileSync(filename, { encoding: 'utf8' })
+    let src = new VFile({
+        path: filename,
+        value: mdsrc,
+    })
+
+    let result = await parser().process(src)
     
     /** @type {object} */
     let meta = result.data.matter
@@ -42,6 +47,7 @@ export async function loadDoc(slug) {
         body: result.value,
         meta: meta,
         path: path,
+        src: filename,
     }
 }
 
@@ -53,19 +59,11 @@ export function parser() {
             .use(parse_frontmatter)
 
             .use(smartypants_transformer, { dashes: "oldschool"})
-            .use(wikiLink, {
-                wikiLinkClassName: 'internal wikilink',
-                hrefTemplate(permalink) {
-                    return `/en/${permalink}`
-                },
-                aliasDivider: '|',
-            })
             .use(extractText)
 
     const toHAST = toMDAST
             .use(remark2rehype, {
                 allowDangerousHtml: true,
-                allowDangerousCharacters: true,
             })
             .use(tagLang)
             //.use(transform_hast, { layout, layout_mode });
@@ -82,7 +80,7 @@ export function parser() {
     return processor
 }
 
-function parse_frontmatter({}) {
+function parse_frontmatter(options={}) {
     return (tree, vFile) => {
         visit(tree, 'yaml', (node) => {
             try {
@@ -94,7 +92,7 @@ function parse_frontmatter({}) {
     }
 }
 
-function escape_code({}) {
+function escape_code(options={}) {
     const entites = [
         [/</g, '&lt;'],
         [/>/g, '&gt;'],

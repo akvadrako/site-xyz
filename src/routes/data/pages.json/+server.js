@@ -5,12 +5,14 @@ import { json } from '@sveltejs/kit';
 
 export const prerender = true
 
-export function GET({ url, setHeaders }) {
-    log('loading pages.json')
+export async function GET({ url, setHeaders }) {
+    log('+pages.json')
 
     setHeaders({
         "cache-control": "max-age=3600",
     });
 
-    return json(loadRoutes())
+    return json({
+        routes: await loadRoutes(),
+    })
 }
