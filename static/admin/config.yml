@@ -15,9 +15,7 @@ logo_url: https://walltowall.nl/media/logo.svg
 display_url: https://walltowall.nl
 
 i18n:
-  # multiple_files - persists files in `<folder>/<slug>.<locale>.<extension>`
-  # single_file - persists a single file in `<folder>/<slug>.<extension>`
-  structure: multiple_files
+  structure: multiple_file
   locales: [en, nl]
   default_locale: en
 
@@ -35,11 +33,10 @@ collections:
     extension: md
     format: yaml-frontmatter
     create: true
-    slug: "{{slug}}"
+    i18n: true
     preview_path: "/en/post/{{slug}}"
     fields:
-      - name: title_en
-      - name: title_nl
+      - name: title
       - name: body
         widget: markdown
   - name: blurbs
@@ -50,12 +47,9 @@ collections:
     format: yaml-frontmatter
     create: true
     i18n: true
-    slug: "{{slug}}"
     fields:
       - name: title
-        i18n: true
       - name: body
-        i18n: true
         widget: markdown
   - name: pages
     label: pages
@@ -64,7 +58,7 @@ collections:
     extension: md
     format: yaml-frontmatter
     create: true
-    slug: "{{slug}}"
+    slug: "{{title_en}}"
     preview_path: "/en/{{slug}}"
     fields:
       - name: title_en
@@ -78,7 +72,7 @@ collections:
     extension: md
     format: yaml-frontmatter
     create: true
-    slug: "{{slug}}"
+    slug: "{{title_en}}"
     preview_path: "/en/works/{{slug}}"
     fields:
       - name: kind
