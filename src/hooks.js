@@ -3,12 +3,15 @@
 //
 // https://kit.svelte.dev/docs#hooks
 
-export async function handle({ event, resolve }) {
-    console.log(event.request.method, event.url.pathname)
-
-    let response = await resolve(event)
-
-    return response;
+async function handle_event({ event, resolve }) {
+    console.log('handle', event.request.method, event.url.pathname)
+    try {
+        let response = await resolve(event)
+        return response;
+    } catch(e) {
+        console.error('handle', e)
+        return new Response('ERROR')
+    }
 
     // read language slug
     let [, lang] = event.url.pathname.split('/')
@@ -24,3 +27,4 @@ export async function handle({ event, resolve }) {
     return response
 }
 
+// export const event = handle_event;

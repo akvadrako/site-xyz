@@ -1,5 +1,5 @@
 <script>
-import Home from '$comp/Home.mdx'
+import Home from '$comp/Home.svelte'
 import { onMount } from 'svelte';
 
 // netlify login

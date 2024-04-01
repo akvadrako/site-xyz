@@ -19,11 +19,28 @@ backend:
   branch: master
 
 collections:
-  - name: comp
-    label: components
-    label_singular: component
-    folder: 'src/comp'
-    extension: mdx
+  - name: posts
+    label: posts
+    label_singular: posts
+    folder: 'doc/posts'
+    extension: md
+    format: yaml-frontmatter
+    create: true
+    slug: "{{slug}}"
+    preview_path: "/en/post/{{slug}}"
+    identifier_field: slug
+    fields:
+      - name: slug
+        label: slug (short, unique ID for URL path)
+      - name: title_en
+      - name: title_nl
+      - name: body
+        widget: markdown
+  - name: blurbs
+    label: blurbs
+    label_singular: blurbs
+    folder: 'doc/blurbs'
+    extension: md
     format: yaml-frontmatter
     create: true
     slug: "{{slug}}"
@@ -38,12 +55,13 @@ collections:
   - name: pages
     label: pages
     label_singular: page
-    folder: 'src/routes/[lang=lang]'
-    extension: mdx
+    folder: 'doc/pages'
+    extension: md
     format: yaml-frontmatter
     create: true
     slug: "{{slug}}"
     identifier_field: slug
+    preview_path: "/en/{{slug}}"
     fields:
       - name: slug
         label: slug (short, unique ID for URL path)
@@ -54,8 +72,8 @@ collections:
   - name: works
     label: works
     label_singular: work
-    folder: 'src/works'
-    extension: mdx
+    folder: 'doc/works'
+    extension: md
     format: yaml-frontmatter
     create: true
     slug: "{{slug}}"

@@ -18,8 +18,8 @@ export default defineConfig({
         presetTypography(),
     ],
     scan: {
-        dirs: ['src'],
-        fileExtensions: ['mdx', 'svelte'],
+        dirs: ['src', 'doc'],
+        fileExtensions: ['md', 'svelte'],
     },
     shortcuts: {
         'hstack': 'flex items-center',

@@ -24,16 +24,16 @@ export { imgcls as class }
 let real
 let loaded = false;
 
-function url(width) {
-    return `${base}/.netlify/images?url=${src}&w=${width}`
-}
+$: url = width => `${base}/.netlify/images?url=${src}&w=${width}`
 
 $: if(real && real.complete) {
     loaded = true;
+    console.log("loaded already")
 }
 
 function onLoad(event) {
     loaded = true;
+    console.log("loaded")
 }
 </script>
 <style lang="postcss">
@@ -45,6 +45,7 @@ img {
     position: absolute;
     width: 100%;
     height: 100%;
+    transition: opacity 1000ms, display 1000ms;
 }
 div {
     position: relative;
@@ -54,9 +55,10 @@ div {
 }
 .loaded .real {
     visibility: visible;
+    outline: red solid;
 }
 .loaded .preload {
-    display: none;
+    opacity: 0;
 }
 </style>
 

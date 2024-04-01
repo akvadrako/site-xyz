@@ -3,7 +3,6 @@
 import { page } from '$app/stores';
 import { lang } from '$lib';
 import { Search, Photo } from '$comp';
-import Hero from '$comp/Hero.svelte';
 import { beforeNavigate } from '$app/navigation';
 import { onMount } from 'svelte';
 
@@ -163,15 +162,9 @@ onMount(() => {
             </a>
         {/each}
     </div>
-    
-    <Hero />
 </header>
     
 <style lang="postcss">
-
-header {
-    --nav-height: 3rem;
-}
 
 nav {
     height: var(--nav-height);

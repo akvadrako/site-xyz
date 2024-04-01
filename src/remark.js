@@ -3,12 +3,11 @@
  */
 
 import strip from 'strip-markdown'
-import visit from 'unist-util-visit'
-    
+import { visit } from 'unist-util-visit'
 import { toString } from 'mdast-util-to-string'
 
 export const extractText = () => (tree, vFile) => {
-    //console.log('TEXT', vFile.filename)
+    console.log('extractText', vFile.filename)
 
     let text = ''
 

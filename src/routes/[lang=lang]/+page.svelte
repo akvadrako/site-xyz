@@ -1,9 +1,8 @@
 <script>
-import Home from '$comp/Home.mdx'
+import Home from '$comp/Home.svelte'
 </script>
 
 <Home />
-
 
 <div hidden>
     <p>Hidden Links for Crawling</p>

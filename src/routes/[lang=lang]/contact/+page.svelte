@@ -1,42 +1,28 @@
-<script context="module">
-    export const metadata = {
-        title_en: 'Contact',
-        title_nl: 'Contact',
-        _text: 'contact form email inquery',
-    }
-</script>
-
 <script>
-    import { base, lang } from '$lib';
-    import { goto } from '$app/navigation';
-    import { page } from '$app/stores';
-    import { browser } from '$app/environment';
-    import {metadata as md_store} from '$lib'
-    
-    md_store.set(metadata)
+import { base } from '$lib';
+import { goto } from '$app/navigation';
+import { page } from '$app/stores';
 
-    let form;
+let form;
 
-    async function submit(e) {
-        e.preventDefault()
+async function submit(e) {
+    e.preventDefault()
 
-        let reply = await fetch(base, { //window.location.toString(), {
-            method: 'POST',
-            mode: 'no-cors',
-            //headers: { "Content-Type": "multipart/form-data" },
-            //headers: { "Content-Type": undefined },
-            body: new FormData(form),
-        })
-        console.log('form', reply)
+    let reply = await fetch(base, {
+        method: 'POST',
+        mode: 'no-cors',
+        body: new FormData(form),
+    })
+    console.log('form', reply)
 
-        if(reply.status == 200 || reply.status == 0) {
-            goto('#done')
-        } else {
-            goto('#error')
-        }
+    if(reply.status == 200 || reply.status == 0) {
+        goto('#done')
+    } else {
+        goto('#error')
     }
+}
 
-    $: hash = $page.url.hash;
+$: hash = $page.url.hash;
 </script>
 
 <h2 class="md">

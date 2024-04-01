@@ -1,95 +1,30 @@
 
-import {assert, log} from '$lib'
+import {listDocs, loadDoc} from '$lib/docs'
 
-let routes = null
+export async function loadRoutes() {
+    let slugs = [ ...listDocs('works'), listDocs('pages') ]
 
-const pathPages = '/src/routes/[lang=lang]'
-const pathWorks = '/src/works'
+    let routes = {}
 
-// return list localized routes
-export function getRoutes(lang) {
-    loadRoutes()
+    for (const slug of slugs) {
+        let doc = await loadDoc(slug)
 
-    return Object.values(routes).map(r => localRoute(r, lang))
+        const route = {
+            path: doc.path,
+            ...doc.meta,
+        }
+
+        routes[doc.path.replace('/[lang]', '')] = route
+    }
+
+    return routes
 }
 
 // return localized route
-export function getRoute(path, lang) {
-    loadRoutes()
-
-    let r = routes[path]
-    if(!r) {
-        log.error(`no route for ${path}`)
-        return {
-            path: '/' + lang + path,
-            title: path,
-        }
-    }
-
-    return localRoute(routes[path], lang)
-}
-
-export function loadWorks(lang) {
-    const works = []
-
-    let pages = import.meta.glob('/src/works/*.mdx', { eager: true })
-
-    for (const file in pages) {
-        const mod = pages[file]
-
-        const path = file.replace(pathWorks,'/[lang]/works').replace('index','').replace('.mdx','')
-        const route = {
-            path: path,
-            ...mod.metadata,
-        }
-
-        works.push(localRoute(route, lang))
-    }
-
-    return works
-}
-
-
-////////////////////////////////////////////////////////////////
-// Internal
-
-function loadRoutes() {
-    if (routes)
-       return routes
-    
-    let works = import.meta.glob('/src/works/*.mdx', { eager: true })
-    let mds = import.meta.glob('/src/routes/[lang=lang]/**/*.mdx', { eager: true })
-    let srcs = import.meta.glob('/src/routes/[lang=lang]/**/*.svelte', { eager: true })
-   
-    let pages = { ...works, ...mds, ...srcs }
-
-    routes = {}
-
-    for (const file in pages) {
-        const mod = pages[file]
-
-        if(! mod.metadata || mod.metadata.hide)
-            continue
-
-        console.log('path', file, mod.metadata)
-
-        const path = file.replace(pathPages,'/[lang]').replace('index','').replace('.mdx','').replace('.svelte', '')
-        const route = {
-            path: path,
-            text: mod.metadata._text,
-            ...mod.metadata,
-        }
-
-        routes[path.replace('/[lang]', '')] = route
-    }
-}
-
-// return localized route
-function localRoute(route, lang) {
+export function localRoute(route, lang) {
     return {
         ...route,
         path: route.path.replace('[lang]', lang),
-        bare_path: route.path.replace('[lang]/', ''),
         title: route['title_' + lang] || route.title_en,
     }
 }

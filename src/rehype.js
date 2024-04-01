@@ -7,14 +7,15 @@
 import rehypeRewrite from 'rehype-rewrite';
 
 const addClassTags = /^(div|em|strong|b|a|i|p|pre|kbd|blockquote|h\d|code|table|img|del|ul|ol)$/
-const debug = false;
+const debug = true;
 
 export const tagLang = () => {
     return rehypeRewrite({
         rewrite: (node, index, parent) => {
             // set language based on [nl] and [en] tags
             if(debug)
-                console.log(node.type, node.tagName, node.value, 
+                console.log("rewrite",
+                    node.type, node.tagName, node.value, 
                     "parent:",
                     parent && parent.properties,
                     parent && parent.tagName,
@@ -42,7 +43,7 @@ export const tagLang = () => {
  */
 
 import {toString} from 'mdast-util-to-string'
-import visit from 'unist-util-visit'
+import {visit} from 'unist-util-visit'
 
 const extractText = () => (tree, vFile) => {
 

@@ -1,17 +1,16 @@
 
-import {loadWorks} from '$lib/metadata'
+import {loadRoutes} from '$lib/metadata'
 import {log} from '$lib'
 import { json } from '@sveltejs/kit';
 
 export const prerender = true
 
-export function GET({}) {
-    // FIXME - handle nl
-    const routes = loadWorks('en')
+export function GET({ url, setHeaders }) {
+    log('loading pages.json')
 
-    log('loading pages.json', { routes: routes.length })
+    setHeaders({
+        "cache-control": "max-age=3600",
+    });
 
-    return json({
-        routes: [ ...routes ],
-    })
+    return json(loadRoutes())
 }

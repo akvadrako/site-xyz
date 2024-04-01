@@ -7,13 +7,10 @@ import {page} from '$app/stores'
 
 export {goto} from '$app/navigation'
 export {createToast} from './toasts'
+export {loadDoc} from './docs'
+export {localRoute} from './metadata'
 
 export const base = "https://walltowall.nl"
-
-export const metadata = writable({
-    title_en: 'title_en',
-    title_nl: 'title_nl',
-})
 
 // return thumbnail image
 export function small(src) {
@@ -22,17 +19,7 @@ export function small(src) {
 
 // store: current language
 export const lang = readable('en', set => {
-    page.subscribe(value => {
-        if(! page) {
-            console.error('$lang: missing $page')
-        }
-
-        if (value.url.pathname.startsWith('/nl')) {
-            set('nl')
-        } else {
-            set('en')
-        }
-    })
+    page.subscribe(p => set(p.data.lang))
 })
 
 // store: localized route for path + params

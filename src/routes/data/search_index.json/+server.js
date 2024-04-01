@@ -7,10 +7,10 @@ import { json } from '@sveltejs/kit';
 export const prerender = true;
 
 export function GET({}) {
+    log('loading search_index.json')
+
     // FIXME - handle nl
     const routes = getRoutes('en').filter(r => !r.noindex)
-
-    log('loading search_index.json', { routes: routes.length })
 
     let stopWords = new Set(['and', 'or', 'to', 'in', 'a', 'the', 'of'])
 
@@ -31,6 +31,8 @@ export function GET({}) {
     let idx = new MiniSearch(config)
     
     idx.addAll(routes)
+    
+    log('loaded search_index.json', { routes: routes.length })
 
     return json({
         config: config,

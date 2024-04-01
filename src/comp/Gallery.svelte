@@ -1,7 +1,8 @@
 <script>
 import {Photo} from '$comp'
-import {loadWorks} from '$lib/metadata'
 import {lang} from '$lib'
+import {page} from '$app/stores'
+import {localRoute} from '$lib'
 
 const keyBy = (array, key) => (array || []).reduce((r, x) => ({ ...r, [key ? x[key] : x]: x }), {});
 
@@ -23,14 +24,18 @@ let kinds = [
     },
 ]
 
-let works = loadWorks($lang)
+let works = $page.data.routes.filter(p => p.slug.startsWith('works'))
 
 $: bykey = keyBy(kinds, 'key')
-$: filtered = works.filter(w => bykey[w.kind || 'mural'].checked)
+$: filtered = (
+    works
+    .filter(w => bykey[w.kind || 'mural'].checked)
+    .map(w => localRoute(w, $page.data.lang))
+)
 
 </script>
 
-<div class="chooser flex flex-wrap items-left text-2xl my-8">
+<div class="chooser flex flex-wrap items-left text-xl my-8">
     {#each kinds as kind}
     <div class="ws-nowrap">
         <input

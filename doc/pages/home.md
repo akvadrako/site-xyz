@@ -1,15 +1,9 @@
 ---
 slug: index
+path: /[lang]/
 title_en: Home
 title_nl: Start
 ---
-<script context="module">
-    import Gallery from '$comp/Gallery.svelte'
-</script>
-
-About
-
-<div class="md text-3xl my-10">
 
 [en]
 Transform your space from Wall to Wall! <br>
@@ -21,12 +15,3 @@ Transformeer uw ruimte van muur tot muur! <br>
 We zijn gespecialiseerd in boeiende muurschilderingen en bieden ook een breed scala aan artistieke diensten, waaronder schilderen, tekenen, illustraties en andere grafische oplossingen. <br>
 Samen een visie tot leven brengen!
 
-</div>
-
-<div class="md my-14">
-    <button class="reset px-4 py-2 bg-[#E08331] text-$theme-bg">
-        Read more +
-    </button>
-</div>
-
-<Gallery />

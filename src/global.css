@@ -6,6 +6,7 @@
 
 :root {
     color-scheme: light dark;
+    --nav-height: 3rem;
 }
 
 html {

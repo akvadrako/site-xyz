@@ -1,6 +1,6 @@
 <script>
 import { browser } from "$app/environment";
-import { lang, metadata, createToast } from '$lib';
+import { createToast } from '$lib';
 import Notify from '$comp/Notify.svelte';
 import Nav from '$comp/Nav.svelte';
 import Footer from '$comp/Footer.svelte';
@@ -13,7 +13,7 @@ import 'virtual:uno.css'  // utilities: top priority
 
 export let data
 
-$: ititle = {en: $metadata.title_en, nl: $metadata.title_nl}[$lang];
+$: ititle = data.title
 
 function unhandledrejection(event) {
     createToast({ msg: `Unhandled Promise: ${event.reason}` })
@@ -67,25 +67,18 @@ afterNavigate(({ from }) => {
 
 <svelte:head>
     <title>Wall To Wall || {ititle}</title>
-    <meta http-equiv="content-language" content="{$lang}" />
+    <meta http-equiv="content-language" content="{data.lang}" />
     <!-- help dark reader detect dark mode support -->
     <meta name="color-scheme" content="light dark">
     <link rel="icon" href="/media/favicon.svg">
-    </svelte:head>
+</svelte:head>
 
-    <Nav routes={data.routes} />
-    <Notify />
+<Nav routes={data.routes} />
+<Notify />
 
-    <main bind:this={main} lang={$lang}>
-        <slot />
-    </main>
+<main bind:this={main} lang={data.lang} class="px-8 mt-[calc(var(--nav-height)*2)]">
+    <slot />
+</main>
 
-    <Footer />
-
-<style>
-main {
-    margin-left: 32px;
-    margin-right: 32px;
-}
-</style>
+<Footer />
 
