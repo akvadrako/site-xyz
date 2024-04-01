@@ -1,5 +1,4 @@
 ---
-path: /[lang]/
 title_en: Home
 title_nl: Start
 ---

@@ -2,7 +2,7 @@
     minimal version of Photo
 -->
 <script>
-    import {base} from '$lib'
+    import {resize} from '$lib'
 
     export let src
     export let sizes = "10vw"
@@ -13,13 +13,14 @@
 </style>
 
 <img
+    class="w-full h-full object-contain photo block"
     srcset="
-    {base}{src}?nf_resize=fit&w=100   100w,
-    {base}{src}?nf_resize=fit&w=200   200w,
-    {base}{src}?nf_resize=fit&w=400   400w,
-    {src}
+        {resize(src, 100)}  100w
+        {resize(src, 200)}  200w
+        {resize(src, 400)}  400w
+        {resize(src, 800)}
     "
-    src="{src}"
+    src="{resize(src, 800)}"
     sizes="{sizes}"
     alt="{alt}"
 />

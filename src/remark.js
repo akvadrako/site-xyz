@@ -2,7 +2,6 @@
  * Remark Plugins
  */
 
-import strip from 'strip-markdown'
 import { visit } from 'unist-util-visit'
 import { toString } from 'mdast-util-to-string'
 
@@ -53,8 +52,6 @@ export const saveHeadings = () => (tree, vFile) => {
         });
     });
 }
-
-import {map} from 'unist-util-map';
 
 export function wikiLink(opts) {
     const LINK_REGEX = /^\[\[(.+?)\]\]/;

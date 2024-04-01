@@ -2,9 +2,11 @@
 
 CMS On Netlify
 - https://lucid-hodgkin-cc7294.netlify.app/admin/index.html
+- dev: http://localhost:5173/admin/index.html
 
 Netlify Admin Page
 - https://app.netlify.com/sites/lucid-hodgkin-cc7294/overview
+
 
 ## TODO
 
@@ -25,9 +27,11 @@ static
 - uploads
     - CMS-editable images
 
+doc
+- source markdown files
+
 src
-- routes
-    - *.md -- CMS-editable mdsvex files
+- routes - svelte routes
 - comp
     - *.svelte -- components
 - layouts

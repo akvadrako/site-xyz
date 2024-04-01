@@ -2,7 +2,7 @@
 import {Photo} from '$comp'
 import {lang} from '$lib'
 import {page} from '$app/stores'
-import {localRoute} from '$lib'
+import {localDoc} from '$lib/docs'
 
 const keyBy = (array, key) => (array || []).reduce((r, x) => ({ ...r, [key ? x[key] : x]: x }), {});
 
@@ -24,13 +24,13 @@ let kinds = [
     },
 ]
 
-let works = $page.data.routes.filter(p => p.slug.startsWith('works'))
+let works = $page.data.works
 
 $: bykey = keyBy(kinds, 'key')
 $: filtered = (
     works
     .filter(w => bykey[w.kind || 'mural'].checked)
-    .map(w => localRoute(w, $page.data.lang))
+    .map(w => localDoc(w, $page.data.lang))
 )
 
 </script>

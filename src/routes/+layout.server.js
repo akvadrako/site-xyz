@@ -1,9 +1,10 @@
 
-import {log, loadDoc} from '$lib'
+import {loadDoc, localDoc} from '$lib/docs'
+import { error, redirect } from '@sveltejs/kit';
 
 export const prerender = true;
 
-const pathPattern = new RegExp("/(nl|en)(/.+)")
+const pathPattern = new RegExp("/(nl|en)/(.+)")
 
 export async function load({ url, fetch }) {
     let m = url.pathname.match(pathPattern)
@@ -11,16 +12,21 @@ export async function load({ url, fetch }) {
 
     // extract language
     if(m) {
-        lang = m[0]
-        slug = m[1]
+        lang = m[1]
+        slug = m[2]
     } else {
         lang = 'en'
-        slug = url.pathname.substr(1)
-    }
 
-    // default
-    if(slug == '') {
-        slug = 'pages/home'
+        if(url.pathname == '/en')
+            redirect(301, '/en/works')
+        
+        if(url.pathname == '/nl')
+            redirect(301, '/nl/works')
+        
+        if(url.pathname == '/')
+            slug = 'works'
+        else
+            slug = url.pathname.substr(1)
     }
 
     // prefix bare paths with 'pages/'
@@ -28,21 +34,25 @@ export async function load({ url, fetch }) {
         slug = `pages/${slug}`
     }
 
-    let doc = await loadDoc(slug)
+    let doc
+
+    try {
+        doc = localDoc(await loadDoc(slug))
+    } catch(e) {
+        error(404, {
+            message: `${e}`
+        });
+    }
+
     let data = {
-        meta: doc.meta,
-        body: doc.body,
-        title: doc.meta[`title_${lang}`],
+        doc: doc,
+        title: doc.title,
         lang: lang,
     }
    
-    // conditionally load more
-    if(slug == 'pages/home') {
-        let resp = await fetch('/data/pages.json')
-        let body = await resp.json()
-        data.routes = body.routes
-    }
-
-    log("$page.data.body.length=${data.body.length}")
+    let resp = await fetch('/data/pages.json')
+    let body = await resp.json()
+    
+    data.works = body.works.map(w => localDoc(w, lang))
     return data
 }

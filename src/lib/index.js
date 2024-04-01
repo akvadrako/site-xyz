@@ -8,14 +8,17 @@ import {page} from '$app/stores'
 export {goto} from '$app/navigation'
 export {createToast} from './toasts'
 export {loadDoc} from './docs'
-export {localRoute} from './metadata'
 export {log} from './shared'
 
 export const base = "https://walltowall.nl"
 
 // return thumbnail image
 export function small(src) {
-    return `${base}/.netlify/images?url=${src}&w=200`
+    return resize(src, 200)
+}
+
+export function resize(src, width) {
+    return `${base}/.netlify/images?url=${src}&w=${width}`
 }
 
 // store: current language

@@ -1,23 +1,36 @@
-import {getRoutes} from '$lib/metadata'
-import {log} from '$lib'
-import MiniSearch from 'minisearch'
+/**
+ * Generate search index
+ */
 
+import {log} from '$lib'
+import {listDocs, loadDoc, localDoc} from '$lib/docs'
 import { json } from '@sveltejs/kit';
+
+import MiniSearch from 'minisearch'
 
 export const prerender = true;
 
-export function GET({}) {
-    log('loading search_index.json')
+export async function GET({ setHeaders }) {
+    let lang = 'en'
 
-    // FIXME - handle nl
-    const routes = getRoutes('en').filter(r => !r.noindex)
+    log('loading search_index.json lang=', lang)
+
+    setHeaders({
+        "cache-control": "max-age=3600",
+    });
+    
+    let slugs = [ ...listDocs('works'), ...listDocs('pages') ]
+
+    let routes = []
+    for(let slug of slugs)
+        routes.push(localDoc(await loadDoc(slug), lang))
 
     let stopWords = new Set(['and', 'or', 'to', 'in', 'a', 'the', 'of'])
 
     const config = {
-        idField: 'path',
-        fields: ['path', 'title', 'text'],
-        storeFields: ['title', 'path', 'text', 'image', 'layout'],
+        idField: 'slug',
+        fields: ['slug', 'title', 'body'],
+        storeFields: ['slug', 'path', 'title', 'body', 'image', 'layout'],
         processTerm: (term, _fieldName) => {
             term = term.toLowerCase()
 

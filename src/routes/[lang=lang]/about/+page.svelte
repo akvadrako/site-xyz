@@ -6,5 +6,5 @@ export let data;
 
 <Hero />
 
-{@html data.body}
+{@html data.doc.body}
 

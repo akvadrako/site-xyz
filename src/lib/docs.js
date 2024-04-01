@@ -22,13 +22,28 @@ import { wikiLink, extractText } from '../remark.js'
 
 import fs from 'fs'
 
-// return slugs like `pages/home` and `works/mural`
+export function localDoc(doc, lang) {
+    return {
+        ...doc,
+        path: doc.path.replace('[lang]', lang),
+        title: doc['title_' + lang] || doc.title_en,
+    }
+}
+
+/**
+ * return slugs like `pages/home` and `works/mural`
+ * @returns Array - List of routes
+ */
 export function listDocs(folder) {
     return fs.readdirSync(`doc/${folder}`).map(e => {
         return `${folder}/${e.replace('.md', '')}`
     })
 }
 
+/**
+ * return slugs like `pages/home` and `works/mural`
+ * @returns Promise<object> Routes
+ */
 export async function loadDoc(slug) {
     let filename = `doc/${slug}.md`
     let mdsrc = fs.readFileSync(filename, { encoding: 'utf8' })
@@ -37,17 +52,34 @@ export async function loadDoc(slug) {
         value: mdsrc,
     })
 
+    // FIXME - can this be sync
     let result = await parser().process(src)
+   
+    // extract known fields
+    let { 
+        path,
+        layout,
+        image,
+        kind,
+        title_en,
+        title_nl,
+        ...meta
+    } = /** @type {object} */ (result.data.matter)
     
-    /** @type {object} */
-    let meta = result.data.matter
-    let path = meta.path || `[lang]/${slug}`.replace('/pages/', '')
+    if(! path)
+        path = `/[lang]/${slug}`.replace('/pages/', '')
 
     return {
         body: result.value,
-        meta: meta,
-        path: path,
-        src: filename,
+        meta,
+        path,
+        title_nl,
+        title_en,
+        filename,
+        image,
+        layout,
+        slug,
+        kind,
     }
 }
 

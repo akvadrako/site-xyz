@@ -5,17 +5,7 @@ import { preloadData, goto } from '$app/navigation';
 
 export let data
 
-export let data.meta.image;
-export let more_images = [];
-export let date;
-export let slug;
-export let kind;
-
-export let layout
-export let _text
-
-layout;
-_text;
+$: more_images = data.doc.meta.more_images || []
 
 function get_title(work) {
     return ($lang == 'nl' && work.title_nl) || work.title_en;
@@ -31,7 +21,7 @@ function preloadImage(active, offset) {
         return;
 
     let idx = (active + offset + works.length) % works.length
-    let work = works[idx]
+    let work = data.works[idx]
 
     if(! work._cache) {
         work._cache = new Image()
@@ -44,9 +34,8 @@ function preloadImage(active, offset) {
 
 let active = 0
 
-$: _works = loadWorks($lang)
-$: works = _works.map((w, i) => {
-    w.active = w.slug == slug
+$: works = data.works.map((w, i) => {
+    w.active = w.slug == data.doc.slug
     if(w.active) {
         active = i
     }
@@ -61,7 +50,7 @@ $: preloadImage(active, 2)
 $: next = works[(active + 1) % works.length];
 $: prev = works[(active - 1 + works.length) % works.length];
 
-$: subimage = image;
+$: subimage = data.doc.image;
 
 var xDown = null;
 var yDown = null;
@@ -112,7 +101,7 @@ function setSub(path) {
     subimage = path;
 }
 
-$: all_images = [image, ...more_images];
+$: all_images = [data.doc.image, ...more_images];
 </script>
 
 <section id="outer"
@@ -149,162 +138,91 @@ $: all_images = [image, ...more_images];
     </a>
 </section>
 
-{#if more_images.length > 0}
-    <div class="subs">
-        {#each all_images as src}
-            <button on:click={() => setSub(src)}>
-                <Thumbnail src={src} />
-            </button>
-        {/each}
-    </div>
-{/if}
+<section id="middle">
+    <section id="desc">
+        <h2 class="font-bold text-xl">{data.doc.title}</h2>
+        <slot />
+        <div><b>Date:</b> {formatDate(data.doc.date)}</div>
+        <div><b>Category:</b> {data.doc.kind}</div>
+    </section>
 
-<section id="desc">
-    <h2 class="md">{data.title}</h2>
-    <slot />
-    <p class="md"><b>Date:</b> {formatDate(date)}, <b>Category:</b> {kind}</p>
+    {#if more_images.length > 0 }
+        <div class="subs">
+            {#each all_images as src}
+                <button on:click={() => setSub(src)}>
+                    <Thumbnail src={src} />
+                </button>
+            {/each}
+        </div>
+    {/if}
 </section>
 
-    <!--
-    <nav>
-        <a href={prev.path}
-            data-sveltekit-noscroll
-            on:mouseover={() => hover(prev)}
-            on:focus={() => hover(prev)}
-        >
-            <figure>
-                <x-title>Previous</x-title>
-                <Thumbnail src={prev.image} />
-                <figcaption>{get_title(prev)}</figcaption>
-            </figure>
-        </a>
-        <div class="middle">
-            <x-title>
-            </x-title>
-        </div>
-        <a href={next.path}
-            data-sveltekit-noscroll
-            on:mouseover={() => hover(next)}
-            on:focus={() => hover(next)}
-        >
-            <figure>
-                <x-title>Next</x-title>
-                <Thumbnail src={next.image} />
-                <figcaption>{get_title(next)}</figcaption>
-            </figure>
-        </a>
-    </nav>
-    -->
-
 <style type="postcss">
-figure {
-width: 100%;
-}
-
-figure :global(img) {
-height: 20vh;
-width: 100%;
-object-fit: contain;
-}
-x-title, figcaption {
-position: absolute;
-bottom: 0;
-left: 0;
-width: 100%;
-padding: 4px 16px;
-}
-x-title {
-top: 0;
-}
-
-nav a {
-color: inherit;
+:root {
+    --arrow-width: 28px;
 }
 
 #outer {
-display: flex;
-align-items: center;
-justify-content: center;
-width: 100%;
-height: min(40vw, 50vh);
-gap: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: min(40vw, 50vh);
+}
+
+#middle {
+    margin: 0 calc(var(--arrow-width) * 2);
 }
 
 #desc {
-width: min(90vh, 100vw);
-margin-top: 8px;
+    width: min(90vh, 100vw);
+    margin-top: 8px;
 }
 
 .arrow {
-flex-grow: 0;
-opacity: 20%;
+    flex-grow: 0;
+    opacity: 20%;
+    width: var(--arrow-width);
 }
 
 .arrow:hover {
-opacity: 100%;
+    opacity: 100%;
 }
 
 .frame {
-height: 100%;
-flex-grow: 1;
-margin: 0 28px; /* same as arrow */ 
+    height: 100%;
+    flex-grow: 1;
+    margin: 0 var(--arrow-width);
 }
 
 .frame :global(img) {
-object-fit: contain;
-object-position: center;
-width: 100%;
-height: 100%;
+    object-fit: contain;
+    object-position: center;
+    width: 100%;
+    height: 100%;
 }
 .frame > :global(div) {
-height: 100%;
-width: 100%;
+    height: 100%;
+    width: 100%;
 }
 
-nav {
-/* break out of main */
-width: 100%;
-display: flex;
-}
-nav {
-margin: 10px 0 20px 0;
-}
-nav > * {
-text-align: center;
-position: relative;
-cursor: default;
-flex-grow: 1;
-flex-basis: 20%;
-}
-nav > a:hover {
-background-color: #222222;
-color: #AAAAAA;
-}
-nav > *:first-child {
-text-align: left;
-}
-nav > *:last-child {
-text-align: right;
-}
 .subs {
-display: flex;
-width: min(80vh, 90vw);
-gap: 2px;
-_margin: 1em 0;
-_box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-border: solid #444444;
+    display: flex;
+    gap: 8px;
+    margin: 8px 0;
 }
+
 .subs button {
-width: 120px;
-_height: 100px;
-cursor: pointer;
-_padding: 10px;
-filter: grayscale(100%);
+    display: block;
+    max-width: 40vw;
+    height: 20vh;
+    padding: 0;
+    background: white;
+    cursor: pointer;
+    filter: grayscale(100%);
 }
 
 .subs button:hover {
-filter: grayscale(0);
-background-color: #222222;
-color: #AAAAAA;
+    filter: grayscale(0);
 }
 </style>

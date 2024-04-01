@@ -1,17 +1,15 @@
-<!-- 
-    docs:
-    - https://gist.github.com/cathyxz/f17d12c07d60bcef52591e64e5e684fb
-    - without 'sizes', FF and Safari always pick largest image
-    - srcset: 400w is intrinsic width in pixels
-    - sizes: media-condition + width-of-element (px, em or vw)
-    - nf_resize: "fit" or "smartcrop"
-
-https://docs.netlify.com/image-cdn/overview/
-
-related: https://github.com/matyunya/svelte-image
--->
 <script>
-import {base, small} from '$lib'
+/** 
+docs:
+- https://gist.github.com/cathyxz/f17d12c07d60bcef52591e64e5e684fb
+- without 'sizes', FF and Safari always pick largest image
+- srcset: 400w is intrinsic width in pixels
+- sizes: media-condition + width-of-element (px, em or vw)
+- https://docs.netlify.com/image-cdn/overview/
+- related: https://github.com/matyunya/svelte-image
+*/
+
+import {resize} from '$lib'
 
 export let src
 export let sizes = "100vw"
@@ -23,8 +21,6 @@ export { imgcls as class }
 
 let real
 let loaded = false;
-
-$: url = width => `${base}/.netlify/images?url=${src}&w=${width}`
 
 $: if(real && real.complete) {
     loaded = true;
@@ -55,7 +51,6 @@ div {
 }
 .loaded .real {
     visibility: visible;
-    outline: red solid;
 }
 .loaded .preload {
     opacity: 0;
@@ -65,7 +60,7 @@ div {
 <div class={divcls} class:loaded>
     <img 
         class="photo preload {imgcls}"
-        src="{small(src)}"
+        src="{resize(src, 200)}"
         alt="{alt} thumbnail"
     />
     <img
@@ -73,13 +68,13 @@ div {
         on:load={onLoad}
         class="photo real {imgcls}"
         srcset="
-        {url(200)}  200w
-        {url(400)}  400w
-        {url(800)}  800w
-        {url(1200)} 1200w
-        {url(2000)}
+        {resize(src, 200)}  200w
+        {resize(src, 400)}  400w
+        {resize(src, 800)}  800w
+        {resize(src, 1200)} 1200w
+        {resize(src, 2000)}
         "
-        src="{url(800)}"
+        src="{resize(src, 800)}"
         sizes="{sizes}"
         alt="{alt}"
     />

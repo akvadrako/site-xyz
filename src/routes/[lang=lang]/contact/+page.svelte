@@ -65,7 +65,7 @@ $: hash = $page.url.hash;
     </div>
 </div>
             
-<section class="my-8 py-2 flex gap-2">
+<section class="my-8 py-2 flex gap-2 w-full">
     <x-area>
         <form
             class:hidden={hash == '#done' || hash == '#error'}
@@ -100,7 +100,7 @@ $: hash = $page.url.hash;
         </form>
     </x-area>
     <x-area>
-        <img src="/media/amdam.jpg" alt="amdam map" />
+        <img class="w-full" src="/media/amdam.jpg" alt="amdam map" />
         <h2>Amsterdam</h2>
         <div>
 1013 LC Amsterdam

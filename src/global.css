@@ -1,7 +1,5 @@
 /**********************************************
  * Global CSS styles
- *
- * See: https://tailwindcss.com/docs/preflight
  */
 
 :root {
@@ -12,7 +10,15 @@
 html {
     margin: 0;
     padding: 0;
-    font-family: "Poppins";
+    font-family: "Poppins",
+        system-ui,
+        'Segoe UI',
+        Roboto,
+        Helvetica,
+        Arial,
+        sans-serif,
+        'Apple Color Emoji',
+        'Segoe UI Emoji';
 }
 
 html:focus-within {

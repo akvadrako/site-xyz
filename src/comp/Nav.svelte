@@ -14,6 +14,11 @@ beforeNavigate(() => {
     document.body.removeEventListener('click', handleDropdownOutsideClick, true);
 })
 
+const homeItem = { 
+    path: '/works',
+    label: { en: 'Home', nl: 'Start' },
+}
+
 const navItems = [
     { 
         path: '/about',
@@ -24,7 +29,7 @@ const navItems = [
         label: { en: 'Contact', nl: 'Contact' },
     },
     { 
-        path: '/',
+        path: '/works',
         label: { en: 'Works', nl: 'Works' },
     },
 ]
@@ -91,8 +96,10 @@ onMount(() => {
     <nav bind:this={navRoot} class="px-8 flex gap-4">
 
         <a
-            href="/{$lang}"
-            class="uppercase flex-initial dark:text-white">
+            href="/{$lang}{homeItem.path}"
+            class="uppercase flex-initial dark:text-white"
+            title="{homeItem.label[$lang]}"
+        >
             <h1>Wall To Wall</h1>
         </a>
         <span class="flex-grow-[5]">
