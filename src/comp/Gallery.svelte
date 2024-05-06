@@ -37,14 +37,14 @@ $: filtered = (
 
 <div class="chooser flex flex-wrap items-left text-xl my-8">
     {#each kinds as kind}
-    <div class="ws-nowrap">
+    <div class="ws-nowrap cursor-pointer">
         <input
             id={kind.key}
             bind:checked={kind.checked}
             type="checkbox"
-            class="bg-$theme-text v--9% w-5 h-5 border-none m-0 p-0 appearance-none checked:bg-[#E08331]"
+            class="bg-$theme-text v--9% w-5 h-5 border-none m-0 p-0 appearance-none checked:bg-[#E08331] hover:ring-2 ring-black"
         />
-        <label for={kind.key} class="ml-2 mr-4">{kind.label[$lang]}</label>
+        <label for={kind.key} class="ml-2 mr-4 cursor-pointer">{kind.label[$lang]}</label>
     </div>
     {/each}
 </div>

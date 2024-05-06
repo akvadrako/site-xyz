@@ -67,7 +67,7 @@ export async function loadDoc(slug) {
     } = /** @type {object} */ (result.data.matter)
     
     if(! path)
-        path = `/[lang]/${slug}`.replace('/pages/', '')
+        path = `/[lang]/${slug}`.replace('/pages/', '/')
 
     return {
         body: result.value,

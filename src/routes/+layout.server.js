@@ -37,12 +37,14 @@ export async function load({ url, fetch }) {
     let doc
 
     try {
-        doc = localDoc(await loadDoc(slug))
+        doc = localDoc(await loadDoc(slug), lang)
     } catch(e) {
         error(404, {
-            message: `${e}`
+            message: `error loading doc: ${e}`
         });
     }
+
+    console.log('loadedDoc', doc)
 
     let data = {
         doc: doc,
@@ -54,5 +56,9 @@ export async function load({ url, fetch }) {
     let body = await resp.json()
     
     data.works = body.works.map(w => localDoc(w, lang))
+    
+    let posts_data = await (await fetch(`/${lang}/blog.json`)).json()
+
+    data.posts = posts_data.posts
     return data
 }

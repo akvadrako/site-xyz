@@ -32,6 +32,10 @@ const navItems = [
         path: '/works',
         label: { en: 'Works', nl: 'Works' },
     },
+    { 
+        path: '/posts',
+        label: { en: 'Blog', nl: 'Blog' },
+    },
 ]
 
 for(let n of navItems) {

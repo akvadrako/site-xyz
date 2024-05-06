@@ -138,12 +138,13 @@ $: all_images = [data.doc.image, ...more_images];
     </a>
 </section>
 
-<section id="middle">
-    <section id="desc">
+    <section class="my-4">
         <h2 class="font-bold text-xl">{data.doc.title}</h2>
         {@html data.doc.body}
-        <div><b>Date:</b> {formatDate(data.doc.date)}</div>
-        <div><b>Category:</b> {data.doc.kind}</div>
+        <div class="flex py-2 border-0 border-t-2 border-solid border-[#e8dcd8]">
+            <span>{formatDate(data.doc.date)}</span>
+            <span class="text-right flex-grow">{data.doc.kind}</span>
+        </div>
     </section>
 
     {#if more_images.length > 0 }
@@ -155,7 +156,6 @@ $: all_images = [data.doc.image, ...more_images];
             {/each}
         </div>
     {/if}
-</section>
 
 <style type="postcss">
 :root {
@@ -172,11 +172,6 @@ $: all_images = [data.doc.image, ...more_images];
 
 #middle {
     margin: 0 calc(var(--arrow-width) * 2);
-}
-
-#desc {
-    width: min(90vh, 100vw);
-    margin-top: 8px;
 }
 
 .arrow {
