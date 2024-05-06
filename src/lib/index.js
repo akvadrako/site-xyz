@@ -42,3 +42,9 @@ import dayjs from 'dayjs'
 export function formatDate(when) {
     return dayjs(when).format('YYYY-MM-DD')
 }
+
+export function assert(condition, message) {
+    if (!condition) {
+        throw message || "Assertion failed";
+    }
+}

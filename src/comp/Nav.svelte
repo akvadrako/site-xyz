@@ -33,7 +33,7 @@ const navItems = [
         label: { en: 'Works', nl: 'Works' },
     },
     { 
-        path: '/posts',
+        path: '/blog',
         label: { en: 'Blog', nl: 'Blog' },
     },
 ]

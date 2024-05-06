@@ -1,5 +1,6 @@
 
 import {loadDoc, localDoc} from '$lib/docs'
+import { assert } from '$lib'
 import { error, redirect } from '@sveltejs/kit';
 
 export const prerender = true;
@@ -44,8 +45,6 @@ export async function load({ url, fetch }) {
         });
     }
 
-    console.log('loadedDoc', doc)
-
     let data = {
         doc: doc,
         title: doc.title,
@@ -53,11 +52,14 @@ export async function load({ url, fetch }) {
     }
    
     let resp = await fetch('/data/pages.json')
+    assert(resp.ok)
     let body = await resp.json()
     
     data.works = body.works.map(w => localDoc(w, lang))
-    
-    let posts_data = await (await fetch(`/${lang}/blog.json`)).json()
+   
+    let posts_resp = await fetch(`/${lang}/blog.json`)
+    assert(posts_resp.ok)
+    let posts_data = await posts_resp.json()
 
     data.posts = posts_data.posts
     return data
