@@ -6,29 +6,26 @@ import { page } from '$app/stores'
 let posts = $page.data.posts
 
 </script>
-<Hero />
 
-<h2>Blog</h2>
+<h2 class="uppercase text-2xl font-semibold sm:(border-b border-b-solid border-[var(--theme-text)])">Most Recent Posts</h2>
 
-<div class="md text-3xl my-10">
+<div class="md">
     {@html $page.data.doc.body}
 </div>
 
-<section class="my-8">
+<section class="">
     {#each posts as post}
-    <div class="flex">
-        <div>
-            <span class="case-upper">{post.title}</span>
-        </div>
-        <a class="flex-1" href={post.path}>
+    <a class="block my-8" href={post.path}>
+        <div class="h-32">
             <Photo
                 src={post.image}
                 alt="thumb"
                 sizes="30vw"
-                class="h-full w-full object-[50%_0%]" 
+                class="w-full object-[50%_0%] object-contain sm:(h-full w-auto)" 
             />
-        </a>
-    </div>
+        </div>
+        <h3 class="text-2xl font-semibold">{post.title}</h3>
+    </a>
     {/each}
 </section>
 
