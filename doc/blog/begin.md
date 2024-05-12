@@ -3,9 +3,12 @@ title_en: Tall
 title_nl: Lang
 image: /media/mix_medium4_1920x1920.jpg
 ---
-
 In the towering world of urban art, tall murals stretch towards the sky,
 Brushstrokes reaching for the heavens, telling stories of streets below.
+
+Other image 
+
+![](/media/amdam.jpg)
 
 Bold colors cascade down walls, breathing life into concrete canyons,
 Each mural a testament to creativity unbound, a splash of vibrant expression.
