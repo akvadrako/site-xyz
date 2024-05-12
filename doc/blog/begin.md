@@ -8,7 +8,11 @@ Brushstrokes reaching for the heavens, telling stories of streets below.
 
 Other image 
 
+<div style="max-width: 50%">
+
 ![](/media/amdam.jpg)
+
+</div>
 
 Bold colors cascade down walls, breathing life into concrete canyons,
 Each mural a testament to creativity unbound, a splash of vibrant expression.

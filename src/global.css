@@ -91,6 +91,11 @@ p.md {
     }
 }
 
+img.md {
+    display: block;
+    width: 100%;
+}
+
 /**********************************************
  * Custom components
  */
