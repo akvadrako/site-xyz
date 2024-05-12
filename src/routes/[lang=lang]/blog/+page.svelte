@@ -21,7 +21,7 @@ let posts = $page.data.posts
                 src={post.image}
                 alt="thumb"
                 sizes="30vw"
-                class="w-full object-[50%_0%] object-contain sm:(h-full w-auto)" 
+                class="h-full object-contain max-w-full" 
             />
         </div>
         <h3 class="text-2xl font-semibold">{post.title}</h3>
