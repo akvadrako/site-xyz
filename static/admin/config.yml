@@ -15,7 +15,7 @@ logo_url: https://walltowall.nl/media/logo.svg
 display_url: https://walltowall.nl
 
 i18n:
-  structure: multiple_file
+  structure: multiple_files
   locales: [en, nl]
   default_locale: en
 
@@ -26,17 +26,23 @@ backend:
   branch: master
 
 collections:
-  - name: posts
-    label: posts
-    label_singular: posts
-    folder: 'doc/posts'
+  - name: blog
+    label: blog
+    label_singular: blog
+    folder: 'doc/blog'
     extension: md
     format: yaml-frontmatter
     create: true
-    i18n: true
-    preview_path: "/en/post/{{slug}}"
+    i18n: false
+    slug: "{{title_en}}"
+    preview_path: "/en/blog/{{slug}}"
     fields:
-      - name: title
+      - name: title_en
+      - name: title_nl
+      - name: image
+        label: Main Image
+        widget: image
+        allow_multiple: false
       - name: body
         widget: markdown
   - name: blurbs
