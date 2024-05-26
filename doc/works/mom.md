@@ -1,7 +1,7 @@
 ---
 kind: painting
-title_en: Mom
-title_nl: Mom
+title_en: Family portrait
+title_nl: Familieportret
 layout: work
 date: 2023-08-29T13:02:51.525Z
 image: /media/mum-painting.jpg
