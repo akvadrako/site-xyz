@@ -16,6 +16,6 @@ Grandpa and his daughters.
 
 <div lang="nl">
 
-Grandpa and his daughters.
+Opa en zijn dochters.
 
 </div>
