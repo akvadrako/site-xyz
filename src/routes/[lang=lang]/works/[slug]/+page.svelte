@@ -105,6 +105,7 @@ $: all_images = [data.doc.image, ...more_images];
 </script>
 
 <section id="outer"
+    class="mb-12 -mt-12"
     on:touchstart={handleTouchStart}
     on:touchmove={handleTouchMove}
     on:touchend={handleTouchEnd}
@@ -138,24 +139,24 @@ $: all_images = [data.doc.image, ...more_images];
     </a>
 </section>
 
-    <section class="my-4">
-        <h2 class="font-bold text-xl">{data.doc.title}</h2>
-        {@html data.doc.body}
-        <div class="flex py-2 border-0 border-t-2 border-solid border-[#e8dcd8]">
-            <span>{formatDate(data.doc.meta.date)}</span>
-            <span class="text-right flex-grow">{data.doc.kind}</span>
-        </div>
-    </section>
+<section class="my-4">
+    <h2 class="font-bold text-xl">{data.doc.title}</h2>
+    {@html data.doc.body}
+    <div class="flex py-2 border-0 border-t-2 border-solid border-[#e8dcd8]">
+        <span>{formatDate(data.doc.meta.date)}</span>
+        <span class="text-right flex-grow">{data.doc.kind}</span>
+    </div>
+</section>
 
-    {#if more_images.length > 0 }
-        <div class="subs">
-            {#each all_images as src}
-                <button on:click={() => setSub(src)}>
-                    <Thumbnail src={src} />
-                </button>
-            {/each}
-        </div>
-    {/if}
+{#if more_images.length > 0 }
+    <div class="subs">
+        {#each all_images as src}
+            <button on:click={() => setSub(src)}>
+                <Thumbnail src={src} />
+            </button>
+        {/each}
+    </div>
+{/if}
 
 <style type="postcss">
 :root {
@@ -167,7 +168,7 @@ $: all_images = [data.doc.image, ...more_images];
     align-items: center;
     justify-content: center;
     width: 100%;
-    height: min(40vw, 50vh);
+    height: calc(100vh - 96px);
 }
 
 #middle {
@@ -214,7 +215,7 @@ $: all_images = [data.doc.image, ...more_images];
     padding: 0;
     background: white;
     cursor: pointer;
-    filter: grayscale(100%);
+    /*  filter: grayscale(100%); */
 }
 
 .subs button:hover {
