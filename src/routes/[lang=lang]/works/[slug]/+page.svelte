@@ -193,7 +193,7 @@ $: all_images = [data.doc.image, ...more_images];
     position: absolute;
     top: calc(((100vw - 64px) * 0.6 - var(--arrow-height)) / 2);
     color: red;
-    z-index: 10;
+    z-index: 2;
     right: 0;
     padding: 8px;
     background: var(--sandstone);
