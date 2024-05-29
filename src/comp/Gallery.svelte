@@ -96,8 +96,8 @@ $: filtered = (
     left: 0;
     right: 0;
     bottom: 20px;
-    background-color: #6a645f;
-    color: #F2EDE8;
+    background-color: var(--brown);
+    color: var(--sandstone);
     padding: 10px;
     opacity: 80%;
     justify-content: center;

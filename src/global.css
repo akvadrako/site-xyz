@@ -1,11 +1,52 @@
 /**********************************************
- * Global CSS styles
+ * Theme
  */
 
 :root {
     color-scheme: light dark;
     --nav-height: 3rem;
+    --ambergris: #3d3732;
+    --sandstone: #f2ede8;
+    --brown: #6a645f;
 }
+
+/**** Light */
+
+@media screen and (prefers-color-scheme: light) {
+    :root {
+        --theme-text: var(--ambergris);
+        --theme-bg: var(--sandstone);
+        color-scheme: light;
+    }
+}
+
+/**** Dark */
+
+@media screen and (prefers-color-scheme: dark) {
+    :root {
+        --theme-text: var(--sandstone);
+        --theme-bg: var(--ambergris);
+        color-scheme: dark;
+    }
+
+    p.md {
+        a { 
+            color: yellow;
+        }
+
+        a:visited {
+            color: pink;
+        }
+
+        a:hover {
+            color: red;
+        }
+    }
+}
+
+/**********************************************
+ * Global CSS styles
+ */
 
 html {
     margin: 0;
@@ -107,44 +148,6 @@ x-debug { display: none; }
     background: inherit;
     color: inherit;
     padding: 0;
-}
-
-/**********************************************
- * Light Theme
- */
-
-@media screen and (prefers-color-scheme: light) {
-    :root {
-        --theme-text: #3D3732;
-        --theme-bg: #F2EDE8;
-        color-scheme: light;
-    }
-}
-
-/**********************************************
- * Dark Theme
- */
-
-@media screen and (prefers-color-scheme: dark) {
-    :root {
-        --theme-text: #F2EDE8;
-        --theme-bg: #3D3732;
-        color-scheme: dark;
-    }
-
-    p.md {
-        a { 
-            color: yellow;
-        }
-
-        a:visited {
-            color: pink;
-        }
-
-        a:hover {
-            color: red;
-        }
-    }
 }
 
 /**********************************************

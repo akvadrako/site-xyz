@@ -178,24 +178,18 @@ nav {
 /* scrolled to top */
 nav, #sidebar {
     background-color: #FFF;
-    color: #3D3732;
-}
-@media screen and (prefers-color-scheme: dark) {
-    nav, #sidebar {
-        background-color: #F2EDE8;
-    }
+    color: var(--ambergris);
 }
 
 /* scrolled down */
-.scrolled #sidebar {
-    background-color: #3D3732;
-    color: #F2EDE8;
+.scrolled #sidebar, .scrolled nav {
+    background-color: var(--ambergris);
+    color: var(--sandstone);
 }
 .scrolled nav {
-    background-color: #3D3732;
-    color: #F2EDE8;
     opacity: 75%;
 }
+
 @media (max-width: 639px) {
     .scrolled h1, .scrolled .lang-switcher {
         display: none; 
