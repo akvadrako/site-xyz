@@ -142,7 +142,7 @@ $: all_images = [data.doc.image, ...more_images];
         <h2 class="font-bold text-xl">{data.doc.title}</h2>
         {@html data.doc.body}
         <div class="flex py-2 border-0 border-t-2 border-solid border-[#e8dcd8]">
-            <span>{formatDate(data.doc.date)}</span>
+            <span>{formatDate(data.doc.meta.date)}</span>
             <span class="text-right flex-grow">{data.doc.kind}</span>
         </div>
     </section>
