@@ -90,6 +90,9 @@ export async function loadDoc(slug) {
 }
 
 async function read_image(path) {
+    if(! path)
+        return null;
+
     let data = fs.createReadStream("static/" + path)
     let size = await imageDimensionsFromStream(data)
 

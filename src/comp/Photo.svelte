@@ -19,14 +19,6 @@ export let sizes = "100vw"
 export let alt = "image"
 export let divcls = "photo h-full"
 
-    /*
-import { onDestroy } from 'svelte';
-
-onDestroy(() => {
-        console.log('the component is being destroyed');
-});
-     */
-
 let imgcls = ""
 
 export { imgcls as class }

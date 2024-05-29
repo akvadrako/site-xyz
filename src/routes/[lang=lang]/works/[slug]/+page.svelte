@@ -176,11 +176,6 @@ $: all_images = [data.doc.image, ...more_images];
 
 /* laptop */
 
-#outer {
-    max-height: calc(100vh - 96px);
-    height: fit-content;
-}
-
 .frame {
     height: 100%;
     margin: 0 calc(var(--arrow-width) * 2);
@@ -239,6 +234,7 @@ $: all_images = [data.doc.image, ...more_images];
 .frame > :global(div) {
     height: 100%;
     width: 100%;
+    max-height: calc(100vh - 96px);
 }
 
 .subs {
