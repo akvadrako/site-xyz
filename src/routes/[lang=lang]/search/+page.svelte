@@ -79,7 +79,7 @@ function marks(hit) {
             <div class="flex flex-col min-h-40 w-full sm:flex-row sm:max-w-2xl rounded-lg bg-white shadow-lg">
                 <div class="side">
                     {#if hit.image}
-                        <Thumbnail src="{hit.image}" alt="{hit.title}" />
+                        <Thumbnail img="{hit.image}" alt="{hit.title}" />
                     {/if}
                 </div>
                 <div class="p-6 flex flex-col justify-start">

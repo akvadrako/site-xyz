@@ -4,9 +4,11 @@
 <script>
 import {resize} from '$lib'
 
-export let src
+export let img
 export let sizes = "10vw"
 export let alt = "image"
+
+$: src = img.path
 
 $: srcset =  `
     ${resize(src, 100)}  100w,
@@ -20,6 +22,8 @@ $: srcset =  `
 </style>
 
 <img
+    width={img.width}
+    height={img.height}
     class="w-full h-full object-contain photo block"
     srcset={srcset}
     src={resize(src, 200)}

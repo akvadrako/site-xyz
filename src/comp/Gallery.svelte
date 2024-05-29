@@ -54,7 +54,7 @@ $: filtered = (
     <div class="work">
         <a class="flex-1" href={work.path}>
             <Photo
-                src={work.image}
+                src={work.image.path}
                 alt={work.title}
                 sizes="30vw"
                 class="h-full w-full object-[50%_0%]" 

@@ -19,6 +19,7 @@ import remarkParse from 'remark-parse'
 import {VFile} from 'vfile'
 import { tagLang } from '../rehype.js'
 import { wikiLink, extractText } from '../remark.js'
+import {imageDimensionsFromStream} from 'image-dimensions';
 
 import fs from 'fs'
 
@@ -69,6 +70,11 @@ export async function loadDoc(slug) {
     if(! path)
         path = `/[lang]/${slug}`.replace('/pages/', '/')
 
+    if(meta.more_images) {
+        let reads = meta.more_images.map(read_image)
+        meta.more_images = await Promise.all(reads)
+    }
+
     return {
         body: result.value,
         meta,
@@ -76,10 +82,20 @@ export async function loadDoc(slug) {
         title_nl,
         title_en,
         filename,
-        image,
+        image: await read_image(image),
         layout,
         slug,
         kind,
+    }
+}
+
+async function read_image(path) {
+    let data = fs.createReadStream("static/" + path)
+    let size = await imageDimensionsFromStream(data)
+
+    return {
+        path: path,
+        ...size,
     }
 }
 

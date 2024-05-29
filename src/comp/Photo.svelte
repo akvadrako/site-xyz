@@ -11,10 +11,21 @@ docs:
 
 import {resize} from '$lib'
 
+
 export let src
+export let width = null
+export let height = null
 export let sizes = "100vw"
 export let alt = "image"
 export let divcls = "photo h-full"
+
+    /*
+import { onDestroy } from 'svelte';
+
+onDestroy(() => {
+        console.log('the component is being destroyed');
+});
+     */
 
 let imgcls = ""
 
@@ -23,14 +34,19 @@ export { imgcls as class }
 let real
 let loaded
 
+$: ratio = width && height ? width / height : "auto"
+
+$: bgimg = resize(src, 200)
+
 // reset when src changes
 $: if(src) {
     loaded = false
+    console.log("new", src, width, height)
 }
 
 $: if(real && real.complete) {
+    console.log("loaded", "now")
     loaded = true;
-    console.log("loaded already")
 }
 
 $: srcset = `
@@ -42,41 +58,37 @@ $: srcset = `
 `
 
 function onLoad(event) {
-    console.log("loaded", loaded, "→", true)
-    loaded = true;
+    let old = !event.target.currentSrc.includes(src)
+    console.log("loaded", event.target.currentSrc, "old=", old)
+    
+    if(! old)
+        loaded = true;
 }
 </script>
 <style lang="postcss">
 img {
     display: block;
 }
-.preload {
-    z-index: 1;
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    transition: opacity 1000ms, display 1000ms;
-}
 div {
     position: relative;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 .real {
-    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0s;
 }
 .loaded .real {
-    visibility: visible;
-}
-.loaded .preload {
-    opacity: 0;
+    transition: opacity 200ms;
+    opacity: 1;
 }
 </style>
 
-<div class={divcls} class:loaded>
-    <img 
-        class="photo preload {imgcls}"
-        src="{resize(src, 200)}"
-        alt="{alt} thumbnail"
-    />
+<div class={divcls}
+    style:background-image="url({bgimg})"
+    style:aspect-ratio={ratio}
+    class:loaded>
     <img
         bind:this={real}
         on:load={onLoad}
@@ -85,6 +97,8 @@ div {
         src="{resize(src, 200)}"
         sizes="{sizes}"
         alt="{alt}"
+        width={width}
+        height={height}
     />
 </div>
 

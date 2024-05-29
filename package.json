@@ -18,6 +18,7 @@
     "@sveltejs/vite-plugin-svelte": "^3.0.2",
     "dayjs": "^1.11.10",
     "eslint": "^8.57.0",
+    "image-dimensions": "^2.3.0",
     "mdast-util-to-string": "^4.0.0",
     "minisearch": "^6.3.0",
     "netlify-cli": "^17.19.5",

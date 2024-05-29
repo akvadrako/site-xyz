@@ -28,7 +28,7 @@ function preloadImage(active, offset) {
         work._cache.onload = e => {
             //console.log('preload', e.target.src)
         }
-        work._cache.src = small(work.image)
+        work._cache.src = small(work.image.path)
     }
 }
 
@@ -97,8 +97,8 @@ function handleTouchMove(e) {
     yDiff = yDown - e.touches[0].clientY;
 }
 
-function setSub(path) {
-    subimage = path;
+function setSub(img) {
+    subimage = img;
 }
 
 $: all_images = [data.doc.image, ...more_images];
@@ -115,16 +115,16 @@ $: all_images = [data.doc.image, ...more_images];
         on:mouseover={() => hover(prev)}
         on:focus={() => hover(prev)}
     >
-        <svg width="28px" height="80px" viewBox="0 0 40.469 115.75">
+        <svg width="100%" height="100%" viewBox="0 0 40.469 115.75">
             <polyline fill="none" stroke="#999999" stroke-width="5.6693" stroke-miterlimit="10" points="38.069,1.578 3.565,57.912
                 38.069,114.245 "/>
         </svg>
     </a>
 
     <a class="frame"
-        href={subimage}
+        href={subimage.path}
     >
-        <Photo src={subimage} />
+        <Photo src={subimage.path} width={subimage.width} height={subimage.height} />
     </a>
 
     <a class="arrow" href={next.path}
@@ -132,7 +132,7 @@ $: all_images = [data.doc.image, ...more_images];
         on:mouseover={() => hover(next)}
         on:focus={() => hover(next)}
     >
-        <svg width="28px" height="80px" viewBox="0 0 40.469 115.75">
+        <svg width="100%" height="100%" viewBox="0 0 40.469 115.75">
             <polyline fill="none" stroke="#999999" stroke-width="5.6693" stroke-miterlimit="10" points="2.565,1.578 37.07,57.912
                 2.565,114.245 "/>
         </svg>
@@ -140,7 +140,7 @@ $: all_images = [data.doc.image, ...more_images];
 </section>
 
 <section class="my-4">
-    <h2 class="font-bold text-xl">{data.doc.title}</h2>
+    <h2 class="font-medium text-2xl leading-none">{data.doc.title}</h2>
     {@html data.doc.body}
     <div class="flex py-2 border-0 border-t-2 border-solid border-[#e8dcd8]">
         <span>{formatDate(data.doc.meta.date)}</span>
@@ -150,9 +150,9 @@ $: all_images = [data.doc.image, ...more_images];
 
 {#if more_images.length > 0 }
     <div class="subs">
-        {#each all_images as src}
-            <button on:click={() => setSub(src)}>
-                <Thumbnail src={src} />
+        {#each all_images as img}
+            <button on:click={() => setSub(img)}>
+                <Thumbnail img={img} />
             </button>
         {/each}
     </div>
@@ -161,34 +161,72 @@ $: all_images = [data.doc.image, ...more_images];
 <style type="postcss">
 :root {
     --arrow-width: 28px;
+    --arrow-height: 80px;
 }
 
 #outer {
-    display: flex;
-    align-items: center;
-    justify-content: center;
     width: 100%;
-    height: calc(100vh - 96px);
-}
-
-#middle {
-    margin: 0 calc(var(--arrow-width) * 2);
-}
-
-.arrow {
-    flex-grow: 0;
-    opacity: 20%;
-    width: var(--arrow-width);
-}
-
-.arrow:hover {
-    opacity: 100%;
+    position: relative;
 }
 
 .frame {
     height: 100%;
-    flex-grow: 1;
     margin: 0 var(--arrow-width);
+}
+
+/* laptop */
+
+#outer {
+    max-height: calc(100vh - 96px);
+    height: fit-content;
+}
+
+.frame {
+    height: 100%;
+    margin: 0 calc(var(--arrow-width) * 2);
+    display: block;
+}
+
+.arrow {
+    width: var(--arrow-width);
+    height: var(--arrow-height);
+    position: absolute;
+    top: calc(((100vw - 64px) * 0.6 - var(--arrow-height)) / 2);
+    color: red;
+    z-index: 10;
+    right: 0;
+    padding: 8px;
+    background: var(--sandstone);
+}
+
+.arrow:first-child {
+    left: 0;
+}
+
+.arrow {
+    opacity: 50%;
+}
+
+/* phone */
+
+@media (max-width: 639px) {
+    :root {
+        --arrow-width: 24px;
+        --arrow-height: 64px;
+    }
+    .frame {
+        margin: 0;
+    }
+    a.frame {
+        pointer-events: none;
+    }
+}
+
+#middle {
+}
+
+.arrow:hover {
+    opacity: 100%;
 }
 
 .frame :global(img) {
@@ -197,6 +235,7 @@ $: all_images = [data.doc.image, ...more_images];
     width: 100%;
     height: 100%;
 }
+
 .frame > :global(div) {
     height: 100%;
     width: 100%;
@@ -206,6 +245,7 @@ $: all_images = [data.doc.image, ...more_images];
     display: flex;
     gap: 8px;
     margin: 8px 0;
+    justify-content: space-between;
 }
 
 .subs button {
