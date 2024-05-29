@@ -20,4 +20,5 @@ onMount(() => {
     <a href="/data/pages.json">pages.json</a>
     <a href="/data/search_index.json">search_index.json</a>
     <a href="/en/blog.json">blog.json</a>
+    <a href="/en/blog">blog</a>
 </div>
