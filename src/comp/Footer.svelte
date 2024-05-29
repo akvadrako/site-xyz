@@ -35,13 +35,13 @@
 </footer>
 
 <style lang="postcss">
-    svg {
-        display: inline-block;
-    }
     footer {
         display: flex;
         flex-direction: column;
         align-items: center;
+
+        /* extend footer to bottom of page */
+        box-shadow: 0 50vh 0 50vh var(--ambergris);
     }
 </style>
 

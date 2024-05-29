@@ -71,7 +71,6 @@ body {
     padding: 0;
     background: var(--theme-bg);
     color: var(--theme-text);
-    min-height: 100vh;
     text-rendering: optimizeSpeed;
     line-height: 1.5;
 }
