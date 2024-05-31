@@ -52,6 +52,38 @@ $: prev = works[(active - 1 + works.length) % works.length];
 
 $: subimage = data.doc.image;
 
+///////////////////////////////////////////////////
+// zoom
+
+let zoom = false;
+let frame
+let canvas
+
+function click_zoom(e) {
+    zoom = !zoom;
+    zoom_move(e)
+}
+
+function zoom_move(e) {
+    if(! zoom) {
+        canvas.style["translate"] = ""
+        return
+    }
+
+    let rect = frame.getBoundingClientRect()
+    let xPos = e.clientX - (rect.x + rect.width / 2)
+    let yPos = e.clientY - (rect.y + rect.height / 2)
+    let trans = `${-xPos * 1.1}px ${-yPos * 1.1}px`
+
+    canvas.style["translate"] = trans
+
+    console.log("move", e.clientX, rect.x, rect.width, xPos, trans)
+    requestAnimationFrame(() => null)
+}
+
+///////////////////////////////////////////////////
+// touch events
+
 var xDown = null;
 var yDown = null;
 var xDiff = null;
@@ -121,11 +153,15 @@ $: all_images = [data.doc.image, ...more_images];
         </svg>
     </a>
 
-    <a class="frame"
-        href={subimage.path}
+    <div bind:this={frame}
+        class="frame"
+        on:click={click_zoom}
+        on:mousemove={zoom_move}
     >
-        <Photo src={subimage.path} width={subimage.width} height={subimage.height} />
-    </a>
+        <div class="canvas" bind:this={canvas} class:zoom>
+            <Photo src={subimage.path} width={subimage.width} height={subimage.height} />
+        </div>
+    </div>
 
     <a class="arrow" href={next.path}
         data-sveltekit-noscroll
@@ -172,6 +208,18 @@ $: all_images = [data.doc.image, ...more_images];
 .frame {
     height: 100%;
     margin: 0 var(--arrow-width);
+    overflow: hidden;
+}
+
+.canvas {
+    transition: scale ease 0.3s;
+    cursor: zoom-in;
+    scale: 1;
+}
+
+.zoom {
+    scale: 2;
+    cursor: zoom-out;
 }
 
 /* laptop */
