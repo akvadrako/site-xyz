@@ -6,7 +6,7 @@ import {resize} from '$lib'
 
 export let img
 export let sizes = "10vw"
-export let alt = "image"
+export let alt = "thumbnail"
 
 $: src = img.path
 

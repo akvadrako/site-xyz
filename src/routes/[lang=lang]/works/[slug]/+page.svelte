@@ -175,24 +175,24 @@ $: all_images = [data.doc.image, ...more_images];
     </a>
 </section>
 
-<section class="my-4">
+<section class="desc my-4">
     <h2 class="font-medium text-2xl leading-none">{data.doc.title}</h2>
     {@html data.doc.body}
     <div class="flex py-2 border-0 border-t-2 border-solid border-[#e8dcd8]">
         <span>{formatDate(data.doc.meta.date)}</span>
         <span class="text-right flex-grow">{data.doc.kind}</span>
     </div>
-</section>
 
-{#if more_images.length > 0 }
-    <div class="subs">
-        {#each all_images as img}
-            <button on:click={() => setSub(img)}>
-                <Thumbnail img={img} />
-            </button>
-        {/each}
-    </div>
-{/if}
+    {#if more_images.length > 0 }
+        <div class="subs">
+            {#each all_images as img}
+                <button on:click={() => setSub(img)}>
+                    <Thumbnail img={img} />
+                </button>
+            {/each}
+        </div>
+    {/if}
+</section>
 
 <style type="postcss">
 :root {
@@ -208,7 +208,7 @@ $: all_images = [data.doc.image, ...more_images];
 .frame {
     height: 100%;
     margin: 0 var(--arrow-width);
-    overflow: hidden;
+    _overflow: hidden;
 }
 
 .canvas {
@@ -226,8 +226,11 @@ $: all_images = [data.doc.image, ...more_images];
 
 .frame {
     height: 100%;
-    margin: 0 calc(var(--arrow-width) * 2);
     display: block;
+}
+
+.frame, .desc {
+    margin: 0 calc(var(--arrow-width) * 2);
 }
 
 .arrow {
@@ -238,7 +241,6 @@ $: all_images = [data.doc.image, ...more_images];
     color: red;
     z-index: 2;
     right: 0;
-    padding: 8px;
     background: var(--sandstone);
 }
 
@@ -250,6 +252,16 @@ $: all_images = [data.doc.image, ...more_images];
     opacity: 50%;
 }
 
+.subs {
+    display: flex;
+    margin: 8px 0;
+    gap: 32px;
+}
+
+.subs button {
+    border: none;
+}
+
 /* phone */
 
 @media (max-width: 639px) {
@@ -257,11 +269,15 @@ $: all_images = [data.doc.image, ...more_images];
         --arrow-width: 24px;
         --arrow-height: 64px;
     }
-    .frame {
+    .frame, .desc {
         margin: 0;
     }
     a.frame {
         pointer-events: none;
+    }
+    .subs {
+        justify-content: space-between;
+        gap: 8px;
     }
 }
 
@@ -279,17 +295,10 @@ $: all_images = [data.doc.image, ...more_images];
     height: 100%;
 }
 
-.frame > :global(div) {
+.frame :global(img) {
     height: 100%;
     width: 100%;
     max-height: calc(100vh - 96px);
-}
-
-.subs {
-    display: flex;
-    gap: 8px;
-    margin: 8px 0;
-    justify-content: space-between;
 }
 
 .subs button {
@@ -297,7 +306,7 @@ $: all_images = [data.doc.image, ...more_images];
     max-width: 40vw;
     height: 20vh;
     padding: 0;
-    background: white;
+    background: transparent;
     cursor: pointer;
     /*  filter: grayscale(100%); */
 }

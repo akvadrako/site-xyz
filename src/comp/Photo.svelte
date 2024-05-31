@@ -79,7 +79,6 @@ div {
 
 <div class={divcls}
     style:background-image="url({bgimg})"
-    style:aspect-ratio={ratio}
     class:loaded>
     <img
         bind:this={real}
@@ -91,6 +90,7 @@ div {
         alt="{alt}"
         width={width}
         height={height}
+        style:aspect-ratio={ratio}
     />
 </div>
 
