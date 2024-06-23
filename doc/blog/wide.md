@@ -1,6 +1,7 @@
 ---
-title_en: Wide
-image: /media/nights1200x600.jpg
+title_en: Treehouse façade logo
+title_nl: Treehouse logo
+image: /media/wip1.jpg
 ---
 
 In the vibrant realm of artistic expression, murals stand as towering testaments to creativity and cultural resonance. Bold strokes and intricate details converge on vast canvases, transforming blank walls into vivid narratives that capture the essence of a place or moment. From sprawling cityscapes pulsating with urban energy to serene natural vistas whispering tales of tranquility, each mural beckons viewers into a realm where imagination knows no bounds.
