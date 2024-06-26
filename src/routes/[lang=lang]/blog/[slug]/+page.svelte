@@ -3,13 +3,19 @@ import {Photo} from '$comp';
 import {lang} from '$lib';
 
 export let data
+export let img = data.doc.image
 </script>
 
-<div class="sm:(mx-32)">
-    <div class="pb-14 w-full flex frame sm:(max-h-[40vh])">
-        <div>
-            <Photo src={data.doc.image} />
-        </div>
+<div class="sm:(mx-32) -mt-12">
+    <div class="pb-14">
+        <Photo 
+                src={img.path}
+                width={img.width}
+                height={img.height}
+                alt="heading"
+                sizes="50vw"
+                divcls="max-h-[30vh] max-w-full"
+        />
     </div>
 
     <section class="max-w-xl">
@@ -24,10 +30,4 @@ export let data
 </div>
     
 <style>
-    .frame :global(img) {
-        object-fit: contain;
-        object-position: center;
-        width: 100%;
-        height: 100%;
-    }
 </style>

@@ -3,7 +3,7 @@
  */
 
 import {log} from '$lib'
-import {listDocs, loadDoc, localDoc} from '$lib/docs'
+import {listDocs, loadDoc} from '$srv/docs'
 import { json } from '@sveltejs/kit';
 
 import MiniSearch from 'minisearch'
@@ -23,7 +23,7 @@ export async function GET({ setHeaders }) {
 
     let routes = []
     for(let slug of slugs)
-        routes.push(localDoc(await loadDoc(slug), lang))
+        routes.push(await loadDoc(slug, lang))
 
     let stopWords = new Set(['and', 'or', 'to', 'in', 'a', 'the', 'of'])
 

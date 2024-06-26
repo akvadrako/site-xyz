@@ -1,6 +1,7 @@
 <script>
 import { Photo, Thumbnail } from '$comp';
-import { lang, formatDate, small } from '$lib';
+import { lang, formatDate } from '$lib'; 
+import { small } from '$lib/img';
 import { preloadData, goto } from '$app/navigation';
 
 export let data
@@ -60,8 +61,15 @@ let frame
 let canvas
 
 function click_zoom(e) {
-    zoom = !zoom;
-    zoom_move(e)
+    let onPhone = window.matchMedia("(max-width: 639px)")
+
+    if(onPhone.matches) {
+        zoom = false;
+    } else {
+        zoom = !zoom;
+        zoom_move(e)
+    }
+    console.log('zoom', zoom)
 }
 
 function zoom_move(e) {
@@ -77,7 +85,7 @@ function zoom_move(e) {
 
     canvas.style["translate"] = trans
 
-    console.log("move", e.clientX, rect.x, rect.width, xPos, trans)
+    // console.log("move", e.clientX, rect.x, rect.width, xPos, trans)
     requestAnimationFrame(() => null)
 }
 
@@ -159,7 +167,11 @@ $: all_images = [data.doc.image, ...more_images];
         on:mousemove={zoom_move}
     >
         <div class="canvas" bind:this={canvas} class:zoom>
-            <Photo src={subimage.path} width={subimage.width} height={subimage.height} />
+            <Photo
+                src={subimage.path}
+                width={subimage.width}
+                height={subimage.height} 
+                divcls="m-auto max-w-full max-h-[calc(100vh-96px)]" />
         </div>
     </div>
 
@@ -201,15 +213,14 @@ $: all_images = [data.doc.image, ...more_images];
 }
 
 #outer {
-    width: 100%;
     position: relative;
 }
 
 .frame {
-    height: 100%;
     margin: 0 var(--arrow-width);
-    _overflow: hidden;
 }
+
+/* laptop */
 
 .canvas {
     transition: scale ease 0.3s;
@@ -220,13 +231,6 @@ $: all_images = [data.doc.image, ...more_images];
 .zoom {
     scale: 2;
     cursor: zoom-out;
-}
-
-/* laptop */
-
-.frame {
-    height: 100%;
-    display: block;
 }
 
 .frame, .desc {
@@ -269,11 +273,11 @@ $: all_images = [data.doc.image, ...more_images];
         --arrow-width: 24px;
         --arrow-height: 64px;
     }
+    .canvas {
+        cursor: auto;
+    }
     .frame, .desc {
         margin: 0;
-    }
-    a.frame {
-        pointer-events: none;
     }
     .subs {
         justify-content: space-between;
@@ -281,24 +285,8 @@ $: all_images = [data.doc.image, ...more_images];
     }
 }
 
-#middle {
-}
-
 .arrow:hover {
     opacity: 100%;
-}
-
-.frame :global(img) {
-    object-fit: contain;
-    object-position: center;
-    width: 100%;
-    height: 100%;
-}
-
-.frame :global(img) {
-    height: 100%;
-    width: 100%;
-    max-height: calc(100vh - 96px);
 }
 
 .subs button {

@@ -1,5 +1,5 @@
 
-import {loadDoc, localDoc} from '$lib/docs'
+import {loadDoc} from '$srv/docs'
 import { assert } from '$lib'
 import { error, redirect } from '@sveltejs/kit';
 
@@ -36,9 +36,11 @@ export async function load({ url, fetch }) {
     }
 
     let doc
+        
+    doc = await loadDoc(slug)
 
+    // TODO
     try {
-        doc = localDoc(await loadDoc(slug), lang)
     } catch(e) {
         error(404, {
             message: `error loading doc: ${e}`
@@ -51,16 +53,13 @@ export async function load({ url, fetch }) {
         lang: lang,
     }
    
-    let resp = await fetch('/data/pages.json')
-    assert(resp.ok)
-    let body = await resp.json()
-    
-    data.works = body.works.map(w => localDoc(w, lang))
+    let resp = await fetch(`/${lang}/works.json`)
+    assert(resp.ok, `fetch(/${lang}/works.json) -> ${resp.status}`)
+    data.works = (await resp.json()).works
    
     let posts_resp = await fetch(`/${lang}/blog.json`)
     assert(posts_resp.ok)
-    let posts_data = await posts_resp.json()
+    data.posts = (await posts_resp.json()).posts
 
-    data.posts = posts_data.posts
     return data
 }

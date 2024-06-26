@@ -2,7 +2,7 @@
     minimal version of Photo
 -->
 <script>
-import {resize} from '$lib'
+import {resize} from '$lib/img'
 
 export let img
 export let sizes = "10vw"

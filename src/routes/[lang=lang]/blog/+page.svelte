@@ -15,17 +15,22 @@ let posts = $page.data.posts
 
 <section class="">
     {#each posts as post}
-    <a class="block my-8" href={post.path}>
-        <div class="h-32">
-            <Photo
-                src={post.image}
-                alt="thumb"
-                sizes="30vw"
-                class="h-full object-contain max-w-full" 
-            />
-        </div>
-        <h3 class="text-2xl font-semibold">{post.title}</h3>
-    </a>
+        <a class="block my-8 flex gap-4" href={post.path}>
+            <div class="w-32 mt-2 flex-none">
+                <Photo
+                    src={post.image.path}
+                    width={post.image.width}
+                    height={post.image.height}
+                    alt="thumb"
+                    sizes="30vw"
+                    divcls="ml-auto max-h-48 max-w-full"
+                />
+            </div>
+            <div>
+                <h3 class="text-2xl font-semibold">{post.title}</h3>
+                <p>{post.preview}</p>
+            </div>
+        </a>
     {/each}
 </section>
 

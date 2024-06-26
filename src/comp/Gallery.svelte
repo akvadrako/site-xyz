@@ -2,7 +2,6 @@
 import {Photo} from '$comp'
 import {lang} from '$lib'
 import {page} from '$app/stores'
-import {localDoc} from '$lib/docs'
 
 const keyBy = (array, key) => (array || []).reduce((r, x) => ({ ...r, [key ? x[key] : x]: x }), {});
 
@@ -24,14 +23,8 @@ let kinds = [
     },
 ]
 
-let works = $page.data.works
-
 $: bykey = keyBy(kinds, 'key')
-$: filtered = (
-    works
-    .filter(w => bykey[w.kind || 'mural'].checked)
-    .map(w => localDoc(w, $page.data.lang))
-)
+$: filtered = $page.data.works.filter(w => bykey[w.kind || 'mural'].checked)
 
 </script>
 

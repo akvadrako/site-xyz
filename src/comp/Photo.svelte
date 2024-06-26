@@ -9,17 +9,17 @@ docs:
 - related: https://github.com/matyunya/svelte-image
 */
 
-import {resize} from '$lib'
-
+import {resize, srcset} from '$lib/img'
 
 export let src
 export let width = null
 export let height = null
 export let sizes = "100vw"
 export let alt = "image"
-export let divcls = "photo h-full"
+export let divcls = "photo max-h-full max-w-full"
 
-let imgcls = ""
+// override width / height on img tag
+let imgcls = "h-full w-full"
 
 export { imgcls as class }
 
@@ -41,14 +41,6 @@ $: if(real && real.complete) {
     loaded = true;
 }
 
-$: srcset = `
-    ${resize(src, 200)}  200w,
-    ${resize(src, 400)}  400w,
-    ${resize(src, 800)}  800w,
-    ${resize(src, 1200)} 1200w,
-    ${resize(src, 2000)}
-`
-
 function onLoad(event) {
     let old = !event.target.currentSrc.includes(src)
     console.log("loaded", event.target.currentSrc, "old=", old)
@@ -62,7 +54,7 @@ img {
     display: block;
 }
 div {
-    position: relative;
+    _position: relative;
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
@@ -78,19 +70,20 @@ div {
 </style>
 
 <div class={divcls}
+    class:loaded
     style:background-image="url({bgimg})"
-    class:loaded>
+    style:aspect-ratio={ratio}
+>
     <img
         bind:this={real}
         on:load={onLoad}
         class="photo real {imgcls}"
-        srcset={srcset}
+        srcset={srcset(src)}
         src="{resize(src, 200)}"
         sizes="{sizes}"
         alt="{alt}"
         width={width}
         height={height}
-        style:aspect-ratio={ratio}
     />
 </div>
 

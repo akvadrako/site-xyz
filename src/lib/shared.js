@@ -1,7 +1,12 @@
 // browser + node - shared utilities
 
-export function assert(test, ...args) {
-    console.assert(test, ...args)
+export function assert(test, msg) {
+    //if(console.assert)
+    //    console.assert(test, msg)
+
+    if (! test) {
+        throw new Error(`assert failed: ${msg}`);
+    }
 }
 
 export function log(...args) {

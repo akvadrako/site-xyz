@@ -17,19 +17,11 @@ import { parse } from 'svelte/compiler';
 import rehypeFormat from 'rehype-format'
 import remarkParse from 'remark-parse'
 import {VFile} from 'vfile'
-import { tagLang } from '../rehype.js'
-import { wikiLink, extractText } from '../remark.js'
-import {imageDimensionsFromStream} from 'image-dimensions';
+import { tagLang } from './rehype.js'
+import { wikiLink, extractText } from './remark.js'
+import { readImage } from '$srv/img'
 
 import fs from 'fs'
-
-export function localDoc(doc, lang) {
-    return {
-        ...doc,
-        path: doc.path.replace('[lang]', lang),
-        title: doc['title_' + lang] || doc.title_en,
-    }
-}
 
 /**
  * return slugs like `pages/home` and `works/mural`
@@ -45,7 +37,7 @@ export function listDocs(folder) {
  * return slugs like `pages/home` and `works/mural`
  * @returns Promise<object> Routes
  */
-export async function loadDoc(slug) {
+export async function loadDoc(slug, lang) {
     let filename = `doc/${slug}.md`
     let mdsrc = fs.readFileSync(filename, { encoding: 'utf8' })
     let src = new VFile({
@@ -55,15 +47,13 @@ export async function loadDoc(slug) {
 
     // FIXME - can this be sync
     let result = await parser().process(src)
-   
+
     // extract known fields
     let { 
         path,
         layout,
         image,
         kind,
-        title_en,
-        title_nl,
         ...meta
     } = /** @type {object} */ (result.data.matter)
     
@@ -71,34 +61,20 @@ export async function loadDoc(slug) {
         path = `/[lang]/${slug}`.replace('/pages/', '/')
 
     if(meta.more_images) {
-        let reads = meta.more_images.map(read_image)
+        let reads = meta.more_images.map(readImage)
         meta.more_images = await Promise.all(reads)
     }
 
     return {
         body: result.value,
         meta,
-        path,
-        title_nl,
-        title_en,
+        path: path.replace('[lang]', lang),
+        title: meta['title_' + lang] || meta.title_en,
         filename,
-        image: await read_image(image),
+        image: await readImage(image),
         layout,
         slug,
         kind,
-    }
-}
-
-async function read_image(path) {
-    if(! path)
-        return null;
-
-    let data = fs.createReadStream("static/" + path)
-    let size = await imageDimensionsFromStream(data)
-
-    return {
-        path: path,
-        ...size,
     }
 }
 

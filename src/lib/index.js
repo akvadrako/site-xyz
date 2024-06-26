@@ -7,19 +7,9 @@ import {page} from '$app/stores'
 
 export {goto} from '$app/navigation'
 export {createToast} from './toasts'
-export {loadDoc} from './docs'
-export {log} from './shared'
-
-export const base = "https://walltowall.nl"
-
-// return thumbnail image
-export function small(src) {
-    return resize(src, 200)
-}
-
-export function resize(src, width) {
-    return `${base}/.netlify/images?url=${src}&w=${width}`
-}
+export {log, assert} from './shared'
+export {base} from './const'
+export {formatDate} from './date'
 
 // store: current language
 export const lang = readable('en', set => {
@@ -37,17 +27,3 @@ export const route = derived(lang, $lang => {
     }
 })
 
-import dayjs from 'dayjs'
-
-export function formatDate(when) {
-    if(! when)
-        return "unknown date"
-
-    return dayjs(when).format('YYYY-MM-DD')
-}
-
-export function assert(condition, message) {
-    if (!condition) {
-        throw message || "Assertion failed";
-    }
-}
