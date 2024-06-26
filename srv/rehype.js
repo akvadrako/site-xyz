@@ -8,7 +8,7 @@ import {resize,srcset} from '$lib/img'
 import {readImage,readImageSync} from '$srv/img'
 
 const addClassTags = /^(div|em|strong|b|a|i|p|pre|kbd|blockquote|h\d|code|table|img|del|ul|ol)$/
-const debug = true;
+const debug = false;
    
 async function visitNode(node, offset, parents) {
     let parent = parents[0]

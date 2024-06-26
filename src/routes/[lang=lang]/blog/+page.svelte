@@ -29,6 +29,7 @@ let posts = $page.data.posts
             <div>
                 <h3 class="text-2xl font-semibold">{post.title}</h3>
                 <p>{post.preview}</p>
+                <!-- ({post.date}) -->
             </div>
         </a>
     {/each}

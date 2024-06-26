@@ -2,6 +2,7 @@
 title_en: Treehouse façade logo
 title_nl: Treehouse logo
 image: /media/facade.jpg
+date: 2024-06-01
 ---
 Treehouse needed a logo on their façade, something to declare their identity to the world. I was drawn to the idea of painting high up on a cherry picker. It seemed like a story one would casually mention to impress people. Otto and I made a surprisingly good team, even though our conversations were in Dutch, and I have the vocabulary of a 5-year-old. Somehow, we managed to communicate - I wouldn’t rule out telepathy. 
 

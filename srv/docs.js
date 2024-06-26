@@ -54,6 +54,7 @@ export async function loadDoc(slug, lang) {
         layout,
         image,
         kind,
+        date,
         ...meta
     } = /** @type {object} */ (result.data.matter)
     
@@ -75,6 +76,7 @@ export async function loadDoc(slug, lang) {
         layout,
         slug,
         kind,
+        date,
     }
 }
 

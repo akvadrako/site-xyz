@@ -39,6 +39,8 @@ collections:
     fields:
       - name: title_en
       - name: title_nl
+      - name: date
+        widget: date
       - name: image
         label: Main Image
         widget: image

@@ -2,6 +2,7 @@
 title_en: Tall
 title_nl: Lang
 image: /media/mix_medium4_1920x1920.jpg
+date: 2024-01-01
 ---
 In the towering world of urban art, tall murals stretch towards the sky,
 Brushstrokes reaching for the heavens, telling stories of streets below.

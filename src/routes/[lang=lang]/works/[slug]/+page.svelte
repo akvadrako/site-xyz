@@ -8,10 +8,6 @@ export let data
 
 $: more_images = data.doc.meta.more_images || []
 
-function get_title(work) {
-    return ($lang == 'nl' && work.title_nl) || work.title_en;
-}
-
 // prefetch images on hover
 function hover(work) {
     preloadData(work.path)

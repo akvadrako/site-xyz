@@ -48,9 +48,13 @@ async function blog(lang) {
             title: doc.title,
             image: doc.image,
             path: doc.path,
+            date: doc.date,
             preview: preview(doc.body),
         })
     }
+
+    // newest first
+    posts.sort((a, b) => b.date - a.date)
 
     return {posts}
 }
@@ -67,8 +71,11 @@ async function works(lang) {
             kind: doc.kind,
             path: doc.path,
             slug: doc.slug,
+            date: doc.date,
         })
     }
+    
+    works.sort((a, b) => a.date - b.date)
 
     return { works }
 }
