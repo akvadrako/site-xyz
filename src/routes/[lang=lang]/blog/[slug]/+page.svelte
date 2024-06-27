@@ -14,7 +14,7 @@ export let img = data.doc.image
                 height={img.height}
                 alt="heading"
                 sizes="50vw"
-                divcls="max-h-[30vh] max-w-full"
+                divcls="max-h-[30vh] max-w-full bg-center bg-cover"
         />
     </div>
 

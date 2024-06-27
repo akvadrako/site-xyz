@@ -16,10 +16,10 @@ export let width = null
 export let height = null
 export let sizes = "100vw"
 export let alt = "image"
-export let divcls = "photo max-h-full max-w-full"
+export let divcls = "photo max-h-full max-w-full bg-center bg-contain"
 
 // override width / height on img tag
-let imgcls = "h-full w-full"
+let imgcls = "h-full w-full object-cover"
 
 export { imgcls as class }
 
@@ -54,10 +54,7 @@ img {
     display: block;
 }
 div {
-    _position: relative;
-    background-size: contain;
     background-repeat: no-repeat;
-    background-position: center;
 }
 .real {
     opacity: 0;

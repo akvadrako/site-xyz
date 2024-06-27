@@ -23,7 +23,7 @@ let posts = $page.data.posts
                     height={post.image.height}
                     alt="thumb"
                     sizes="30vw"
-                    divcls="ml-auto max-h-48 max-w-full"
+                    divcls="ml-auto max-h-48 max-w-full bg-center bg-cover"
                 />
             </div>
             <div>

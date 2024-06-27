@@ -167,7 +167,7 @@ $: all_images = [data.doc.image, ...more_images];
                 src={subimage.path}
                 width={subimage.width}
                 height={subimage.height} 
-                divcls="m-auto max-w-full max-h-[calc(100vh-96px)]" />
+                divcls="m-auto max-w-full max-h-[calc(100vh-96px)] bg-center bg-cover" />
         </div>
     </div>
 

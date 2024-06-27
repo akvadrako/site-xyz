@@ -48,9 +48,12 @@ $: filtered = $page.data.works.filter(w => bykey[w.kind || 'mural'].checked)
         <a class="flex-1" href={work.path}>
             <Photo
                 src={work.image.path}
+                _width={work.image.width}
+                _height={work.image.height}
                 alt={work.title}
                 sizes="30vw"
-                class="h-full w-full object-[50%_0%]" 
+                divcls="h-full bg-cover bg-top"
+                class="h-full w-full object-cover object-top" 
             />
         </a>
         <div class="title flex leading-tight text-lg text-black font-semibold">
@@ -127,9 +130,6 @@ $: filtered = $page.data.works.filter(w => bykey[w.kind || 'mural'].checked)
     .work {
         height: calc((100vw - 110px) / 3);
         width: calc((100vw - 110px) / 3);
-    }
-    .work :global(img) {
-        object-fit: cover;
     }
     section {
         display: grid;

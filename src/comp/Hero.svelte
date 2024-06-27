@@ -6,7 +6,9 @@ import { Photo } from '$comp';
     <div class="inner">
         <img class="mask dark:hidden" alt="mark" src="/media/hero-mask.svg" />
         <img class="mask light:hidden" alt="mask" src="/media/hero-mask-dark.svg" />
-        <Photo src="/media/image_top.jpg"
+        <Photo
+            src="/media/image_top.jpg"
+            divcls="bg-cover bg-[position:50%_80%]"
             class="w-full h-full object-cover object-[50%_80%]"
         />
     </div>
