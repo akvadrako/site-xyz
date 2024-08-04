@@ -5,7 +5,7 @@
  */
 
 import {resize,srcset} from '$lib/img'
-import {readImage,readImageSync} from '$srv/img'
+import {readImage} from '$srv/img'
 
 const addClassTags = /^(div|em|strong|b|a|i|p|pre|kbd|blockquote|h\d|code|table|img|del|ul|ol)$/
 const debug = false;

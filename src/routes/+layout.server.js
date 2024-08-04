@@ -38,6 +38,7 @@ export async function load({ url, fetch }) {
     let doc
         
     doc = await loadDoc(slug, lang)
+    // console.debug('doc', doc.title, doc.date)
 
     // TODO
     try {

@@ -33,7 +33,7 @@ $: bgimg = resize(src, 200)
 // reset when src changes
 $: if(src) {
     loaded = false
-    console.log("new", src, width, height)
+    // console.debug("new photo", src, width, height)
 }
 
 $: if(real && real.complete) {

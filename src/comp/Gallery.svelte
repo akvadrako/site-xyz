@@ -48,8 +48,8 @@ $: filtered = $page.data.works.filter(w => bykey[w.kind || 'mural'].checked)
         <a class="flex-1" href={work.path}>
             <Photo
                 src={work.image.path}
-                _width={work.image.width}
-                _height={work.image.height}
+                width={work.image.width}
+                height={work.image.height}
                 alt={work.title}
                 sizes="30vw"
                 divcls="h-full bg-cover bg-top"

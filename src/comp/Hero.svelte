@@ -8,6 +8,8 @@ import { Photo } from '$comp';
         <img class="mask light:hidden" alt="mask" src="/media/hero-mask-dark.svg" />
         <Photo
             src="/media/image_top.jpg"
+            width="3707"
+            height="1980"
             divcls="bg-cover bg-[position:50%_80%]"
             class="w-full h-full object-cover object-[50%_80%]"
         />
