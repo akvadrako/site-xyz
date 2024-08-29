@@ -9,6 +9,4 @@ The hardest part is deciding what you’ll paint. The process is usually a matte
 
 Painting alone can be hard because there’s no one else to blame. Sometimes, every brush stroke looks wrong, and I prefer to hide the outcome from one day to the next, dreading the moment I have to explain that it’s still a work in progress. Perfectionism is always there to make me feel cramped and a little insane. 
 
-Painting with someone has the gift of relieving me of some of this perfectionism.
-
-We paint together, but what matters to me is not the painting or the wall. It’s the warmth of the conversations, the comfortable silences, and the excitement of discovering a favourite song together. When I look at our mural, it feels more like a dialogue than just a painting.
+Painting with someone has the gift of relieving me of some of this perfectionism. We paint together, but what matters to me is not the painting or the wall. It’s the warmth of the conversations, the comfortable silences, and the excitement of discovering a favourite song together. When I look at our mural, it feels more like a dialogue than just a painting.
