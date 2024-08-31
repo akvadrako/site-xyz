@@ -41,9 +41,8 @@ collections:
       - name: title_nl
       - name: date
         widget: datetime
-        date_format: 'yyyy-MM-dd'
+        date_format: true
         time_format: false
-        format: 'yyyy-MM-dd'
       - name: image
         label: Main Image
         widget: image
@@ -98,9 +97,8 @@ collections:
         default: work
       - name: date
         widget: datetime
-        date_format: 'yyyy-MM-dd'
+        date_format: true
         time_format: false
-        format: 'yyyy-MM-dd'
       - name: image
         label: Primary Image
         widget: image
