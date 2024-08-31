@@ -3,6 +3,7 @@ kind: painting
 title_en: Ana's present
 title_nl: Ana's cadeau
 layout: work
+date: 2024-08-26
 image: /media/26aug_1600.jpg
 more_images:
   - /media/aug8_1.jpg
