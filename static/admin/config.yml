@@ -40,7 +40,10 @@ collections:
       - name: title_en
       - name: title_nl
       - name: date
-        widget: date
+        widget: datetime
+        date_format: 'yyyy-MM-dd'
+        time_format: false
+        format: 'yyyy-MM-dd'
       - name: image
         label: Main Image
         widget: image
@@ -94,7 +97,10 @@ collections:
         widget: hidden
         default: work
       - name: date
-        widget: date
+        widget: datetime
+        date_format: 'yyyy-MM-dd'
+        time_format: false
+        format: 'yyyy-MM-dd'
       - name: image
         label: Primary Image
         widget: image
