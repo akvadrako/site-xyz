@@ -15,7 +15,7 @@ beforeNavigate(() => {
 })
 
 const homeItem = { 
-    path: '/works',
+    path: '/home',
     label: { en: 'Home', nl: 'Start' },
 }
 

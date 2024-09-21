@@ -19,10 +19,10 @@ export async function load({ url, fetch }) {
         lang = 'en'
 
         if(url.pathname == '/en')
-            redirect(301, '/en/works')
+            redirect(301, '/en/home')
         
         if(url.pathname == '/nl')
-            redirect(301, '/nl/works')
+            redirect(301, '/nl/home')
         
         if(url.pathname == '/')
             slug = 'works'

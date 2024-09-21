@@ -3,6 +3,8 @@ import {Photo} from '$comp'
 import {lang} from '$lib'
 import {page} from '$app/stores'
 
+export let max = 99;
+
 const keyBy = (array, key) => (array || []).reduce((r, x) => ({ ...r, [key ? x[key] : x]: x }), {});
 
 let kinds = [
@@ -24,7 +26,7 @@ let kinds = [
 ]
 
 $: bykey = keyBy(kinds, 'key')
-$: filtered = $page.data.works.filter(w => bykey[w.kind || 'mural'].checked)
+$: filtered = $page.data.works.filter(w => bykey[w.kind || 'mural'].checked).slice(0, max)
 
 </script>
 
@@ -44,29 +46,25 @@ $: filtered = $page.data.works.filter(w => bykey[w.kind || 'mural'].checked)
 
 <section class="my-8">
     {#each filtered as work}
-    <div class="work">
-        <a class="flex-1" href={work.path}>
-            <Photo
-                src={work.image.path}
-                width={work.image.width}
-                height={work.image.height}
-                alt={work.title}
-                sizes="30vw"
-                divcls="h-full bg-cover bg-top"
-                class="h-full w-full object-cover object-top" 
-            />
-        </a>
-        <div class="title flex leading-tight text-lg text-black font-semibold">
-            <div>
-                <span class="case-upper">{work.title}</span>
-                <br>{work.kind}
+        <div class="cell">
+            <div class="work w-auto">
+                <a class="flex-1" href={work.path}>
+                    <Photo
+                        src={work.image.path}
+                        width={work.image.width}
+                        height={work.image.height}
+                        alt={work.title}
+                        sizes="30vw"
+                    />
+                </a>
+                <div class="title flex leading-tight text-lg text-black font-semibold">
+                    <div>
+                        <span class="case-upper">{work.title}</span>
+                        <br>{work.kind}
+                    </div>
+                </div>
             </div>
         </div>
-        <svg class="border" height="20px" width="100%" viewBox="0 0 10 10" preserveAspectRatio="none">
-            <line x1="0.1" y1="2" x2="9.9" y2="2" stroke="#CCC" stroke-width="1px" />
-            <line x1="0.5" y1="4" x2="9.5" y2="4" stroke="#DDD" stroke-width="1px" />
-        </svg>
-    </div>
     {/each}
 </section>
 
@@ -91,7 +89,7 @@ $: filtered = $page.data.works.filter(w => bykey[w.kind || 'mural'].checked)
     z-index: 10;
     left: 0;
     right: 0;
-    bottom: 20px;
+    bottom: 0;
     background-color: var(--brown);
     color: var(--sandstone);
     padding: 10px;
@@ -100,12 +98,6 @@ $: filtered = $page.data.works.filter(w => bykey[w.kind || 'mural'].checked)
 }
 .work:hover .title {
     display: flex;
-}
-.border {
-    display: block;
-    height: 20px;
-    width: 100%;
-    border: none;
 }
 
 @media (hover: hover) {
@@ -118,23 +110,15 @@ $: filtered = $page.data.works.filter(w => bykey[w.kind || 'mural'].checked)
 }
 
 @media (max-width: 1023px) {
-    .work :global(img) {
-        display: block;
-        width: 100%;
-
-        object-fit: contain;
+    .work {
+        margin-top: 12px;
+        margin-bottom: 12px;
     }
 }
 
 @media (min-width: 1024px) {
-    .work {
-        height: calc((100vw - 110px) / 3);
-        width: calc((100vw - 110px) / 3);
-    }
     section {
         display: grid;
-        justify-items: stretch;
-        align-items: stretch;
         grid-template-columns: 1fr 1fr 1fr;
         gap: 24px;
     }
