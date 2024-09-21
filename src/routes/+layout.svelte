@@ -6,9 +6,7 @@ import Nav from '$comp/Nav.svelte';
 import Footer from '$comp/Footer.svelte';
 
 // CSS Imports
-import '/src/reset.css' // defaults
-import '/src/global.css'
-import '/src/fonts.css'
+import '/src/style.css'
 import 'virtual:uno.css'  // utilities: top priority
 
 export let data

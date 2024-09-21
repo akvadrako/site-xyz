@@ -1,5 +1,5 @@
 /**********************************************
- * Theme
+ * Layer: Theme
  */
 
 :root {
@@ -104,13 +104,20 @@ main > .md {
     max-width: 50rem;
 }
 
-h1.md, h2.md, h3.md, h4.md {
-    font-weight: bold;
+h1.md {
+    font-size: 30px;
+    line-height: 36px;
+    font-weight: 600;
 }
 
 h2.md {
     @apply mt-4;
     font-size: 120%;
+    font-weight: bold;
+}
+
+h3.md, h4.md {
+    font-weight: bold;
 }
 
 p.md {
@@ -134,38 +141,4 @@ p.md {
 img.md {
     display: block;
     width: 100%;
-}
-
-/**********************************************
- * Custom components
- */
-
-x-debug { display: none; }
-
-.reset {
-    border: none;
-    background: inherit;
-    color: inherit;
-    padding: 0;
-}
-
-/**********************************************
- * Search
- */
-
-.side img {
-    height: 100%;
-    width: 100%;
-    position: absolute;
-    object-fit: cover;
-}
-
-.side {
-    width: 10em;
-    position: relative;
-    flex: 0 0 auto;
-}
-
-.hit mark {
-    background: unset;
 }

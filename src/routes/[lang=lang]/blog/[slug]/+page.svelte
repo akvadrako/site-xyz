@@ -19,7 +19,7 @@ export let img = data.doc.image
     </div>
 
     <section class="max-w-xl">
-        <h1 class="font-semibold text-3xl">{data.doc.title}</h1>
+        <h1 class="md">{data.doc.title}</h1>
         
         {@html data.doc.body}
     </section>

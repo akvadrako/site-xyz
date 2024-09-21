@@ -17,10 +17,8 @@ import {lang} from '$lib'
     </div>
 
     <div class="my-14">
-        <a href="/{$lang}/about">
-            <button class="reset px-4 py-2 bg-[#E08331] text-$theme-bg">
-                Read more +
-            </button>
+        <a href="/{$lang}/about" x-button class="px-4 py-2">
+            Read more +
         </a>
     </div>
 
@@ -29,10 +27,8 @@ import {lang} from '$lib'
     <Gallery max={6} />
     
     <div class="my-14">
-        <a href="/{$lang}/works">
-            <button class="reset px-4 py-2 bg-[#E08331] text-$theme-bg">
-                View all work
-            </button>
+        <a href="/{$lang}/works" x-button class="px-4 py-2">
+            View all work
         </a>
     </div>
 </div>

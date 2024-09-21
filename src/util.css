@@ -1,0 +1,43 @@
+/*
+ * Layer util
+ */
+
+x-debug { display: none; }
+
+.reset {
+    border: none;
+    background: inherit;
+    color: inherit;
+    padding: 0;
+}
+
+[x-button] {
+    @apply my-14 px-2 py-1 bg-[#E08331] text-$theme-bg;
+    white-space: nowrap;
+    text-decoration: none;
+}
+
+[x-button]:hover {
+    @apply ring-2 ring-black;
+}
+
+/**********************************************
+* Search
+*/
+
+.side img {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    object-fit: cover;
+}
+
+.side {
+    width: 10em;
+    position: relative;
+    flex: 0 0 auto;
+}
+
+.hit mark {
+    background: unset;
+}
