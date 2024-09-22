@@ -242,7 +242,7 @@ $: all_images = [data.doc.image, ...more_images];
     color: red;
     z-index: 2;
     right: 0;
-    background: var(--sandstone);
+    background: var(--theme-bg);
 }
 
 .arrow:first-child {
@@ -280,10 +280,6 @@ $: all_images = [data.doc.image, ...more_images];
         justify-content: space-between;
         gap: 8px;
     }
-}
-
-.arrow:hover {
-    opacity: 100%;
 }
 
 .subs button {

@@ -30,6 +30,7 @@ $: filtered = $page.data.works.filter(w => bykey[w.kind || 'mural'].checked).sli
 
 </script>
 
+{#if max > 10}
 <div class="chooser flex flex-wrap items-left text-xl my-8">
     {#each kinds as kind}
     <div class="ws-nowrap cursor-pointer">
@@ -37,14 +38,15 @@ $: filtered = $page.data.works.filter(w => bykey[w.kind || 'mural'].checked).sli
             id={kind.key}
             bind:checked={kind.checked}
             type="checkbox"
-            class="bg-$theme-text v--9% w-5 h-5 border-none m-0 p-0 appearance-none checked:bg-[#E08331] hover:ring-2 ring-black"
+            class="bg-$theme-text v--9% w-5 h-5 border-none m-0 p-0 appearance-none checked:bg-$orange hover:ring-2 ring-black"
         />
         <label for={kind.key} class="ml-2 mr-4 cursor-pointer">{kind.label[$lang]}</label>
     </div>
     {/each}
 </div>
+{/if}
 
-<section class="my-8">
+<section class="my-4">
     {#each filtered as work}
         <div class="cell">
             <div class="work w-auto">
@@ -111,8 +113,8 @@ $: filtered = $page.data.works.filter(w => bykey[w.kind || 'mural'].checked).sli
 
 @media (max-width: 1023px) {
     .work {
-        margin-top: 12px;
-        margin-bottom: 12px;
+        margin-top: 48px;
+        margin-bottom: 48px;
     }
 }
 

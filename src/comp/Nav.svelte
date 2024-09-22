@@ -101,7 +101,7 @@ onMount(() => {
 
         <a
             href="/{$lang}{homeItem.path}"
-            class="uppercase flex-initial dark:text-white"
+            class="uppercase flex-initial"
             title="{homeItem.label[$lang]}"
         >
             <h1>Wall To Wall</h1>
@@ -113,7 +113,7 @@ onMount(() => {
         {#each navItems as item}
             <a
                 href="/{$lang}{item.path}"
-                class="link lt-sm:hidden flex-initial max-w-xs uppercase dark:text-white" 
+                class="link lt-sm:hidden flex-initial max-w-xs uppercase" 
                 aria-current={ item.current ? "page" : false }>
                 {item.label[$lang]}
             </a>
@@ -186,6 +186,20 @@ nav, #sidebar {
     background-color: var(--ambergris);
     color: var(--sandstone);
 }
+
+@media screen and (prefers-color-scheme: dark) {
+    /* scrolled to top */
+    nav, #sidebar {
+        background-color: var(--sandstone);
+        color: var(--ambergris);
+    }
+
+    /* scrolled down */
+    .scrolled #sidebar, .scrolled nav {
+        color: var(--sandstone);
+    }
+}
+
 .scrolled nav {
     opacity: 75%;
 }

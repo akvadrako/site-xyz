@@ -12,9 +12,10 @@ x-debug { display: none; }
 }
 
 [x-button] {
-    @apply my-14 px-2 py-1 bg-[#E08331] text-$theme-bg;
+    @apply px-2 py-1 bg-$orange text-$theme-bg;
     white-space: nowrap;
     text-decoration: none;
+    display: inline-block;
 }
 
 [x-button]:hover {

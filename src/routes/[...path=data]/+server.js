@@ -74,8 +74,9 @@ async function works(lang) {
             date: doc.date,
         })
     }
-    
-    works.sort((a, b) => a.date - b.date)
+   
+    // latest first
+    works.sort((a, b) => b.date - a.date)
 
     return { works }
 }

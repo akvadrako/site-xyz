@@ -4,18 +4,18 @@ title_nl: Werkwijze
 ---
 Hi, I’m iulia, artist based in Amsterdam. I make murals, paintings, illustrations and more.
 
-[en] You can see <a href="/en/about" x-button>my work here.</a>
+[en] You can see <a href="/en/works">my work here</a>.
 
-[nl] You can see <a href="/nl/about" x-button>my work here.</a>
+[nl] You can see <a href="/nl/works">my work here</a>.
 
 # Bespoke Mural
 
 [en] Each mural I create is unique, adding a distinctive touch to any space. If you're looking to transform a room
-<a href="/en/contact" x-button>get in touch</a>
+<a href="/en/contact">get in touch</a>
 and we'll design something that creates the ideal atmosphere.
 
 [nl] Each mural I create is unique, adding a distinctive touch to any space. If you're looking to transform a room
-<a href="/nl/contact" x-button>get in touch</a>
+<a href="/nl/contact">get in touch</a>
 and we'll design something that creates the ideal atmosphere.
 
 As a mural artist, my process is both creative and collaborative, ensuring that the final artwork aligns with my client's vision. Below is how I approach creating a mural.
