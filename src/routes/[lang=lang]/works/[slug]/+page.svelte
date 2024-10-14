@@ -53,34 +53,99 @@ $: subimage = data.doc.image;
 ///////////////////////////////////////////////////
 // zoom
 
-let zoom = false;
+let zoom = 1;
 let frame
 let canvas
+let grab = false;
+let offset = { x: 0, y: 0}
 
 function click_zoom(e) {
     let onPhone = window.matchMedia("(max-width: 639px)")
 
     if(onPhone.matches) {
-        zoom = false;
-    } else {
-        zoom = !zoom;
-        zoom_move(e)
+        zoom = 1;
+    } else if(zoom == 1) {
+        zoom = 2;
+        offset = { x: 0, y: 0 }
+        draw()
     }
-    console.log('zoom', zoom)
+
+    console.log('click', { zoom })
+}
+
+function zoom_wheel(e) {
+    if(zoom == 1)
+        return;
+
+    zoom += e.wheelDelta / 3000;
+    if(zoom > 3.0)
+        zoom = 3.0
+    
+    if (zoom < 1) {
+        zoom = 1
+        grab = false;
+    }
+
+    e.preventDefault();
+    console.log('wheel', { zoom });
+    draw()
+}
+
+function zoom_mousedown(e) {
+    if(e.button != 0)
+        return
+
+    e.preventDefault();
+    grab = true;
+    console.log('grab', { grab });
+}
+
+function zoom_mouseup(e) {
+    if(e.button != 0)
+        return
+
+    e.preventDefault();
+    grab = false;
+    console.log('grab', { grab });
 }
 
 function zoom_move(e) {
-    if(! zoom) {
-        canvas.style["translate"] = ""
+    if(! grab)
+        return;
+    
+    let rect = frame.getBoundingClientRect()
+    let max_ratio = 1;
+
+    offset.y += e.movementY;
+    if(offset.y > 0)
+        offset.y = 0;
+    if(offset.y < -rect.height / max_ratio)
+        offset.y = -rect.height / max_ratio;
+
+    offset.x += e.movementX;
+    if(offset.x > rect.width / max_ratio)
+        offset.x = rect.width / max_ratio;
+    
+    if(offset.x < -rect.width / max_ratio)
+        offset.x = -rect.width / max_ratio;
+
+    draw()
+}
+
+function draw() {
+    if(zoom == 1) {
+        canvas.style["transform"] = ""
         return
     }
-
+    
     let rect = frame.getBoundingClientRect()
-    let xPos = e.clientX - (rect.x + rect.width / 2)
-    let yPos = e.clientY - (rect.y + rect.height / 2)
-    let trans = `${-xPos * 1.1}px ${-yPos * 1.1}px`
+    //let xPos = (rect.x + rect.width / 2) + offset.x
+    //let yPos = (rect.y + rect.height / 2) + offset.y
+    let xPos = offset.x;
+    let yPos = offset.y;
+    let trans = `${xPos}px ${yPos}px`
 
-    canvas.style["translate"] = trans
+    canvas.style["transform"] = `translate(${xPos}px, ${yPos}px) scale(${zoom})`;
 
     // console.log("move", e.clientX, rect.x, rect.width, xPos, trans)
     requestAnimationFrame(() => null)
@@ -141,6 +206,14 @@ function setSub(img) {
 $: all_images = [data.doc.image, ...more_images];
 </script>
 
+<div class="zoombox" class:zoom={zoom != 1}>
+    {grab ? '[grabbed]' : ''}
+{Math.round(zoom * 10) / 10}× {Math.round(offset.x)}x {Math.round(offset.y)}y
+    <button on:click={() => { zoom = 1; draw(); }}>
+        Zoom Out
+    </button>
+</div>
+
 <section id="outer"
     class="mb-12 -mt-12"
     on:touchstart={handleTouchStart}
@@ -162,8 +235,11 @@ $: all_images = [data.doc.image, ...more_images];
         class="frame"
         on:click={click_zoom}
         on:mousemove={zoom_move}
+        on:wheel={zoom_wheel}
+        on:mousedown={zoom_mousedown}
+        on:mouseup={zoom_mouseup}
     >
-        <div class="canvas" bind:this={canvas} class:zoom>
+        <div class="canvas" bind:this={canvas} class:zoom={zoom != 1} class:grab>
             <Photo
                 src={subimage.path}
                 width={subimage.width}
@@ -213,6 +289,26 @@ $: all_images = [data.doc.image, ...more_images];
     position: relative;
 }
 
+.zoombox {
+    display: none;
+}
+
+.zoombox.zoom {
+    z-index: 1000;
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, 0);
+    color: black;
+    padding: 4px 12px;
+    margin: 4px;
+    text-align: center;
+    line-height: 1.6em;
+    background: white;
+    border: thin solid black;
+}
+
 .frame {
     margin: 0 var(--arrow-width);
 }
@@ -221,13 +317,18 @@ $: all_images = [data.doc.image, ...more_images];
 
 .canvas {
     transition: scale ease 0.3s;
+    transform-origin: 50% top;
     cursor: zoom-in;
     scale: 1;
 }
 
 .zoom {
-    scale: 2;
-    cursor: zoom-out;
+    cursor: move;
+    cursor: grab;
+}
+
+.grab {
+    cursor: grabbing;
 }
 
 .frame, .desc {
